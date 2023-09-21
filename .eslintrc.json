@@ -14,6 +14,7 @@
   "plugins": [
     "react"
   ],
+  "overrides": [],
   "rules": {
     "no-console": "warn",
     "import/prefer-default-export": "off",

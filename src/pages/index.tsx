@@ -1,12 +1,18 @@
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 import Head from 'next/head'
-// import Image from 'next/image'
 
-import * as serviceWorker from '../serviceWorker';
 
 // import styles from '@/styles/Home.module.css'
 
 
 export const Home = () => {
+
+  const router = useRouter()
+
+
+
+
   return (
     <>
       <Head>
@@ -22,6 +28,5 @@ export const Home = () => {
   )
 }
 
-serviceWorker.unregister();
 
 export default Home
