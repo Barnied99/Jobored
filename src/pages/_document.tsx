@@ -2,12 +2,12 @@ import { Html, Head, Main, NextScript } from 'next/document'
 import { MantineProvider, MantineThemeOverride } from '@mantine/core';
 
 const overrides: MantineThemeOverride = {
-  // globalStyles: () => ({
-  //   body: {
-  //     overflowY: 'scroll',
-  //     scrollbarGutter: 'stable',
-  //   },
-  // }),
+  globalStyles: () => ({
+    body: {
+      overflowY: 'scroll',
+      scrollbarGutter: 'stable',
+    },
+  }),
   fontFamily: 'Inter',
   components: {
     Paper: {

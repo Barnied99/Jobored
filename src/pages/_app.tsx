@@ -1,14 +1,15 @@
 import { useCallback, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 
-import { loginUser, refreshTokens } from '../components/auth/api';
+import { loginUser, refreshTokens } from '@/components/auth/api';
 import {
   ACCESS_TOKEN_KEY,
   EXPIRE_DATE_KEY,
   REFRESH_TOKEN_KEY,
-} from '../components/common/constants';
-import { DefaultLayout, DefaultLoader } from '../components/common/component';
-import { getToken, setToken } from '../components/common/services';
+} from '@/components/common/constants';
+import { DefaultLayout, DefaultLoader } from '@/components/common/component';
+import { getToken, setToken } from '@/components/common/services';
+
 import * as serviceWorker from '../serviceWorker';
 
 import type { AppProps } from 'next/app'
@@ -19,20 +20,13 @@ import '@/styles/globals.css'
 const FIVE_MINUTES = 1000 * 60 * 5;
 
 
-const Router = ({ Component: Component1, Component: Component2, Component: Component3, pageProps }: AppProps) => {
+const Router = ({ Component, pageProps }: AppProps) => {
 
-  const VacanciesRouter = dynamic(() => import(`@modules/${Component1}`), {
+  const Rout = dynamic(() => import(`./${Component}`), {
     loading: () => <DefaultLoader />,
     ssr: false,
   });
-  const FavoritesRouter = dynamic(() => import(`@modules/${Component2}`), {
-    loading: () => <DefaultLoader />,
-    ssr: false,
-  });
-  const NotFound = dynamic(() => import(`@modules/${Component3}`), {
-    loading: () => <DefaultLoader />,
-    ssr: false,
-  });
+
 
 
   const refOnce = useRef(false);
@@ -106,9 +100,7 @@ const Router = ({ Component: Component1, Component: Component2, Component: Compo
 
   return (
     <DefaultLayout>
-      <VacanciesRouter {...pageProps} />
-      <FavoritesRouter {...pageProps} />
-      <NotFound />
+      <Rout {...pageProps} />
     </DefaultLayout>
   )
 }

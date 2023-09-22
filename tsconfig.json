@@ -10,13 +10,19 @@
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
-    "esModuleInterop": true,
+    "allowImportingTsExtensions": true,
+    "esModuleInterop": false,
     "module": "esnext",
+    "noUnusedLocals": true,
+    "allowSyntheticDefaultImports": true,
     "moduleResolution": "bundler",
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "noImplicitAny": false,
     "paths": {
       "@/*": [
         "./src/*"

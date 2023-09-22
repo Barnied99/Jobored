@@ -11,8 +11,6 @@ export const Home = () => {
   const router = useRouter()
 
 
-
-
   return (
     <>
       <Head>
