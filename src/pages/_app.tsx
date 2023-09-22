@@ -10,7 +10,7 @@ import {
 import { DefaultLayout, DefaultLoader } from '@/components/common/component';
 import { getToken, setToken } from '@/components/common/services';
 
-import * as serviceWorker from '../serviceWorker';
+// import * as serviceWorker from '../serviceWorker';
 
 import type { AppProps } from 'next/app'
 
@@ -104,6 +104,6 @@ const Router = ({ Component, pageProps }: AppProps) => {
     </DefaultLayout>
   )
 }
-serviceWorker.unregister();
+// serviceWorker.unregister();
 
 export default Router

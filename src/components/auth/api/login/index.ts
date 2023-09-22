@@ -22,7 +22,6 @@ export const loginUser = async (): Promise<LoginResponse> => {
                 password,
                 client_id: clientId,
                 client_secret: clientSecret,
-                hr: 0,
             },
             headers: {
                 'X-Api-App-Id': clientSecret,

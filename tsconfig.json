@@ -11,7 +11,7 @@
     "strict": true,
     "noEmit": true,
     "allowImportingTsExtensions": true,
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "module": "esnext",
     "noUnusedLocals": true,
     "allowSyntheticDefaultImports": true,
