@@ -11,7 +11,7 @@ export const useStyles = createStyles(
 		},
 
 		header__link: {
-			height: '100%',
+			height: '90%',
 			paddingLeft: '30px',
 			paddingRight: '30px',
 		},

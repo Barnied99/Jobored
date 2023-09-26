@@ -14,8 +14,8 @@ import Link from 'next/link';
 import Image from "next/image";
 
 
-import { DefaultContainer, NavLink } from '../../../../common/component';
-import { LogoFull } from '../../../../../assets/img';
+import { DefaultContainer, NavLink } from '@/components/common/component';
+import { LogoFull } from '@/assets/img';
 
 import { useStyles } from './styles';
 

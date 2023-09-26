@@ -10,15 +10,12 @@ import {
 import { DefaultLayout, DefaultLoader } from '@/components/common/component';
 import { getToken, setToken } from '@/components/common/services';
 
-// import * as serviceWorker from '../serviceWorker';
 
 import type { AppProps } from 'next/app'
 
-import '@/styles/globals.css'
 
 
 const FIVE_MINUTES = 1000 * 60 * 5;
-
 
 const Router = ({ Component, pageProps }: AppProps) => {
 
@@ -26,9 +23,6 @@ const Router = ({ Component, pageProps }: AppProps) => {
     loading: () => <DefaultLoader />,
     ssr: false,
   });
-
-
-
   const refOnce = useRef(false);
 
   const onRefreshTokens = useCallback(async () => {
@@ -51,13 +45,12 @@ const Router = ({ Component, pageProps }: AppProps) => {
   const onLoginUser = useCallback(async () => {
     try {
       const data = await loginUser();
-
       const expirationDate = data.ttl * 1000;
-
       setToken(ACCESS_TOKEN_KEY, data.access_token);
       setToken(REFRESH_TOKEN_KEY, data.refresh_token);
       setToken(EXPIRE_DATE_KEY, expirationDate.toString());
     } catch (err) {
+      // console.log(err)
       return;
     }
   }, []);
@@ -95,7 +88,7 @@ const Router = ({ Component, pageProps }: AppProps) => {
     return () => {
       clearInterval(timer);
     };
-  }, []);
+  }, [onLoginUser]);
 
 
   return (
@@ -104,6 +97,5 @@ const Router = ({ Component, pageProps }: AppProps) => {
     </DefaultLayout>
   )
 }
-// serviceWorker.unregister();
 
 export default Router
