@@ -1,6 +1,8 @@
 import { Html, Head, Main, NextScript } from 'next/document'
 import { MantineProvider, MantineThemeOverride } from '@mantine/core';
 
+
+
 const overrides: MantineThemeOverride = {
   globalStyles: () => ({
     body: {
@@ -13,7 +15,7 @@ const overrides: MantineThemeOverride = {
     Paper: {
       styles: () => ({
         root: {
-          borderRadius: 12,
+          borderRadius: 14,
         },
       }),
     },
@@ -21,7 +23,7 @@ const overrides: MantineThemeOverride = {
     Button: {
       styles: () => ({
         root: {
-          borderRadius: 8,
+          borderRadius: 12,
         },
       }),
     },
@@ -29,7 +31,7 @@ const overrides: MantineThemeOverride = {
     Input: {
       styles: () => ({
         input: {
-          borderRadius: '8px',
+          borderRadius: '12px',
         },
       }),
     },
@@ -37,7 +39,7 @@ const overrides: MantineThemeOverride = {
     NumberInput: {
       styles: () => ({
         input: {
-          borderRadius: '8px',
+          borderRadius: '12px',
         },
       }),
     },
@@ -45,7 +47,7 @@ const overrides: MantineThemeOverride = {
     Select: {
       styles: () => ({
         input: {
-          borderRadius: '8px',
+          borderRadius: '12px',
         },
       }),
     },

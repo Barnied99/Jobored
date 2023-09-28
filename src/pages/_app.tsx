@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
-import dynamic from 'next/dynamic';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+import { useState } from 'react';
 
 import { loginUser, refreshTokens } from '@/components/auth/api';
 import {
@@ -10,23 +12,19 @@ import {
 import { DefaultLayout, DefaultLoader } from '@/components/common/component';
 import { getToken, setToken } from '@/components/common/services';
 
-// import * as serviceWorker from '../serviceWorker';
 
 import type { AppProps } from 'next/app'
 
-import '@/styles/globals.css'
 
-
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: { refetchOnMount: false, refetchOnWindowFocus: false },
+  },
+});
 const FIVE_MINUTES = 1000 * 60 * 5;
 
-
 const Router = ({ Component, pageProps }: AppProps) => {
-
-  const Rout = dynamic(() => import(`./${Component}`), {
-    loading: () => <DefaultLoader />,
-    ssr: false,
-  });
-
+  const [isLoading, setIsLoading] = useState(true)
 
 
   const refOnce = useRef(false);
@@ -51,13 +49,12 @@ const Router = ({ Component, pageProps }: AppProps) => {
   const onLoginUser = useCallback(async () => {
     try {
       const data = await loginUser();
-
       const expirationDate = data.ttl * 1000;
-
       setToken(ACCESS_TOKEN_KEY, data.access_token);
       setToken(REFRESH_TOKEN_KEY, data.refresh_token);
       setToken(EXPIRE_DATE_KEY, expirationDate.toString());
     } catch (err) {
+      console.log(err)
       return;
     }
   }, []);
@@ -92,18 +89,25 @@ const Router = ({ Component, pageProps }: AppProps) => {
     checkTokenExpiration();
     const timer = setInterval(checkTokenExpiration, 60000);
 
+    const loadingTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000)
+
     return () => {
       clearInterval(timer);
+      clearTimeout(loadingTimer);
     };
   }, []);
 
 
   return (
-    <DefaultLayout>
-      <Rout {...pageProps} />
-    </DefaultLayout>
+    <QueryClientProvider client={queryClient}>
+      <DefaultLayout>
+        {isLoading ? <DefaultLoader /> : <Component {...pageProps} />}
+      </DefaultLayout>
+    </QueryClientProvider>
+
   )
 }
-// serviceWorker.unregister();
 
 export default Router
