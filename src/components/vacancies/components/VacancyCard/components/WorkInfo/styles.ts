@@ -5,7 +5,7 @@ export const useStyles = createStyles((theme) => ({
 		width: 5,
 		height: 5,
 		background: theme.colors.gray[6],
-		borderRadius: '50%',
+		borderRadius: '60%',
 		margin: '0 2px',
 	},
 

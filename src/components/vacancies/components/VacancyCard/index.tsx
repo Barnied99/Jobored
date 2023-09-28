@@ -44,6 +44,7 @@ const VacancyCard: React.FC<VacancyCardProps> = ({ data }) => {
 		<Paper
 			component="article"
 			p={23}
+			radius="md"
 			pb={21}
 			pt={20}
 			withBorder

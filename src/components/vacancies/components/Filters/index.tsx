@@ -86,6 +86,7 @@ const Filters: React.FC<FiltersProps> = ({
 
 	return (
 		<Paper
+			radius="md"
 			ref={paperRef}
 			onSubmit={handleSubmit(onSubmit)}
 			component="form"

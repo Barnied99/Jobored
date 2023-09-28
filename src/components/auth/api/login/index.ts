@@ -15,7 +15,7 @@ const clientId = NEXT_CLIENT_ID;
 const clientSecret = NEXT_CLIENT_SECRET;
 export const loginUser = async (): Promise<LoginResponse> => {
     return axios
-        .get(`/2.0/oauth2/password/`, {
+        .get(`https://localhost:5232/api/2.0/oauth2/password/`, {
             params: {
                 login,
                 password,

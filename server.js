@@ -12,8 +12,7 @@ const app = express();
 const port = process.env.PORT || 5232;
 const cookiePerIP = new LRUCache({
     max: 1000,
-    // how long to live in ms
-    ttl: 1000 * 60 * 3, // 3 min
+    ttl: 1000 * 60 * 3,
     updateAgeOnGet: false,
     updateAgeOnHas: false,
 });

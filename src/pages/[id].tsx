@@ -1,6 +1,6 @@
 import { Stack } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 
 import { DefaultContainer } from '@/components/common/component';
@@ -14,7 +14,9 @@ import {
 } from '@/components/vacancies/components';
 
 const Vacancy = () => {
-    const { id } = useParams();
+
+    const router = useRouter()
+    const { id } = router.query
 
     const { data: vacancy, isLoading } = useQuery(['vacancy', id], {
         queryFn: () => getVacancy(id as string),

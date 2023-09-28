@@ -7,9 +7,8 @@ export const getVacancies = async (
 ): Promise<GetVacanciesResponse> => {
 	const { pageIdx, count, fields, paymentFrom, paymentTo, keyword, ids } =
 		params;
-
 	return jobsApi
-		.get('/api/2.0/vacancies/', {
+		.get('http://localhost:5232/api/2.0/vacancies/', {
 			params: {
 				page: pageIdx,
 				count,

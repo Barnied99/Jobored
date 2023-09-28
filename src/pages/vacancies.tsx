@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Group, Pagination, Stack } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import Head from 'next/head';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
@@ -33,29 +33,28 @@ const PARAM_FROM = 'from';
 const PARAM_TO = 'to';
 
 const Vacancies = () => {
-    const navigate = useRouter();
+    const router = useRouter();
+    const { pathname, query } = router;
 
-    const { pathname } = navigate;
-    const params = new URLSearchParams(pathname);
 
     const { classes } = useStyles();
 
-    const search = params.get(PARAM_SEARCH) || '';
+    const search = query[PARAM_SEARCH] || '';
 
     const { handleSubmit, control, reset } = useForm({
         defaultValues: {
-            search,
+            search: search as string,
         },
         resolver: yupResolver(searchSchema),
     });
 
-    const page = Number(params.get(PARAM_PAGE)) || 1;
-    const catalogue = params.get(PARAM_FIELD) || '';
-    const paymentFrom = Number(params.get(PARAM_FROM)) || '';
-    const paymentTo = Number(params.get(PARAM_TO)) || '';
+    const page = Number(query[PARAM_PAGE]) || 1;
+    const catalogue = query[PARAM_FIELD] || '';
+    const paymentFrom = Number(query[PARAM_FROM]) || '';
+    const paymentTo = Number(query[PARAM_TO]) || '';
 
     const filtersForm: FiltersForm = {
-        catalogues: catalogue,
+        catalogues: catalogue as string,
         payment_from: paymentFrom,
         payment_to: paymentTo,
     };
@@ -70,7 +69,7 @@ const Vacancies = () => {
                     fields: filtersForm.catalogues,
                     paymentFrom: filtersForm.payment_from || undefined,
                     paymentTo: filtersForm.payment_to || undefined,
-                    keyword: search,
+                    keyword: search as string,
                 }),
         }
     );
@@ -83,22 +82,20 @@ const Vacancies = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    const onChangeSearch = useCallback(
+    const onChangeSearch =
         (values: SearchForm) => {
-            const newParams = new URLSearchParams(pathname);
+            const newParams = new URLSearchParams(router.query as any);
             newParams.delete(PARAM_SEARCH);
             newParams.set(PARAM_PAGE, '1');
             if (values.search) newParams.set(PARAM_SEARCH, values.search);
 
             // scrollToTop();
-            navigate.push(`${pathname}?${newParams.toString()}`);
-        },
-        [pathname]
-    );
+            router.push(`${pathname}?${newParams.toString()}`);
+        };
 
-    const onChangeFilters = useCallback(
+    const onChangeFilters =
         (values: FiltersForm) => {
-            const newParams = new URLSearchParams(pathname);
+            const newParams = new URLSearchParams(router.query as any);
 
             newParams.delete(PARAM_FIELD);
             newParams.delete(PARAM_FROM);
@@ -113,39 +110,34 @@ const Vacancies = () => {
                 newParams.set(PARAM_TO, values.payment_to.toString());
 
             // scrollToTop();
-            navigate.push(`${pathname}?${newParams.toString()}`);
-        },
-        [pathname]
-    );
+            router.push(`${pathname}?${newParams.toString()}`);
+        };
 
-    const onChangePage = useCallback(
+    const onChangePage =
         (newPage: number) => {
-            const newParams = new URLSearchParams(pathname);
+            const newParams = new URLSearchParams(router.query as any);
             newParams.set(PARAM_PAGE, newPage.toString());
 
             // scrollToTop();
-            navigate.push(`${pathname}?${newParams.toString()}`);
-        },
-        [pathname]
-    );
+            router.push(`${pathname}?${newParams.toString()}`);
+        };
 
     useEffect(() => {
         const newParams = new URLSearchParams();
 
         newParams.append(PARAM_PAGE, page.toString());
-        if (catalogue) newParams.append(PARAM_FIELD, catalogue);
+        if (catalogue) newParams.append(PARAM_FIELD, catalogue as string);
         if (paymentFrom) newParams.append(PARAM_FROM, paymentFrom.toString());
         if (paymentTo) newParams.append(PARAM_TO, paymentTo.toString());
-        if (search) newParams.append(PARAM_SEARCH, search);
-        reset({ search });
+        if (search) newParams.append(PARAM_SEARCH, search as string);
+        reset({ search: search as string });
 
-        navigate.push(`${pathname}?${newParams.toString()}`);
+        router.push(`${pathname}?${newParams.toString()}`, undefined, { shallow: true });
     }, []);
 
     useEffect(() => {
         scrollToTop();
-    }, [pathname]);
-
+    }, [router.query]);
     const entities = vacancies?.total
         ? Math.min(vacancies.total, MAX_ENTITIES)
         : DEFAULT_PAGES * PAGE_ITEMS;

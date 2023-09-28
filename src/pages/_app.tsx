@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
-import dynamic from 'next/dynamic';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+import { useState } from 'react';
 
 import { loginUser, refreshTokens } from '@/components/auth/api';
 import {
@@ -14,15 +16,17 @@ import { getToken, setToken } from '@/components/common/services';
 import type { AppProps } from 'next/app'
 
 
-
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: { refetchOnMount: false, refetchOnWindowFocus: false },
+  },
+});
 const FIVE_MINUTES = 1000 * 60 * 5;
 
 const Router = ({ Component, pageProps }: AppProps) => {
+  const [isLoading, setIsLoading] = useState(true)
 
-  const Rout = dynamic(() => import(`./${Component}`), {
-    loading: () => <DefaultLoader />,
-    ssr: false,
-  });
+
   const refOnce = useRef(false);
 
   const onRefreshTokens = useCallback(async () => {
@@ -50,7 +54,7 @@ const Router = ({ Component, pageProps }: AppProps) => {
       setToken(REFRESH_TOKEN_KEY, data.refresh_token);
       setToken(EXPIRE_DATE_KEY, expirationDate.toString());
     } catch (err) {
-      // console.log(err)
+      console.log(err)
       return;
     }
   }, []);
@@ -85,16 +89,24 @@ const Router = ({ Component, pageProps }: AppProps) => {
     checkTokenExpiration();
     const timer = setInterval(checkTokenExpiration, 60000);
 
+    const loadingTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000)
+
     return () => {
       clearInterval(timer);
+      clearTimeout(loadingTimer);
     };
-  }, [onLoginUser]);
+  }, []);
 
 
   return (
-    <DefaultLayout>
-      <Rout {...pageProps} />
-    </DefaultLayout>
+    <QueryClientProvider client={queryClient}>
+      <DefaultLayout>
+        {isLoading ? <DefaultLoader /> : <Component {...pageProps} />}
+      </DefaultLayout>
+    </QueryClientProvider>
+
   )
 }
 

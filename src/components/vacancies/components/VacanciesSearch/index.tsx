@@ -44,6 +44,7 @@ const VacanciesSearch: React.FC<VacanciesSearchProps> = ({
 						{...field}
 						data-elem="search-input"
 						size="lg"
+						radius="md"
 						placeholder="Введите название вакансии"
 						className={classes.searchInput}
 						icon={
