@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
 import { useState } from 'react';
 
 import { loginUser, refreshTokens } from '@/components/auth/api';
@@ -25,7 +24,6 @@ const FIVE_MINUTES = 1000 * 60 * 5;
 
 const Router = ({ Component, pageProps }: AppProps) => {
   const [isLoading, setIsLoading] = useState(true)
-
 
   const refOnce = useRef(false);
 
