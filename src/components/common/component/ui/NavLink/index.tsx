@@ -13,11 +13,11 @@ interface NavLinkProps {
 const NavLink: React.FC<NavLinkProps> = ({ to, className, children }) => {
 	const { classes, cx } = useStyles();
 	return (
-		<Link href={to}>
-			<MantineNavLink className={cx(classes.link, className)}>
-				{children}
-			</MantineNavLink>
-		</Link>
+		<MantineNavLink className={cx(classes.link, className)}
+			component={Link}
+			label={children}
+			href={to}
+		/>
 	);
 };
 

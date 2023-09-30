@@ -1,24 +1,19 @@
 import { Pagination, Stack } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useMemo } from 'react';
-// import { Helmet } from 'react-helmet';
 import Head from 'next/head';
-// import { useLocation, useNavigate } from 'react-router-dom';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { DefaultContainer } from '@/components/common/component';
 import { getPaginationControlProps } from '@/components/common/helpers';
 import { getPageTitle } from '@/components/common/services';
 import { NothingHere } from '@/components/not-found/components';
-
 import { getVacancies } from '@/components/vacancies/api';
 import {
     VacancyCard,
     VacancyCardSkeleton,
 } from '@/components/vacancies/components';
 import { getFavoriteVacancies } from '@/components/vacancies/services';
-
 import { useStyles } from '@/components/favorites/pages/Favorites/styles';
 
 const PAGE_ITEMS = 4;
