@@ -25,7 +25,8 @@ const NothingHere: React.FC<NothingHereProps> = ({
 			<Image
 				src={ImgNotFound}
 				alt="Man with a loupe"
-				height="100"
+				height="200"
+				width="200"
 				className={classes.image}
 			/>
 			<Title className={classes.title}>{title}</Title>

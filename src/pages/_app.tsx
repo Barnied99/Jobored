@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
 
+import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 import { loginUser, refreshTokens } from '@/components/auth/api';
 import {
   ACCESS_TOKEN_KEY,
@@ -100,9 +101,11 @@ const Router = ({ Component, pageProps }: AppProps) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <DefaultLayout>
-        {isLoading ? <DefaultLoader /> : <Component {...pageProps} />}
-      </DefaultLayout>
+      <ErrorBoundary>
+        <DefaultLayout>
+          {isLoading ? <DefaultLoader /> : <Component {...pageProps} />}
+        </DefaultLayout>
+      </ErrorBoundary>
     </QueryClientProvider>
 
   )
