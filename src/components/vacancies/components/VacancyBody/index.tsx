@@ -7,7 +7,7 @@ interface VacancyBodyProps {
 
 const VacancyBody: React.FC<VacancyBodyProps> = ({ description }) => {
 	return (
-		<Paper p={23} pb={18} pt={17} withBorder>
+		<Paper p={23} pb={18} radius='md' pt={17} withBorder>
 			<TypographyStylesProvider>
 				<div dangerouslySetInnerHTML={{ __html: description }} />
 			</TypographyStylesProvider>

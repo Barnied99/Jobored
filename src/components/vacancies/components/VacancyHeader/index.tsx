@@ -53,7 +53,7 @@ const VacancyHeader: React.FC<VacancyHeaderProps> = ({ data }) => {
 	}, [isFavorite, data]);
 
 	return (
-		<Paper component="article" p={23} pb={18} pt={17} withBorder>
+		<Paper component="article" p={23} pb={18} pt={17} radius='md' withBorder>
 			<Stack spacing={17}>
 				<Group position="apart" noWrap>
 					<Title order={2} className={classes.cardTitle}>
