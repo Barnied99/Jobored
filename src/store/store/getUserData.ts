@@ -1,13 +1,13 @@
 const getUserData = () => {
   try {
     let currentUser = localStorage.getItem('currentUser');
-    let tasklist = localStorage.getItem('tasklist');
+    // let jobored = localStorage.getItem('jobored');
     currentUser = currentUser ? JSON.parse(currentUser) : undefined;
 
     if (currentUser) {
       const initialUserData = {
         user: { email: currentUser },
-        tasklist: tasklist ? JSON.parse(tasklist) : [],
+        // jobored: jobored ? JSON.parse(jobored) : [],
       };
       return initialUserData;
     } else {

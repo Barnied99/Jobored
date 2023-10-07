@@ -1,23 +1,23 @@
 import { configureStore } from "@reduxjs/toolkit"
 import thunk from "redux-thunk";
-import logger from "redux-logger";
 
-import userReducer from './slice/user-slice';
-import changeReducer from './slice/change-taskSlice'
+import userReducer from '@/store/slice/user-slice';
+
 import saveUserData from "./saveUserData";
 import getUserData from "./getUserData";
+
+// import changeReducer from '@/store/slice/change-taskSlice'
 
 const preloadedState: Record<string, any> =
     getUserData();
 
-
 const store = configureStore({
     reducer: {
         user: userReducer,
-        tasklist: changeReducer
+        // tasklist: changeReducer
     },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(saveUserData, logger, thunk),
+        getDefaultMiddleware().concat(saveUserData, thunk),
     preloadedState: preloadedState,
 
 });
