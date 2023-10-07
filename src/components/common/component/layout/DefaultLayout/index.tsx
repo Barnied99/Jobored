@@ -18,6 +18,7 @@ import { DefaultContainer, NavLink } from '@/components/common/component';
 import { LogoFull } from '@/assets/img';
 import { useAppSelector, useAppDispatch } from '@/utills/hooks';
 import { userActions } from '@/store/slice/user-slice'
+import { RootState } from '@/store/store/store';
 
 import { useStyles } from './styles';
 
@@ -26,6 +27,7 @@ import { useStyles } from './styles';
 const links = [
 	{ href: '/vacancies', title: 'Поиск Вакансий' },
 	{ href: '/favorites', title: 'Избранное' },
+
 ];
 
 interface DefaultLayoutProps {
@@ -37,7 +39,7 @@ export function HeaderMenu() {
 	const { pathname } = location
 
 	const dispatch = useAppDispatch();
-	const { email: user } = useAppSelector((state: any) => {
+	const { email: user } = useAppSelector((state: RootState) => {
 		return state.user;
 	});
 	const logoutHandler = () => {
@@ -117,12 +119,14 @@ export function HeaderMenu() {
 										Вход
 									</Button>
 								</Link>
-								<Button
-									size={'sm'}
-									variant="subtle"
-									c="#ACADB9"
-									onClick={logoutHandler}
-								> Выход</Button>
+								<Link href='/logout'>
+									<Button
+										size={'sm'}
+										variant="subtle"
+										c="#ACADB9"
+										onClick={logoutHandler}
+									> Выход</Button>
+								</Link>
 								<Link href="/signup">
 									<Button
 										size={'sm'}

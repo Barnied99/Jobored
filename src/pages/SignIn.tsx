@@ -11,7 +11,7 @@ const SignIn = () => {
 
     if (user) {
         router.push('/vacancies')
-        // return null
+        return null
     }
 
     return (

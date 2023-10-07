@@ -5,21 +5,18 @@ import { RootState } from '@/store/store/store';
 import { useAppSelector } from '@/utills/hooks';
 
 
-const SignUp = () => {
+const SignIn = () => {
     const { email: user } = useAppSelector((state: RootState) => state.user);
     const router = useRouter()
 
     if (user) {
-        router.push('/vacancies')
-        // return null
+        router.push('/signin')
+        return null
     }
 
-    return <AuthForm header='Регистрация' type='signup' />;
+    return (
+        <AuthForm header='Вход' type='signin' />
+    );
 };
 
-export default SignUp;
-
-
-
-
-
+export default SignIn;
