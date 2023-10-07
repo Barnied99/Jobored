@@ -6,10 +6,8 @@ import { useAppSelector } from '@/utills/hooks';
 import { Ballon } from '@/assets/img';
 
 
-const SignIn = () => {
+const Main = () => {
     const { email: user } = useAppSelector((state: RootState) => state.user);
-
-
 
     return (
         <Group >
@@ -23,4 +21,4 @@ const SignIn = () => {
     );
 };
 
-export default SignIn;
+export default Main;
