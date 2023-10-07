@@ -14,7 +14,7 @@ const SignIn = () => {
     return (
         <Group >
             <Text c="blue">
-                Добро пожаловать {user}
+                Добро пожаловать{user}
             </Text>
             <Image src={Ballon} alt='ballon' />
 
