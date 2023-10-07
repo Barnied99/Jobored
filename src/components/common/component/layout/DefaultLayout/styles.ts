@@ -11,7 +11,7 @@ export const useStyles = createStyles(
 		},
 
 		header__link: {
-			height: '100%',
+			height: '35%',
 			paddingLeft: '30px',
 			paddingRight: '30px',
 		},
@@ -31,7 +31,7 @@ export const useStyles = createStyles(
 		},
 
 		header__logo: {
-			height: '100%',
+			height: '40%',
 			aspectRatio: '141 / 36',
 		},
 

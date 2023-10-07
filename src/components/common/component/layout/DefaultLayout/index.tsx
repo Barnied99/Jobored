@@ -1,6 +1,7 @@
 import {
 	AppShell,
 	Burger,
+	Button,
 	Drawer,
 	Group,
 	Header,
@@ -13,11 +14,14 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from "next/image";
 
-
 import { DefaultContainer, NavLink } from '@/components/common/component';
 import { LogoFull } from '@/assets/img';
+import { useAppSelector, useAppDispatch } from '@/utills/hooks';
+import { userActions } from '@/store/slice/user-slice'
 
 import { useStyles } from './styles';
+
+
 
 const links = [
 	{ href: '/vacancies', title: 'Поиск Вакансий' },
@@ -32,12 +36,23 @@ export function HeaderMenu() {
 	const location = useRouter();
 	const { pathname } = location
 
+	const dispatch = useAppDispatch();
+	const { email: user } = useAppSelector((state: any) => {
+		return state.user;
+	});
+	const logoutHandler = () => {
+		dispatch(userActions.logout());
+		location.push('/signin');
+	};
+
 	const headerHeight = 84;
 
 	const { classes, cx } = useStyles({ headerHeight });
 
 	const [drawerOpen, { toggle: toggleDrawer, close: closeDrawer }] =
 		useDisclosure(false);
+
+
 
 	const disableScroll = useCallback(() => {
 		document.body.style.position = 'fixed';
@@ -61,6 +76,8 @@ export function HeaderMenu() {
 	useEffect(() => {
 		closeDrawer();
 	}, [pathname]);
+
+
 
 	return (
 		<>
@@ -90,6 +107,33 @@ export function HeaderMenu() {
 									{link.title}
 								</NavLink>
 							))}
+							<>
+								<Link href="/signin" >
+									<Button
+										size={'sm'}
+										variant="subtle"
+										c="#ACADB9"
+									>
+										Вход
+									</Button>
+								</Link>
+								<Button
+									size={'sm'}
+									variant="subtle"
+									c="#ACADB9"
+									onClick={logoutHandler}
+								> Выход</Button>
+								<Link href="/signup">
+									<Button
+										size={'sm'}
+										variant="subtle"
+										c="#ACADB9"
+									>
+										Регистрация
+									</Button>
+								</Link>
+							</>
+
 						</Group>
 
 						<Burger
