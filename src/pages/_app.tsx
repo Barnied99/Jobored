@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Provider } from 'react-redux';
 import { useState } from 'react';
 
+import store from '@/store/store/store';
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 import { loginUser, refreshTokens } from '@/components/auth/api';
 import {
@@ -25,7 +27,6 @@ const FIVE_MINUTES = 1000 * 60 * 5;
 
 const Router = ({ Component, pageProps }: AppProps) => {
   const [isLoading, setIsLoading] = useState(true)
-
   const refOnce = useRef(false);
 
   const onRefreshTokens = useCallback(async () => {
@@ -102,9 +103,11 @@ const Router = ({ Component, pageProps }: AppProps) => {
   return (
     <QueryClientProvider client={queryClient}>
       <ErrorBoundary>
-        <DefaultLayout>
-          {isLoading ? <DefaultLoader /> : <Component {...pageProps} />}
-        </DefaultLayout>
+        <Provider store={store}>
+          <DefaultLayout>
+            {isLoading ? <DefaultLoader /> : <Component {...pageProps} />}
+          </DefaultLayout>
+        </Provider>
       </ErrorBoundary>
     </QueryClientProvider>
 

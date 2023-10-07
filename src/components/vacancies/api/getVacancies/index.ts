@@ -12,7 +12,6 @@ export const getVacancies = async (
 			params: {
 				page: pageIdx,
 				count,
-
 				catalogues: fields,
 				payment_from: paymentFrom,
 				payment_to: paymentTo,
@@ -26,3 +25,7 @@ export const getVacancies = async (
 		})
 		.then((res) => res.data);
 };
+
+
+
+

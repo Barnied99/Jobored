@@ -5,7 +5,7 @@ import {
     NEXT_CLIENT_SECRET,
     NEXT_LOGIN,
     NEXT_PASSWORD,
-} from '../../../common/constants';
+} from '../../../common/constants'
 
 import { LoginResponse } from './dat';
 
@@ -15,7 +15,7 @@ const clientId = NEXT_CLIENT_ID;
 const clientSecret = NEXT_CLIENT_SECRET;
 export const loginUser = async (): Promise<LoginResponse> => {
     return axios
-        .get(`https://localhost:5232/api/2.0/oauth2/password/`, {
+        .get(`http://localhost:5232/api/2.0/oauth2/password/`, {
             params: {
                 login,
                 password,
@@ -29,3 +29,5 @@ export const loginUser = async (): Promise<LoginResponse> => {
         })
         .then((response) => response.data);
 };
+
+
