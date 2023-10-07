@@ -27,26 +27,21 @@ export const styles = createStyles(() => ({
 
     ,
     formControlLabel: {
-        // display: 'flex',
         color: '#00a8e8',
         fontWeight: 'bold',
         marginBottom: '1rem',
         fontSize: '1rem',
         paddingLeft: '0px',
-        // justifyContent: 'flex-start',
         gap: '10px'
     }
 
     ,
     formControlInput: {
         font: 'inherit',
-        // color: '#00a8e8',
         borderRadius: '14px',
         border: '1px  ',
         width: '100%',
         textAlign: 'left',
-        // padding: '0.5rem',
-        // outline: 'none',
     }
 
     ,
