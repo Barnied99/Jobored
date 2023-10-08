@@ -5,12 +5,12 @@ import { RootState } from '@/store/store/store';
 import { useAppSelector } from '@/utills/hooks';
 
 
-const SignIn = () => {
+const LogOut = () => {
     const { email: user } = useAppSelector((state: RootState) => state.user);
     const router = useRouter()
 
-    if (user) {
-        router.push('/signin')
+    if (!user) {
+        router.push('/signup')
         return null
     }
 
@@ -19,4 +19,4 @@ const SignIn = () => {
     );
 };
 
-export default SignIn;
+export default LogOut;

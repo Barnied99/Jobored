@@ -44,7 +44,7 @@ export function HeaderMenu() {
 	});
 	const logoutHandler = () => {
 		dispatch(userActions.logout());
-		location.push('/signin');
+		location.push('/logout')
 	};
 
 	const headerHeight = 84;
@@ -119,14 +119,16 @@ export function HeaderMenu() {
 										Вход
 									</Button>
 								</Link>
-								<Link href='/logout'>
-									<Button
-										size={'sm'}
-										variant="subtle"
-										c="#ACADB9"
-										onClick={logoutHandler}
-									> Выход</Button>
-								</Link>
+								{user && (
+									<Link href='/logout'>
+										<Button
+											size={'sm'}
+											variant="subtle"
+											c="#ACADB9"
+											onClick={logoutHandler}
+										> Выход</Button>
+									</Link>
+								)}
 								<Link href="/signup">
 									<Button
 										size={'sm'}
@@ -136,6 +138,7 @@ export function HeaderMenu() {
 										Регистрация
 									</Button>
 								</Link>
+
 							</>
 
 						</Group>

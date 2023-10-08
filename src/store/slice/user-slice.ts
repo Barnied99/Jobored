@@ -17,24 +17,24 @@ const userSlice = createSlice({
     reducers: {
         login(state, action: PayloadAction<LoginFormPayload>) {
             if (action.payload?.error) {
-                state = initialUserState;
+                state.email = null;
             } else {
                 state.email = action.payload.email;
             }
         },
         signup(state, action: PayloadAction<LoginFormPayload>) {
             if (action.payload?.error) {
-                state = initialUserState;
+                state.email = null;
             } else {
                 state.email = action.payload.email;
             }
         },
 
         logout(state) {
-            state = initialUserState;
+            state.email = null;
         },
         getSavedUser(state, action: PayloadAction<UserState>) {
-            state = action.payload;
+            state.email = action.payload.email;
         },
     }
 })
