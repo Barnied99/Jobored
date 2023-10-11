@@ -2,11 +2,10 @@ import { configureStore } from "@reduxjs/toolkit"
 import thunk from "redux-thunk";
 
 import userReducer from '@/store/slice/user-slice';
+import changeReducer from '@/store/slice/change-taskSlice'
 
 import saveUserData from "./saveUserData";
 import getUserData from "./getUserData";
-
-// import changeReducer from '@/store/slice/change-taskSlice'
 
 const preloadedState: Record<string, any> =
     getUserData();
@@ -14,7 +13,7 @@ const preloadedState: Record<string, any> =
 const store = configureStore({
     reducer: {
         user: userReducer,
-        // tasklist: changeReducer
+        jobored: changeReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(saveUserData, thunk),

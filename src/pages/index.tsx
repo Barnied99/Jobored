@@ -10,14 +10,12 @@ const Main = () => {
     const { email: user } = useAppSelector((state: RootState) => state.user);
 
     return (
-        <Group >
+        <Group position="center" spacing="xs" >
             <Text c="blue">
-                Добро пожаловать{user}
+                Добро пожаловать, {user?.slice(0, 11)}
             </Text>
             <Image src={Ballon} alt='ballon' />
-
         </Group>
-
     );
 };
 
