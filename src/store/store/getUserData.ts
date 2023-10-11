@@ -1,7 +1,7 @@
 const getUserData = () => {
   try {
     let currentUser = localStorage.getItem('currentUser');
-    // let jobored = localStorage.getItem('jobored');
+    // let favorites = localStorage.getItem('jobored');
     currentUser = currentUser ? JSON.parse(currentUser) : undefined;
 
     if (currentUser) {

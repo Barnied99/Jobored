@@ -1,54 +1,46 @@
-// import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {
+    addFavoriteVacancy,
+    deleteFavoriteVacancy,
+    resetFavoriteVacancies,
+} from '@/components/vacancies/services';
 
-// export interface Task {
-//     tasks?: Action[];
-// }
-// export interface Action {
-//     id: string,
-//     text: string,
-// }
 
-// let initialState: Task = {
-//     tasks: []
-// }
 
-// const changeSlice = createSlice({
-//     name: 'tasklist',
-//     initialState: initialState.tasks || [],
-//     reducers: {
-//         setadd(state, action: PayloadAction<Action>) {
-//             const newTask: Action = {
-//                 id: action.payload.id,
-//                 text: action.payload.text
-//             }
-//             return [
-//                 ...state,
-//                 newTask
-//             ];
-//         },
+interface ChangeState {
+    jobored: number[];
+}
 
-//         remove(state, action: PayloadAction<string>) {
-//             const deleteTask = state.filter((item: any) => {
-//                 return item.id !== action.payload
-//             })
-//             return [
-//                 ...deleteTask
-//             ];
-//         },
 
-//         change(state, action: PayloadAction<Action>) {
-//             const { id, text } = action.payload
-//             const updateTask = state.map((el) =>
-//                 el.id === id ? { ...el, text: text } : el
-//             )
-//             return updateTask;
-//         },
-//     },
-// });
+const changeSlice = createSlice({
+    name: 'jobored',
+    initialState: {
+        jobored: []
+    } as ChangeState,
+    reducers: {
+        setaddFavoriteVacancy: (state, action: PayloadAction<number>) => {
+            const key = action.payload
+            addFavoriteVacancy(key)
+            state.jobored = [...state.jobored, key]
+        },
 
-// export const changeActions = changeSlice.actions;
+        setdeleteFavoriteVacancy: (state, action: PayloadAction<number>) => {
+            const key = action.payload
+            deleteFavoriteVacancy(key)
+            state.jobored = state.jobored.filter((elem) => elem !== key)
+        },
 
-// export default changeSlice.reducer;
+        setresetFavoriteVacancies: (state) => {
+            resetFavoriteVacancies()
+            state.jobored = []
+        }
+
+    },
+});
+
+export const changeActions = changeSlice.actions;
+
+export default changeSlice.reducer;
 
 
 
