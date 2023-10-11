@@ -47,7 +47,7 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
             props.type === 'signin'
                 ? dispatch(userActions.login(payload))
                 : dispatch(userActions.signup(payload));
-            router.push('/');
+            router.push('/vacancies');
         }
     };
 

@@ -76,23 +76,19 @@ const saveUserData = (store: any) => (next: any) => (action: any) => {
 
   switch (action.type) {
 
-    // case 'jobored/setadd': {
-    //   const { jobored } = store.getState();
-    //   localStorage.setItem('jobored', JSON.stringify(jobored));
-    //   break
-    // }
+    case 'jobored/setaddFavoriteVacancy': {
+      const { jobored } = store.getState();
+      localStorage.setItem('jobored', JSON.stringify(jobored));
+      break
+    }
 
-    // case 'jobored/remove': {
-    //   const { jobored } = store.getState();
-    //   localStorage.setItem('jobored', JSON.stringify(jobored));
+    case 'jobored/setdeleteFavoriteVacancy': {
+      const { jobored } = store.getState();
+      localStorage.setItem('jobored', JSON.stringify(jobored));
 
-    //   break;
-    // }
-    // case 'jobored/change': {
-    //   const { jobored } = store.getState()
-    //   localStorage.setItem('jobored', JSON.stringify(jobored));
-    //   break
-    // }
+      break;
+    }
+
 
     default:
       break;
@@ -105,9 +101,3 @@ export default saveUserData;
 
 
 
-// const store = {
-//   'darkbarnied99@gmailcom': { user: { email: "darkbarnied99@gmailcom" } },
-//   'savitskiy.v@inbox.ru': { user: { email: "savitskiy.v@inbox.ru" } }
-// }
-
-// store['savitskiy.v@inbox.ru']
