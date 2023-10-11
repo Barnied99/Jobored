@@ -9,7 +9,7 @@ import {
 	Styles,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from "next/image";
@@ -38,6 +38,11 @@ export function HeaderMenu() {
 	const location = useRouter();
 	const { pathname } = location
 
+
+
+	const [userClient, setUserClient] = useState(false)
+
+
 	const dispatch = useAppDispatch();
 	const { email: user } = useAppSelector((state: RootState) => {
 		return state.user;
@@ -46,6 +51,14 @@ export function HeaderMenu() {
 		dispatch(userActions.logout());
 		location.push('/logout')
 	};
+
+	useEffect(() => {
+		if (user) {
+			setUserClient(!userClient)
+		}
+	}, [user])
+
+
 
 	const headerHeight = 84;
 
@@ -119,7 +132,7 @@ export function HeaderMenu() {
 										Вход
 									</Button>
 								</Link>
-								{user && (
+								{userClient && (
 									<Link href='/logout'>
 										<Button
 											size={'sm'}
