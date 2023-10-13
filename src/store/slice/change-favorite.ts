@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import {
     addFavoriteVacancy,
     deleteFavoriteVacancy,
@@ -7,33 +8,33 @@ import {
 
 
 
-interface ChangeState {
-    jobored: number[];
-}
+// interface ChangeState {
+//     jobored: number[];
+// }
 
 
 const changeSlice = createSlice({
     name: 'jobored',
-    initialState: {
-        jobored: []
-    } as ChangeState,
+    initialState: [] as number[],
     reducers: {
         setaddFavoriteVacancy: (state, action: PayloadAction<number>) => {
             const key = action.payload
             addFavoriteVacancy(key)
-            state.jobored = [...state.jobored, key]
+            return [...state, key]
         },
 
         setdeleteFavoriteVacancy: (state, action: PayloadAction<number>) => {
             const key = action.payload
             deleteFavoriteVacancy(key)
-            state.jobored = state.jobored.filter((elem) => elem !== key)
+            const deletefav = state.filter((elem) => { return elem !== key })
+            return [...deletefav]
         },
 
         setresetFavoriteVacancies: (state) => {
             resetFavoriteVacancies()
-            state.jobored = []
-        }
+            state = []
+        },
+
 
     },
 });
