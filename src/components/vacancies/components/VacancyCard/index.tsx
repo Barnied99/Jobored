@@ -3,16 +3,16 @@ import React, { useCallback, useState } from 'react';
 
 import { getCompensationString } from '@/components/vacancies/helpers';
 import {
-	// addFavoriteVacancy,
-	// deleteFavoriteVacancy,
 	isFavoriteVacancy,
 } from '@/components/vacancies/services';
-import { useAppDispatch, useAppSelector } from '@/utills/hooks';
-import { changeActions } from '@/store/slice/change-taskSlice';
+import { useAppDispatch } from '@/utills/hooks';
+import { changeActions } from '@/store/slice/change-favorite';
 import { Vacancy } from '@/components/vacancies/types';
 
 import { CardHeader, Location, WorkInfo } from './components';
-import { RootState } from '@/store/store/store';
+
+
+
 
 interface VacancyCardProps {
 	data: Vacancy;
@@ -29,7 +29,6 @@ const VacancyCard: React.FC<VacancyCardProps> = ({ data }) => {
 	} = data;
 
 	const dispatch = useAppDispatch()
-	const favorites = useAppSelector((store: RootState) => store?.jobored)
 
 	const compensation = getCompensationString(currency, paymentFrom, paymentTo);
 

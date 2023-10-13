@@ -10,19 +10,17 @@ import {
 import React, { useCallback, useState } from 'react';
 import Image from 'next/image';
 
-import { useAppDispatch, useAppSelector } from '@/utills/hooks';
-import { changeActions } from '@/store/slice/change-taskSlice';
+import { useAppDispatch } from '@/utills/hooks';
+import { changeActions } from '@/store/slice/change-favorite';
 import { IconGeolocation, IconStar, IconStarFilled } from '@/assets/icons';
 import { getCompensationString } from '@/components/vacancies/helpers';
 import {
-	// addFavoriteVacancy,
-	// deleteFavoriteVacancy,
 	isFavoriteVacancy,
 } from '@/components/vacancies/services';
 import { Vacancy } from '@/components/vacancies/types';
+import { RootState } from '@/store/store/store';
 
 import { useStyles } from './styles';
-import { RootState } from '@/store/store/store';
 
 interface VacancyHeaderProps {
 	data: Vacancy;
@@ -32,7 +30,8 @@ const VacancyHeader: React.FC<VacancyHeaderProps> = ({ data }) => {
 	const { classes } = useStyles();
 
 	const dispatch = useAppDispatch()
-	const favorites = useAppSelector((store: RootState) => store?.jobored)
+
+
 	const {
 		type_of_work: { title: workType },
 		profession,
@@ -44,7 +43,10 @@ const VacancyHeader: React.FC<VacancyHeaderProps> = ({ data }) => {
 
 	const compensation = getCompensationString(currency, paymentFrom, paymentTo);
 
+
+
 	const [isFavorite, setIsFavorite] = useState(isFavoriteVacancy(data.id));
+
 
 	const toggleIsFavorite = useCallback(() => {
 		if (isFavorite) {
@@ -54,7 +56,8 @@ const VacancyHeader: React.FC<VacancyHeaderProps> = ({ data }) => {
 		}
 
 		dispatch(changeActions.setaddFavoriteVacancy(data.id));
-		setIsFavorite(true);
+		setIsFavorite(true)
+
 	}, [isFavorite, data]);
 
 	return (
