@@ -92,6 +92,7 @@ export function HeaderMenu() {
 									src={LogoFull}
 									alt="Jobored Logo"
 									className={classes.header__logo}
+									priority
 								/>
 							</Link>
 						</Group>

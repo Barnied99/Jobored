@@ -48,7 +48,7 @@ const VacanciesSearch: React.FC<VacanciesSearchProps> = ({
 						placeholder="Введите название вакансии"
 						className={classes.searchInput}
 						icon={
-							<Image src={IconSearch} alt="" className={classes.searchIcon} />
+							<Image src={IconSearch} alt="" className={classes.searchIcon} width={13} />
 						}
 						iconWidth={SEARCH_ICON_WIDTH + SEARCH_ICON_X_PADDINGS}
 						rightSectionWidth={buttonWidth}
