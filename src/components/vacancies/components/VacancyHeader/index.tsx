@@ -18,7 +18,6 @@ import {
 	isFavoriteVacancy,
 } from '@/components/vacancies/services';
 import { Vacancy } from '@/components/vacancies/types';
-import { RootState } from '@/store/store/store';
 
 import { useStyles } from './styles';
 
@@ -75,6 +74,7 @@ const VacancyHeader: React.FC<VacancyHeaderProps> = ({ data }) => {
 						<Image
 							src={isFavorite ? IconStarFilled : IconStar}
 							height={22}
+							loading='lazy'
 							alt="Star icon"
 						/>
 					</ActionIcon>

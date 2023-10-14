@@ -6,24 +6,29 @@
 
 -   Функциональные компоненты c хуками в приоритете над классовыми.
 -   Есть разделение на умные и глупые компоненты.
--   Есть рендеринг списков: []() и т.д.
--   Реализована хотя бы одна форма: [AuthForm]().
--   Есть применение предохранителя: [ErrorBoundary]().
--   Есть хотя бы один кастомный хук: нет в проекте.
--   Есть применение lazy + Suspense/NextDynamic: []().
--   Использован TypeScript.
+-   Есть рендеринг списков: [DefaultContainer](https://github.com/Barnied99/Jobored/blob/main/src/components/common/component/ui/DefaultContainer/index.tsx) и т.д.
+-   Реализована хотя бы одна форма: [AuthForm](https://github.com/Barnied99/Jobored/blob/main/src/components/auth/api/localauth/index.tsx).
+-   Есть применение предохранителя: [ErrorBoundary](https://github.com/Barnied99/Jobored/blob/main/src/components/ErrorBoundary/ErrorBoundary.tsx).
+-   Есть хотя бы один кастомный хук: [use-validation](https://github.com/Barnied99/Jobored/blob/main/src/utills/use-validation.ts).
+-   Есть применение lazy + Suspense/NextDynamic.
 
 ### Redux
 
--   Используем Modern Redux with Redux Toolkit: []().
--   Используем слайсы: []().
--   Есть хотя бы одна кастомная мидлвара: []().
--   Используется RTK Query:.
+-   Используем Modern Redux with Redux Toolkit: [store](https://github.com/Barnied99/Jobored/blob/main/src/store/store/store.ts).
+-   Используем слайсы: [change-favorites](https://github.com/Barnied99/Jobored/blob/main/src/store/slice/change-favorite.ts) / 
+[user-slice](https://github.com/Barnied99/Jobored/blob/main/src/store/slice/user-slice.ts).
+-   Есть хотя бы одна кастомная мидлвара: [getUserData](https://github.com/Barnied99/Jobored/blob/main/src/store/store/getUserData.ts).
+-   Используется React Query.
 
 ## Дополнительно
-- Использована библиотека react-hook-form для форм регистрации и входа
-- Использована библиотека mantine 
-- Использована библиотека yup для валидации данных
-- использованн предохранитель (ErrorBoundary)
+- Использован NextJs.
+- Использована библиотека react-hook-form для форм регистрации и входа.
+- Использована библиотека mantine.
+- Использована библиотека yup для валидации данных.
+- Использованн предохранитель (ErrorBoundary).
+- Написан небольшой proxy-server для обхода cors политики.
+- Написан serviceworker(пока нету).
+- Использован TypeScript.
+
 
 
