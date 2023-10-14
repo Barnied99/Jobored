@@ -1,1 +1,1 @@
-export const FAVORITE_VACANCIES_KEY = 'favorite-vacancies';
+export const FAVORITE_VACANCIES_KEY = 'favorite_vacancies';
