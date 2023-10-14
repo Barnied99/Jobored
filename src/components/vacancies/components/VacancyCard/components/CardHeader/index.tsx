@@ -41,6 +41,8 @@ const CardHeader: React.FC<CardHeaderProps> = ({
 					src={isFavorite ? IconStarFilled : IconStar}
 					className={classes.starIcon}
 					alt="Star icon"
+					width={22}
+					height={22}
 				/>
 			</ActionIcon>
 		</Group>
