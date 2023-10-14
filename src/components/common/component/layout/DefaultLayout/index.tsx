@@ -22,8 +22,6 @@ import { RootState } from '@/store/store/store';
 
 import { useStyles } from './styles';
 
-
-
 const links = [
 	{ href: '/vacancies', title: 'Поиск Вакансий' },
 	{ href: '/favorites', title: 'Избранное' },
@@ -37,12 +35,7 @@ interface DefaultLayoutProps {
 export function HeaderMenu() {
 	const location = useRouter();
 	const { pathname } = location
-
-
-
 	const [userClient, setUserClient] = useState(false)
-
-
 	const dispatch = useAppDispatch();
 	const { email: user } = useAppSelector((state: RootState) => {
 		return state.user;
@@ -58,16 +51,12 @@ export function HeaderMenu() {
 		}
 	}, [user])
 
-
-
 	const headerHeight = 84;
 
 	const { classes, cx } = useStyles({ headerHeight });
 
 	const [drawerOpen, { toggle: toggleDrawer, close: closeDrawer }] =
 		useDisclosure(false);
-
-
 
 	const disableScroll = useCallback(() => {
 		document.body.style.position = 'fixed';
@@ -91,8 +80,6 @@ export function HeaderMenu() {
 	useEffect(() => {
 		closeDrawer();
 	}, [pathname]);
-
-
 
 	return (
 		<>
@@ -188,6 +175,37 @@ export function HeaderMenu() {
 						{link.title}
 					</NavLink>
 				))}
+				<>
+					<Link href="/signin" >
+						<Button
+							size={'sm'}
+							variant="subtle"
+							c="#ACADB9"
+						>
+							Вход
+						</Button>
+					</Link>
+					{userClient && (
+						<Link href='/logout'>
+							<Button
+								size={'sm'}
+								variant="subtle"
+								c="#ACADB9"
+								onClick={logoutHandler}
+							> Выход</Button>
+						</Link>
+					)}
+					<Link href="/signup">
+						<Button
+							size={'sm'}
+							variant="subtle"
+							c="#ACADB9"
+						>
+							Регистрация
+						</Button>
+					</Link>
+
+				</>
 			</Drawer>
 		</>
 	);

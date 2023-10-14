@@ -1,13 +1,13 @@
 const getUserData = () => {
   try {
     let currentUser = localStorage.getItem('currentUser');
-    // let favorites = localStorage.getItem('jobored');
+    let jobored = localStorage.getItem('jobored_favorite_vacancies');
     currentUser = currentUser ? JSON.parse(currentUser) : undefined;
 
     if (currentUser) {
       const initialUserData = {
         user: { email: currentUser },
-        // jobored: jobored ? JSON.parse(jobored) : [],
+        jobored: jobored ? JSON.parse(jobored) : [],
       };
       return initialUserData;
     } else {

@@ -23,7 +23,6 @@ const Favorites = () => {
     const { pathname, query: urlSearchString } = useRouter();
     const navigate = useRouter();
     const params = new URLSearchParams(pathname);
-
     const vacanciesKeys = useMemo(() => getFavoriteVacancies(), []);
     const totalVacancies = vacanciesKeys.length;
     const totalPages = Math.ceil(vacanciesKeys.length / PAGE_ITEMS);
