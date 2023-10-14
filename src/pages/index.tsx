@@ -14,7 +14,7 @@ const Main = () => {
             <Text c="blue">
                 Добро пожаловать, {user?.slice(0, 11)}
             </Text>
-            <Image src={Ballon} alt='ballon' />
+            <Image src={Ballon} alt='ballon' loading='lazy' />
         </Group>
     );
 };
