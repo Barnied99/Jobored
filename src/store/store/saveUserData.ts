@@ -16,7 +16,7 @@ const saveUserData = (store: any) => (next: any) => (action: any) => {
       localStorage.setItem('store', JSON.stringify(parsedSavedStore));
       localStorage.removeItem('currentUser');
       // localStorage.removeItem('jobored');
-      localStorage.removeItem('jobored-favorite-vacancies');
+      localStorage.removeItem('jobored_favorite_vacancies');
 
       let result = next(action);
 
@@ -31,7 +31,7 @@ const saveUserData = (store: any) => (next: any) => (action: any) => {
 
       if (userData) {
         localStorage.setItem('currentUser', JSON.stringify(userData.user));
-        jobored && localStorage.setItem('jobored', jobored)
+        jobored && localStorage.setItem('jobored_favorite_vacancies', jobored)
       } else {
         alert('We could not find your email. Please, Sign Up.');
 
