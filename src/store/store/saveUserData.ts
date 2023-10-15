@@ -1,5 +1,3 @@
-import { clearToken, getToken, setToken } from '@/components/common/services';
-
 const saveUserData = (store: any) => (next: any) => (action: any) => {
 
   switch (action.type) {
