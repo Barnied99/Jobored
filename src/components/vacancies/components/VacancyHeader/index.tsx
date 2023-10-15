@@ -99,3 +99,11 @@ const VacancyHeader: React.FC<VacancyHeaderProps> = ({ data }) => {
 
 export default VacancyHeader;
 export { VacancyHeaderSkeleton } from './skeleton';
+
+
+
+
+
+
+
+
