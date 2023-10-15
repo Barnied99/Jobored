@@ -36,13 +36,16 @@ export function HeaderMenu() {
 	const location = useRouter();
 	const { pathname } = location
 	const [userClient, setUserClient] = useState(false)
+
 	const dispatch = useAppDispatch();
 	const { email: user } = useAppSelector((state: RootState) => {
 		return state.user;
 	});
 	const logoutHandler = () => {
 		dispatch(userActions.logout());
+		location.reload()
 		location.push('/logout')
+
 	};
 
 	useEffect(() => {
@@ -50,6 +53,8 @@ export function HeaderMenu() {
 			setUserClient(!userClient)
 		}
 	}, [user])
+
+
 
 	const headerHeight = 84;
 
@@ -80,6 +85,8 @@ export function HeaderMenu() {
 	useEffect(() => {
 		closeDrawer();
 	}, [pathname]);
+
+
 
 	return (
 		<>
@@ -121,14 +128,15 @@ export function HeaderMenu() {
 									</Button>
 								</Link>
 								{userClient && (
-									<Link href='/logout'>
-										<Button
-											size={'sm'}
-											variant="subtle"
-											c="#ACADB9"
-											onClick={logoutHandler}
-										> Выход</Button>
-									</Link>
+									// <Link href="/logout">
+									<Button
+										size={'sm'}
+										variant="subtle"
+										c="#ACADB9"
+										onClick={logoutHandler}
+									> Выход
+									</Button>
+									// </Link>
 								)}
 								<Link href="/signup">
 									<Button
