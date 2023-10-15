@@ -10,7 +10,6 @@
 -   Реализована хотя бы одна форма: [AuthForm](https://github.com/Barnied99/Jobored/blob/main/src/components/auth/api/localauth/index.tsx).
 -   Есть применение предохранителя: [ErrorBoundary](https://github.com/Barnied99/Jobored/blob/main/src/components/ErrorBoundary/ErrorBoundary.tsx).
 -   Есть хотя бы один кастомный хук: [use-validation](https://github.com/Barnied99/Jobored/blob/main/src/utills/use-validation.ts).
--   Есть применение lazy + Suspense/NextDynamic.
 
 ### Redux
 
@@ -23,12 +22,14 @@
 ## Дополнительно
 - Использован NextJs.
 - Использована библиотека react-hook-form для форм регистрации и входа.
-- Использована библиотека mantine.
 - Использована библиотека yup для валидации данных.
+- Использована библиотека mantine.
 - Использованн предохранитель (ErrorBoundary).
 - Написан небольшой proxy-server для обхода cors политики.
 - Написан serviceworker(пока нету).
 - Использован TypeScript.
+- Есть применение lazy + Suspense/NextDynamic.
+
 
 
 
