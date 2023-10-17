@@ -10,7 +10,9 @@ import { DefaultContainer } from '@/components/common/component';
 import { getPaginationControlProps } from '@/components/common/helpers';
 import { getPageTitle } from '@/components/common/services';
 import { NothingHere } from '@/components/not-found/components';
-import { getFields, getVacancies } from '@/components/vacancies/api';
+import { getVacancies, getFields } from '@/components/vacancies/api'; // убран getFields
+// import { getFieldsNew } from '@/pages/api/fields'
+// import getVacanciessNew from '@/pages/api/vacancies'
 import {
     Filters,
     MobileFilters,
@@ -32,11 +34,33 @@ const PARAM_FIELD = 'field';
 const PARAM_FROM = 'from';
 const PARAM_TO = 'to';
 
-const Vacancies = () => {
+
+export async function getServerSideProps() {
+    try {
+
+        const fields = await getFields();
+
+        return {
+            props: {
+                fields,
+                // vacancies
+            }
+        };
+    } catch (error) {
+        console.error('Error fetching datas:', error);
+        return {
+            props: {
+                fields: [],
+                // vacancies: []
+            }
+        };
+    }
+}
+
+
+const Vacancies = ({ fields }) => { // использование any
     const router = useRouter();
     const { pathname, query } = router;
-
-
     const { classes } = useStyles();
 
     const search = query[PARAM_SEARCH] || '';
@@ -74,9 +98,9 @@ const Vacancies = () => {
         }
     );
 
-    const { data: fields } = useQuery(['fields'], {
-        queryFn: () => getFields(),
-    });
+    // const { data: fields } = useQuery(['fields'], {
+    //     queryFn: () => getFields(),
+    // });
 
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
