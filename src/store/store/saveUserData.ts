@@ -77,24 +77,6 @@ const saveUserData = (store: any) => (next: any) => (action: any) => {
 
   switch (action.type) {
 
-    // case 'jobored/setaddFavoriteVacancy': {
-    //   const { jobored } = store.getState();
-    //   localStorage.setItem('jobored', JSON.stringify(jobored));
-    //   break
-    // }
-
-    // case 'jobored/setdeleteFavoriteVacancy': {
-    //   const { jobored } = store.getState();
-    //   localStorage.setItem('jobored', JSON.stringify(jobored));
-
-    //   break;
-    // }
-    // case 'jobored/setresetFavoriteVacancies': {
-    //   const { jobored } = store.getState();
-    //   localStorage.setItem('jobored', JSON.stringify(jobored));
-    //   break;
-    // }
-
     default:
       break;
   }
