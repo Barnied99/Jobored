@@ -87,7 +87,6 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
                         <Button
                             size={'sm'}
                             variant="filled"
-                            c="#ACADB9"
                             type='submit'>
                             {props.header}
                         </Button>
