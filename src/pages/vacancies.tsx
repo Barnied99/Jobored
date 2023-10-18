@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Group, Pagination, Stack } from '@mantine/core';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient, QueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import Head from 'next/head';
 import { useForm } from 'react-hook-form';
@@ -10,9 +10,7 @@ import { DefaultContainer } from '@/components/common/component';
 import { getPaginationControlProps } from '@/components/common/helpers';
 import { getPageTitle } from '@/components/common/services';
 import { NothingHere } from '@/components/not-found/components';
-import { getVacancies, getFields } from '@/components/vacancies/api'; // убран getFields
-// import { getFieldsNew } from '@/pages/api/fields'
-// import getVacanciessNew from '@/pages/api/vacancies'
+import { getVacancies, getFields } from '@/components/vacancies/api';
 import {
     Filters,
     MobileFilters,
@@ -35,34 +33,59 @@ const PARAM_FROM = 'from';
 const PARAM_TO = 'to';
 
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ query }) {
     try {
+        const queryClient = new QueryClient();
 
         const fields = await getFields();
 
+        const page = Number(query[PARAM_PAGE]) || 1;
+        const catalogue = query[PARAM_FIELD] || '';
+        const paymentFrom = Number(query[PARAM_FROM]) || '';
+        const paymentTo = Number(query[PARAM_TO]) || '';
+        const search = query[PARAM_SEARCH] || '';
+        const filtersForm = {
+            catalogues: catalogue as string,
+            payment_from: paymentFrom,
+            payment_to: paymentTo,
+        };
+
+        await queryClient.prefetchQuery(['vacancies', page, filtersForm, search], () =>
+            getVacancies({
+                pageIdx: page - 1,
+                count: PAGE_ITEMS,
+                fields: filtersForm.catalogues,
+                paymentFrom: filtersForm.payment_from || undefined,
+                paymentTo: filtersForm.payment_to || undefined,
+                keyword: search as string,
+            })
+        );
+        const isFetching = queryClient.isFetching(['vacancies', page, filtersForm, search]);
+        const vacancies = queryClient.getQueryData(['vacancies', page, filtersForm, search]);
         return {
             props: {
                 fields,
-                // vacancies
+                vacancies,
+                isFetching
             }
         };
+
     } catch (error) {
         console.error('Error fetching datas:', error);
         return {
             props: {
                 fields: [],
-                // vacancies: []
+                vacancies: [],
             }
         };
     }
 }
 
 
-const Vacancies = ({ fields }) => { // использование any
+const Vacancies = ({ fields, vacancies, isFetching }) => {
     const router = useRouter();
     const { pathname, query } = router;
     const { classes } = useStyles();
-
     const search = query[PARAM_SEARCH] || '';
 
     const { handleSubmit, control, reset } = useForm({
@@ -83,20 +106,20 @@ const Vacancies = ({ fields }) => { // использование any
         payment_to: paymentTo,
     };
 
-    const { data: vacancies, isLoading: vacanciesLoading } = useQuery(
-        ['vacancies', page, filtersForm, search],
-        {
-            queryFn: () =>
-                getVacancies({
-                    pageIdx: page - 1,
-                    count: PAGE_ITEMS,
-                    fields: filtersForm.catalogues,
-                    paymentFrom: filtersForm.payment_from || undefined,
-                    paymentTo: filtersForm.payment_to || undefined,
-                    keyword: search as string,
-                }),
-        }
-    );
+    // const { data: vacancies, isLoading: vacanciesLoading } = useQuery(
+    //     ['vacancies', page, filtersForm, search],
+    //     {
+    //         queryFn: () =>
+    //             getVacancies({
+    //                 pageIdx: page - 1,
+    //                 count: PAGE_ITEMS,
+    //                 fields: filtersForm.catalogues,
+    //                 paymentFrom: filtersForm.payment_from || undefined,
+    //                 paymentTo: filtersForm.payment_to || undefined,
+    //                 keyword: search as string,
+    //             }),
+    //     }
+    // );
 
     // const { data: fields } = useQuery(['fields'], {
     //     queryFn: () => getFields(),
@@ -168,9 +191,9 @@ const Vacancies = ({ fields }) => { // использование any
 
     const totalPages = Math.ceil(entities / PAGE_ITEMS);
 
-    const readyToDisplay = !vacanciesLoading && vacancies;
+    const readyToDisplay = !isFetching && vacancies;
 
-    const noData = !vacanciesLoading && vacancies?.objects.length === 0;
+    const noData = !isFetching && vacancies?.objects.length === 0;
 
     const title = getPageTitle('Вакансии');
 

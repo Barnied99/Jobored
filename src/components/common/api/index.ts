@@ -20,15 +20,15 @@ const CLIENT_SECRET_KEY = NEXT_CLIENT_SECRET;
 const onRequest = async (
 	config: InternalAxiosRequestConfig
 ): Promise<InternalAxiosRequestConfig> => {
-	if (typeof window !== 'undefined') {
+	// if (typeof window !== 'undefined') {
 
-		const accessToken = getToken(ACCESS_TOKEN_KEY);
+	const accessToken = getToken(ACCESS_TOKEN_KEY);
 
-		if (config?.headers) {
-			if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
-			config.headers['X-Api-App-Id'] = CLIENT_SECRET_KEY;
-		}
+	if (config?.headers) {
+		if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
+		config.headers['X-Api-App-Id'] = CLIENT_SECRET_KEY;
 	}
+	// }
 	return config;
 };
 
