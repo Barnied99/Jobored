@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Group, Pagination, Stack } from '@mantine/core';
 import { useQuery, useQueryClient, QueryClient } from '@tanstack/react-query';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
@@ -87,6 +87,7 @@ const Vacancies = ({ fields, vacancies, isFetching }) => {
     const { pathname, query } = router;
     const { classes } = useStyles();
     const search = query[PARAM_SEARCH] || '';
+
 
     const { handleSubmit, control, reset } = useForm({
         defaultValues: {
@@ -250,3 +251,8 @@ const Vacancies = ({ fields, vacancies, isFetching }) => {
 };
 
 export default Vacancies;
+
+
+
+
+
