@@ -89,7 +89,7 @@ const Favorites = () => {
             <Head>
                 <title>{title}</title>
             </Head>
-            {hasVacancies && userClient ? ( //user
+            {hasVacancies && userClient ? (
                 <>
                     <Stack align="stretch">
                         {pageVacancies.data
