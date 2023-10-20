@@ -6,9 +6,29 @@ import { useAppSelector } from '@/utills/hooks';
 import { Ballon } from '@/assets/img';
 import { DefaultContainer } from '@/components/common/component';
 import { useStyles } from '@/components/main/pages/Home/styles';
+import { getFields } from '@/components/vacancies/api';
 
+export async function getServerSideProps() {
+    try {
+        const fields = await getFields();
 
-const Main = () => {
+        return {
+            props: {
+                fields,
+            }
+        };
+
+    } catch (error) {
+        console.error('Error fetching datas:', error);
+        return {
+            props: {
+                fields: [],
+            }
+        };
+    }
+}
+
+const Main = ({ fields }) => {
     const { email: user } = useAppSelector((state: RootState) => state.user);
     const { classes } = useStyles();
 
@@ -16,40 +36,27 @@ const Main = () => {
         <DefaultContainer >
 
             <Group className={classes.columnsWrapper} position="center" spacing="xs" >
-                <Paper
-                    radius="md"
-                    pb={31}
-                    p={43}
-                    pt={30}
-                    withBorder
-                >
-                    <Text c="blue">
-                        Салам
-                    </Text>
+                {fields.map((f) => (
+                    <div key={f.id}>
+                        <Paper
+                            key={f.id}
+                            radius="md"
+                            pb={11}
+                            p={63}
+                            pt={11}
+                            withBorder
 
-                </Paper>
-                <Paper
-                    radius="md"
-                    pb={31}
-                    p={43}
-                    pt={30}
-                    withBorder>
-                    <Text c="blue">
-                        Добро пожаловать
-                    </Text>
-                </Paper>
-                <Paper
-                    radius="md"
-                    pb={31}
-                    p={43}
-                    pt={30}
-                    withBorder
-                >
-                    <Text c="blue">
-                        не знаю пока еще куда, но я обязательно придумаю для вас
-                    </Text>
+                        >
+                            <Text c="blue">
+                                {f.title_rus}
+                            </Text>
 
-                </Paper>
+                        </Paper>
+                    </div>
+                )
+                )}
+
+
                 <Image src={Ballon} alt='ballon' loading='lazy' />
 
             </Group>
