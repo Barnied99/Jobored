@@ -95,7 +95,6 @@ const Vacancies = ({ fields, vacancies, isFetching }) => {
         },
         resolver: yupResolver(searchSchema),
     });
-
     const page = Number(query[PARAM_PAGE]) || 1;
     const catalogue = query[PARAM_FIELD] || '';
     const paymentFrom = Number(query[PARAM_FROM]) || '';
