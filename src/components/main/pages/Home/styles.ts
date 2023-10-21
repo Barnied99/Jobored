@@ -4,18 +4,26 @@ export const useStyles = createStyles((theme) => ({
     columnsWrapper: {
         display: 'flex',
         flexDirection: 'row',
-        flexWrap: 'nowrap',
+        flexWrap: 'wrap',
         width: '100%',
-        // border
+        justifyContent: 'flex-start'
+
     },
 
     flex1: {
         flex: 1,
+        overflow: 'auto',
+        flexWrap: 'wrap',
+
     },
 
     pagination: {
         justifyContent: 'center',
         marginTop: 37,
+    },
+    text: {
+        marginBottom: '10px',
+        marginTop: '10px',
     },
 
     hiddenTabletsAndBelow: {

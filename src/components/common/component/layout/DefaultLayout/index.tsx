@@ -128,7 +128,6 @@ export function HeaderMenu() {
 									</Button>
 								</Link>
 								{userClient && (
-									// <Link href="/logout">
 									<Button
 										size={'sm'}
 										variant="subtle"
@@ -136,7 +135,6 @@ export function HeaderMenu() {
 										onClick={logoutHandler}
 									> Выход
 									</Button>
-									// </Link>
 								)}
 								<Link href="/signup">
 									<Button
