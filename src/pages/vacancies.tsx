@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Group, Pagination, Stack } from '@mantine/core';
-import { useQuery, useQueryClient, QueryClient } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import Head from 'next/head';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
@@ -33,40 +33,14 @@ const PARAM_FROM = 'from';
 const PARAM_TO = 'to';
 
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps() {
     try {
-        const queryClient = new QueryClient();
 
         const fields = await getFields();
 
-        const page = Number(query[PARAM_PAGE]) || 1;
-        const catalogue = query[PARAM_FIELD] || '';
-        const paymentFrom = Number(query[PARAM_FROM]) || '';
-        const paymentTo = Number(query[PARAM_TO]) || '';
-        const search = query[PARAM_SEARCH] || '';
-        const filtersForm = {
-            catalogues: catalogue as string,
-            payment_from: paymentFrom,
-            payment_to: paymentTo,
-        };
-
-        await queryClient.prefetchQuery(['vacancies', page, filtersForm, search], () =>
-            getVacancies({
-                pageIdx: page - 1,
-                count: PAGE_ITEMS,
-                fields: filtersForm.catalogues,
-                paymentFrom: filtersForm.payment_from || undefined,
-                paymentTo: filtersForm.payment_to || undefined,
-                keyword: search as string,
-            })
-        );
-        const isFetching = queryClient.isFetching(['vacancies', page, filtersForm, search]);
-        const vacancies = queryClient.getQueryData(['vacancies', page, filtersForm, search]);
         return {
             props: {
                 fields,
-                vacancies,
-                isFetching
             }
         };
 
@@ -75,14 +49,13 @@ export async function getServerSideProps({ query }) {
         return {
             props: {
                 fields: [],
-                vacancies: [],
             }
         };
     }
 }
 
 
-const Vacancies = ({ fields, vacancies, isFetching }) => {
+const Vacancies = ({ fields }) => {
     const router = useRouter();
     const { pathname, query } = router;
     const { classes } = useStyles();
@@ -106,20 +79,20 @@ const Vacancies = ({ fields, vacancies, isFetching }) => {
         payment_to: paymentTo,
     };
 
-    // const { data: vacancies, isLoading: vacanciesLoading } = useQuery(
-    //     ['vacancies', page, filtersForm, search],
-    //     {
-    //         queryFn: () =>
-    //             getVacancies({
-    //                 pageIdx: page - 1,
-    //                 count: PAGE_ITEMS,
-    //                 fields: filtersForm.catalogues,
-    //                 paymentFrom: filtersForm.payment_from || undefined,
-    //                 paymentTo: filtersForm.payment_to || undefined,
-    //                 keyword: search as string,
-    //             }),
-    //     }
-    // );
+    const { data: vacancies, isLoading: vacanciesLoading } = useQuery(
+        ['vacancies', page, filtersForm, search],
+        {
+            queryFn: () =>
+                getVacancies({
+                    pageIdx: page - 1,
+                    count: PAGE_ITEMS,
+                    fields: filtersForm.catalogues,
+                    paymentFrom: filtersForm.payment_from || undefined,
+                    paymentTo: filtersForm.payment_to || undefined,
+                    keyword: search as string,
+                }),
+        }
+    );
 
     // const { data: fields } = useQuery(['fields'], {
     //     queryFn: () => getFields(),
@@ -191,13 +164,14 @@ const Vacancies = ({ fields, vacancies, isFetching }) => {
 
     const totalPages = Math.ceil(entities / PAGE_ITEMS);
 
-    const readyToDisplay = !isFetching && vacancies;
+    const readyToDisplay = !vacanciesLoading && vacancies
 
-    const noData = !isFetching && vacancies?.objects.length === 0;
+    const noData = !vacanciesLoading && vacancies?.objects.length === 0;
 
     const title = getPageTitle('Вакансии');
 
     return (
+
         <DefaultContainer>
             <Head>
                 <title>{title}</title>
@@ -246,6 +220,7 @@ const Vacancies = ({ fields, vacancies, isFetching }) => {
                 </Box>
             </Group>
         </DefaultContainer>
+
     );
 };
 
