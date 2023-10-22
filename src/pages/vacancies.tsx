@@ -61,7 +61,6 @@ const Vacancies = ({ fields }) => {
     const { classes } = useStyles();
     const search = query[PARAM_SEARCH] || '';
 
-
     const { handleSubmit, control, reset } = useForm({
         defaultValues: {
             search: search as string,

@@ -61,7 +61,7 @@ const Filters: React.FC<FiltersProps> = ({
 				: '';
 
 			const to = formValues.payment_to ? Number(formValues.payment_to) : '';
-
+			console.log(formValues);
 			onChange({
 				catalogues: formValues.catalogues,
 				payment_from: from,
