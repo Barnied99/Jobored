@@ -93,10 +93,6 @@ const Vacancies = ({ fields }) => {
         }
     );
 
-    // const { data: fields } = useQuery(['fields'], {
-    //     queryFn: () => getFields(),
-    // });
-
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
@@ -219,7 +215,6 @@ const Vacancies = ({ fields }) => {
                 </Box>
             </Group>
         </DefaultContainer>
-
     );
 };
 

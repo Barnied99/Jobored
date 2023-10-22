@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { useRef, useEffect, useState, useMemo, useCallback } from 'react';
+import React, { useRef, useEffect, useMemo, useCallback } from 'react';
 import { Box, Button, Group, Paper, Stack, Text, List } from '@mantine/core';
 import Image from 'next/image';
 import { v4 as uuidv4 } from 'uuid';
@@ -24,8 +24,10 @@ const PARAM_FROM = 'from';
 const PARAM_TO = 'to';
 
 const Main = () => {
-    const { email: user } = useAppSelector((state: RootState) => state.user);
+    const { email: user } = useAppSelector((state: RootState) => state.user);// не исп.
+
     const { classes } = useStyles();
+
     const navigate = useRouter()
     const { pathname, query } = navigate;
 
@@ -52,7 +54,6 @@ const Main = () => {
     const onChangeFilters = useCallback(
         (values: FiltersForm) => {
             const newParams = new URLSearchParams(navigate.query as any);
-
             newParams.delete(PARAM_FIELD);
             newParams.delete(PARAM_FROM);
             newParams.delete(PARAM_TO);
@@ -119,9 +120,7 @@ const Main = () => {
                                     )}
                                     control={control}
                                 />
-
                             </div>
-
                         )
                         )) : (
                             <>
@@ -157,7 +156,6 @@ const Main = () => {
                                 <FieldSkeleton />
                                 <FieldSkeleton />
                             </>
-
                         )}
                     </Group>
                 </Paper>
@@ -182,7 +180,6 @@ const Main = () => {
                                 <FieldSkeleton />
                                 <FieldSkeleton />
                                 <FieldSkeleton />
-
                             </>
                         )}
                     </Group>
@@ -201,7 +198,6 @@ const Main = () => {
                                     {String(c)}
                                 </Button>
                             </Link>
-
                         ))}
                     </Group>
                 </Paper>
