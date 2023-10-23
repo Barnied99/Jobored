@@ -1,6 +1,4 @@
-import { Paper, Stack } from '@mantine/core';
-
-import { FieldsHeader } from './FieldsHeader/skeleton';
+import { Paper } from '@mantine/core';
 
 import { WorkTypeSkeleton } from '@/components/main/components/typeWork/skeleton'
 
