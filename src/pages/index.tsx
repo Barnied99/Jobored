@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { useRef, useEffect, useState, useMemo, useCallback } from 'react';
+import React, { useRef, useEffect, useMemo, useCallback } from 'react';
 import { Box, Button, Group, Paper, Stack, Text, List } from '@mantine/core';
 import Image from 'next/image';
 import { v4 as uuidv4 } from 'uuid';
@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useAppSelector } from '@/utills/hooks';
+// import { useAppSelector } from '@/utills/hooks';
 import { Ballon } from '@/assets/img';
 import { useStyles } from '@/components/main/pages/Home/styles';
 import { getFields, getTime } from '@/components/vacancies/api';
@@ -16,21 +16,25 @@ import { FieldSkeleton } from '@/components/main/components/skeleton';
 import { filterSchema } from '@/components/main/components/Fields/validation';
 import { FiltersForm } from '@/components/vacancies/types';
 
-import type { RootState } from '@/store/store/store';
+// import type { RootState } from '@/store/store/store';
 
 const PARAM_PAGE = 'page';
 const PARAM_FIELD = 'field';
+const PARAM_TYPEWORK = 'type_of_work';
 const PARAM_FROM = 'from';
 const PARAM_TO = 'to';
 
 const Main = () => {
-    const { email: user } = useAppSelector((state: RootState) => state.user);
+    // const { email: user } = useAppSelector((state: RootState) => state.user);// не исп.
+
     const { classes } = useStyles();
+
     const navigate = useRouter()
     const { pathname, query } = navigate;
 
     const page = Number(query[PARAM_PAGE]) || 1;
     const catalogue = query[PARAM_FIELD] || '';
+    const typework = query[PARAM_TYPEWORK] || '';
 
     const paperRef = useRef<HTMLFormElement>(null);
     const values = { catalogues: '' }
@@ -41,24 +45,34 @@ const Main = () => {
     const { data: references } = useQuery(['typeWork'], {
         queryFn: () => getTime(),
     });
+
     const typeWorks = Object.values(references?.type_of_work || {})
+    const typeWorksKeys = Object.entries(references?.type_of_work || {})
+    // console.log(typeWorksKeys.map((el) => { return el[1] }));
+
     const countries = Object.values(references?.citizenship || {})
 
-    const { handleSubmit, control, reset } = useForm<any>({ //any вместо FiltersForm
+    const { handleSubmit, control } = useForm<any>({ //any вместо FiltersForm
         resolver: yupResolver(filterSchema),
         defaultValues: values,
     });
 
+
+    const fieldSkeletons = (x: number) => Array.from({ length: x }, (_, index) => (
+        <FieldSkeleton key={index} />
+    ))    //skeletonx31
+
+
     const onChangeFilters = useCallback(
         (values: FiltersForm) => {
             const newParams = new URLSearchParams(navigate.query as any);
-
             newParams.delete(PARAM_FIELD);
             newParams.delete(PARAM_FROM);
             newParams.delete(PARAM_TO);
 
             newParams.set(PARAM_PAGE, '1');
             if (values.catalogues) newParams.set(PARAM_FIELD, values.catalogues);
+            if (values.type_of_work) newParams.set(PARAM_TYPEWORK, values.type_of_work);
 
             // scrollToTop();
             navigate.push({
@@ -66,7 +80,7 @@ const Main = () => {
                 query: newParams.toString(),
             });
         },
-        [navigate, pathname])
+        [navigate])
 
     const onSubmit = useCallback(
         (formValues: FiltersForm) => {
@@ -78,9 +92,9 @@ const Main = () => {
 
     useEffect(() => {
         const newParams = new URLSearchParams();
-
         newParams.append(PARAM_PAGE, page.toString());
         if (catalogue) newParams.append(PARAM_FIELD, catalogue as string);
+        if (typework) newParams.append(PARAM_TYPEWORK, typework as string);
 
         navigate.push(`${pathname}?${newParams.toString()}`, undefined, { shallow: true });
     }, []);
@@ -98,11 +112,10 @@ const Main = () => {
                     withBorder
                     radius="md"
                 >
-
                     <Text className={classes.text}>ПО ОТРАСЛЯМ</Text>
                     <Group className={classes.columnsWrapper} position="center" spacing="xs" >
                         {fields ? (fields?.map((f) => (
-                            <div key={uuidv4()} >
+                            <Group key={uuidv4()} >
                                 <Controller
                                     name="catalogues"
                                     render={({ field }) => (
@@ -119,45 +132,12 @@ const Main = () => {
                                     )}
                                     control={control}
                                 />
-
-                            </div>
-
+                            </Group>
                         )
                         )) : (
                             <>
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
+                                {fieldSkeletons(31)};
                             </>
-
                         )}
                     </Group>
                 </Paper>
@@ -169,20 +149,28 @@ const Main = () => {
                     radius="md">
                     <Text className={classes.text}>ПО ГРАФИКУ</Text>
                     <Group className={classes.columnsWrapper} position="center" spacing="xs" >
-                        {typeWorks ? (typeWorks?.slice(1).map((t) => (
-                            <div key={uuidv4()} >
-                                <Button key={uuidv4()} variant="subtle" type='submit'>
-                                    {String(t)}
-                                </Button>
-                            </div>
+                        {typeWorks ? (typeWorksKeys?.map((t) => (
+                            <Group key={uuidv4()} >
+                                <Controller
+                                    name="type_of_work"
+                                    render={({ field }) => (
+                                        <Button key={uuidv4()}
+                                            variant="subtle"
+                                            type='button'
+                                            onClick={() => {
+                                                field.onChange(String(t[0]));
+                                                handleSubmit(onSubmit)();
+                                            }}>
+                                            {String(t[1])}
+                                        </Button>
+                                    )}
+                                    control={control}
+                                />
+                            </Group>
                         ))
                         ) : (
                             <>
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-                                <FieldSkeleton />
-
+                                {fieldSkeletons(5)};
                             </>
                         )}
                     </Group>
@@ -201,7 +189,6 @@ const Main = () => {
                                     {String(c)}
                                 </Button>
                             </Link>
-
                         ))}
                     </Group>
                 </Paper>

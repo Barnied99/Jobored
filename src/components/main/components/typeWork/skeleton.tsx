@@ -10,7 +10,7 @@ export const WorkTypeSkeleton = () => {
             <Breadcrumbs
                 className={classes.skeletonBreadcrumbs}
             >
-                <Skeleton height={21} width={150} />
+                <Skeleton height={21} width={250} />
             </Breadcrumbs>
         </Group>
     );

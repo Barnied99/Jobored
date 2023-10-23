@@ -1,16 +1,12 @@
 import { Component } from 'react';
+import { Alert } from '@mantine/core';
+import { IconInfoCircle } from '@tabler/icons-react';
 
 export type Props = {
   children: React.ReactNode;
 };
 
-export type RootState = {
-  tasklist: {
-    id: string,
-    text: string
-  }
-  user: { email: string };
-};
+
 
 class ErrorBoundary extends Component<Props, { hasError: boolean }> {
   constructor(props: Props) {
@@ -18,16 +14,17 @@ class ErrorBoundary extends Component<Props, { hasError: boolean }> {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error: any) {
+  static getDerivedStateFromError() {
     return { hasError: true };
   }
+  icon = <IconInfoCircle />;
+
 
   render() {
     if (this.state.hasError) {
       return (
-        <div>
-          <p >Something went wrong!</p>
-        </div>
+        <Alert variant="filled" color="red" withCloseButton title="Alert " radius="md" icon={this.icon}>
+          Something went wrong!        </Alert>
       );
     }
     return this.props.children;
@@ -35,3 +32,7 @@ class ErrorBoundary extends Component<Props, { hasError: boolean }> {
 }
 
 export default ErrorBoundary;
+
+
+
+
