@@ -37,7 +37,10 @@ const Main = () => {
     const typework = query[PARAM_TYPEWORK] || '';
 
     const paperRef = useRef<HTMLFormElement>(null);
-    const values = { catalogues: '' }
+    const values = {
+        catalogues: '',
+        type_of_work: ''
+    }
 
     const { data: fields } = useQuery(['fields'], {
         queryFn: () => getFields(),

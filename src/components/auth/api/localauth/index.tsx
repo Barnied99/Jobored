@@ -15,8 +15,6 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
 
     const { classes } = styles()
 
-
-
     const {
         inputRef: emailInputRef,
         isInvalid: isEmailInvalid,
@@ -80,8 +78,6 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
                             />
                             {isPasswordInvalid && <span>Password is invalid</span>}
                         </Input.Wrapper>
-
-
                     </div>
                     <div className={classes.formAction}>
                         <Button
