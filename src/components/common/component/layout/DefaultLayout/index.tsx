@@ -25,7 +25,6 @@ import { useStyles } from './styles';
 const links = [
 	{ href: '/vacancies', title: 'Поиск Вакансий' },
 	{ href: '/favorites', title: 'Избранное' },
-
 ];
 
 interface DefaultLayoutProps {
@@ -53,8 +52,6 @@ export function HeaderMenu() {
 			setUserClient(!userClient)
 		}
 	}, [user])
-
-
 
 	const headerHeight = 84;
 
@@ -85,8 +82,6 @@ export function HeaderMenu() {
 	useEffect(() => {
 		closeDrawer();
 	}, [pathname]);
-
-
 
 	return (
 		<>
