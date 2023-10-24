@@ -6,8 +6,6 @@ export type Props = {
   children: React.ReactNode;
 };
 
-
-
 class ErrorBoundary extends Component<Props, { hasError: boolean }> {
   constructor(props: Props) {
     super(props);
@@ -18,7 +16,6 @@ class ErrorBoundary extends Component<Props, { hasError: boolean }> {
     return { hasError: true };
   }
   icon = <IconInfoCircle />;
-
 
   render() {
     if (this.state.hasError) {

@@ -10,7 +10,7 @@ import { DefaultContainer } from '@/components/common/component';
 import { getPaginationControlProps } from '@/components/common/helpers';
 import { getPageTitle } from '@/components/common/services';
 import { NothingHere } from '@/components/not-found/components';
-import { getVacancies, getFields } from '@/components/vacancies/api';
+import { getVacancies, getFields, getTime } from '@/components/vacancies/api';
 import {
     Filters,
     MobileFilters,
@@ -31,19 +31,17 @@ const PARAM_SEARCH = 'search';
 const PARAM_FIELD = 'field';
 const PARAM_FROM = 'from';
 const PARAM_TO = 'to';
+const PARAM_TYPEWORK = 'type_of_work';
 
 
 export async function getServerSideProps() {
     try {
-
         const fields = await getFields();
-
         return {
             props: {
                 fields,
             }
         };
-
     } catch (error) {
         console.error('Error fetching datas:', error);
         return {
@@ -53,7 +51,6 @@ export async function getServerSideProps() {
         };
     }
 }
-
 
 const Vacancies = ({ fields }) => {
     const router = useRouter();
@@ -71,6 +68,7 @@ const Vacancies = ({ fields }) => {
     const catalogue = query[PARAM_FIELD] || '';
     const paymentFrom = Number(query[PARAM_FROM]) || '';
     const paymentTo = Number(query[PARAM_TO]) || '';
+    const typework = query[PARAM_TYPEWORK] || '';
 
     const filtersForm: FiltersForm = {
         catalogues: catalogue as string,
@@ -92,6 +90,10 @@ const Vacancies = ({ fields }) => {
                 }),
         }
     );
+
+    const { data: references } = useQuery(['typeWork'], {
+        queryFn: () => getTime(),
+    });
 
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -123,6 +125,7 @@ const Vacancies = ({ fields }) => {
                 newParams.set(PARAM_FROM, values.payment_from.toString());
             if (values.payment_to)
                 newParams.set(PARAM_TO, values.payment_to.toString());
+            if (values.type_of_work) newParams.set(PARAM_TYPEWORK, values.type_of_work);//
 
             // scrollToTop();
             router.push(`${pathname}?${newParams.toString()}`);
@@ -145,6 +148,7 @@ const Vacancies = ({ fields }) => {
         if (paymentFrom) newParams.append(PARAM_FROM, paymentFrom.toString());
         if (paymentTo) newParams.append(PARAM_TO, paymentTo.toString());
         if (search) newParams.append(PARAM_SEARCH, search as string);
+        if (typework) newParams.append(PARAM_TYPEWORK, typework as string);
         reset({ search: search as string });
 
         router.push(`${pathname}?${newParams.toString()}`, undefined, { shallow: true });
