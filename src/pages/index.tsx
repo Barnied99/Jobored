@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { useRef, useEffect, useMemo, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import { Box, Button, Group, Paper, Stack, Text, List } from '@mantine/core';
 import Image from 'next/image';
 import { v4 as uuidv4 } from 'uuid';
@@ -21,8 +21,11 @@ import { FiltersForm } from '@/components/vacancies/types';
 const PARAM_PAGE = 'page';
 const PARAM_FIELD = 'field';
 const PARAM_TYPEWORK = 'type_of_work';
+const PARAM_EXP = 'expirience';
 const PARAM_FROM = 'from';
 const PARAM_TO = 'to';
+
+
 
 const Main = () => {
     // const { email: user } = useAppSelector((state: RootState) => state.user);// не исп.
@@ -35,11 +38,13 @@ const Main = () => {
     const page = Number(query[PARAM_PAGE]) || 1;
     const catalogue = query[PARAM_FIELD] || '';
     const typework = query[PARAM_TYPEWORK] || '';
+    const experienceType = query[PARAM_EXP] || '';
 
     const paperRef = useRef<HTMLFormElement>(null);
-    const values = {
+    const values: FiltersForm = {
         catalogues: '',
-        type_of_work: ''
+        type_of_work: '',
+        expirience: ''
     }
 
     const { data: fields } = useQuery(['fields'], {
@@ -48,14 +53,16 @@ const Main = () => {
     const { data: references } = useQuery(['typeWork'], {
         queryFn: () => getTime(),
     });
-
+    console.log(references);
     const typeWorks = Object.values(references?.type_of_work || {})
     const typeWorksKeys = Object.entries(references?.type_of_work || {})
-    // console.log(typeWorksKeys.map((el) => { return el[1] }));
+    const experience = Object.values(references?.experience || {})
+    const experienceKeys = Object.entries(references?.experience || {})
 
     const countries = Object.values(references?.citizenship || {})
 
-    const { handleSubmit, control } = useForm<any>({ //any вместо FiltersForm
+
+    const { handleSubmit, control } = useForm<any>({ //any
         resolver: yupResolver(filterSchema),
         defaultValues: values,
     });
@@ -68,7 +75,7 @@ const Main = () => {
 
     const onChangeFilters = useCallback(
         (values: FiltersForm) => {
-            const newParams = new URLSearchParams(navigate.query as any);
+            const newParams = new URLSearchParams(navigate.query as any); //any
             newParams.delete(PARAM_FIELD);
             newParams.delete(PARAM_FROM);
             newParams.delete(PARAM_TO);
@@ -76,6 +83,7 @@ const Main = () => {
             newParams.set(PARAM_PAGE, '1');
             if (values.catalogues) newParams.set(PARAM_FIELD, values.catalogues);
             if (values.type_of_work) newParams.set(PARAM_TYPEWORK, values.type_of_work);
+            if (values.expirience) newParams.set(PARAM_EXP, values.expirience);
 
             // scrollToTop();
             navigate.push({
@@ -98,6 +106,7 @@ const Main = () => {
         newParams.append(PARAM_PAGE, page.toString());
         if (catalogue) newParams.append(PARAM_FIELD, catalogue as string);
         if (typework) newParams.append(PARAM_TYPEWORK, typework as string);
+        if (experienceType) newParams.append(PARAM_EXP, experienceType as string);
 
         navigate.push(`${pathname}?${newParams.toString()}`, undefined, { shallow: true });
     }, []);
@@ -184,6 +193,35 @@ const Main = () => {
                     pt={6}
                     withBorder
                     radius="md">
+                    <Text className={classes.text}>ПО ОБРАЗОВАНИЮ</Text>
+                    <Group className={classes.columnsWrapper} position="center" spacing="xs" >
+                        {experience?.map((e) => (
+                            <Group key={uuidv4()} >
+                                <Controller
+                                    name="expirience"
+                                    render={({ field }) => (
+                                        <Button key={uuidv4()}
+                                            variant="subtle"
+                                            type='button'
+                                            onClick={() => {
+                                                field.onChange(String(e));
+                                                handleSubmit(onSubmit)();
+                                            }}>
+                                            {String(e)}
+                                        </Button>
+                                    )}
+                                    control={control}
+                                />
+                            </Group>
+                        ))}
+                    </Group>
+                </Paper>
+                <Paper
+                    p={6}
+                    pb={5}
+                    pt={6}
+                    withBorder
+                    radius="md">
                     <Text className={classes.text}>ПО СТРАНАМ</Text>
                     <Group className={classes.columnsWrapper} position="center" spacing="xs" >
                         {countries?.map((c) => (
@@ -195,15 +233,18 @@ const Main = () => {
                         ))}
                     </Group>
                 </Paper>
+
+
+
                 <Paper
-                    p={13}
-                    pb={11}
+                    p={7}
+                    pb={6}
                     pt={10}
                     withBorder
                     radius="md">
                     <Image src={Ballon} alt='ballon' priority />
                     <Text variant="gradient"
-                        gradient={{ from: 'indigo', to: 'pink', deg: 90 }}
+                        gradient={{ from: 'indigo', to: 'pink', deg: 80 }}
                     > Работа в Москве</Text>
                     <List withPadding>
                         <List.Item>Свежие вакансии на Jobored в Москве от прямых работодателей, агентств, центров занятости.
