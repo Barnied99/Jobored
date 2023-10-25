@@ -74,6 +74,7 @@ const Vacancies = ({ fields }) => {
         catalogues: catalogue as string,
         payment_from: paymentFrom,
         payment_to: paymentTo,
+        type_of_work: typework as string
     };
 
     const { data: vacancies, isLoading: vacanciesLoading } = useQuery(
@@ -87,6 +88,7 @@ const Vacancies = ({ fields }) => {
                     paymentFrom: filtersForm.payment_from || undefined,
                     paymentTo: filtersForm.payment_to || undefined,
                     keyword: search as string,
+                    typeWork: filtersForm.type_of_work as string
                 }),
         }
     );
