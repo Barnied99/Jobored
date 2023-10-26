@@ -7,6 +7,9 @@ export const useStyles = createStyles((theme) => ({
 		padding: 20,
 		paddingTop: 14,
 		minWidth: 315,
+		// display: 'flex',
+		// flexDirection: 'column',
+		// maxWidth: 315
 	},
 
 	filters__select: {

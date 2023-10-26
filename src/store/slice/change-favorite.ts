@@ -6,13 +6,6 @@ import {
     resetFavoriteVacancies,
 } from '@/components/vacancies/services';
 
-
-
-// interface ChangeState {
-//     jobored: number[];
-// }
-
-
 const changeSlice = createSlice({
     name: 'jobored',
     initialState: [] as number[],

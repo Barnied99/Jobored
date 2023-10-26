@@ -53,7 +53,6 @@ const Main = () => {
     const { data: references } = useQuery(['typeWork'], {
         queryFn: () => getTime(),
     });
-    console.log(references);
     const typeWorks = Object.values(references?.type_of_work || {})
     const typeWorksKeys = Object.entries(references?.type_of_work || {})
     const experience = Object.values(references?.experience || {})
@@ -148,11 +147,12 @@ const Main = () => {
                         )
                         )) : (
                             <>
-                                {fieldSkeletons(31)};
+                                {fieldSkeletons(31)}
                             </>
                         )}
                     </Group>
                 </Paper>
+
                 <Paper
                     p={13}
                     pb={11}
@@ -161,7 +161,7 @@ const Main = () => {
                     radius="md">
                     <Text className={classes.text}>ПО ГРАФИКУ</Text>
                     <Group className={classes.columnsWrapper} position="center" spacing="xs" >
-                        {typeWorks ? (typeWorksKeys?.map((t) => (
+                        {references ? (typeWorksKeys?.map((t) => (
                             <Group key={uuidv4()} >
                                 <Controller
                                     name="type_of_work"
@@ -182,11 +182,12 @@ const Main = () => {
                         ))
                         ) : (
                             <>
-                                {fieldSkeletons(5)};
+                                {fieldSkeletons(7)}
                             </>
                         )}
                     </Group>
                 </Paper>
+
                 <Paper
                     p={6}
                     pb={5}
@@ -195,7 +196,7 @@ const Main = () => {
                     radius="md">
                     <Text className={classes.text}>ПО ОБРАЗОВАНИЮ</Text>
                     <Group className={classes.columnsWrapper} position="center" spacing="xs" >
-                        {experience?.map((e) => (
+                        {references ? (experienceKeys?.map((e) => (
                             <Group key={uuidv4()} >
                                 <Controller
                                     name="expirience"
@@ -204,18 +205,24 @@ const Main = () => {
                                             variant="subtle"
                                             type='button'
                                             onClick={() => {
-                                                field.onChange(String(e));
+                                                field.onChange(String(e[0]));
                                                 handleSubmit(onSubmit)();
                                             }}>
-                                            {String(e)}
+                                            {String(e[1])}
                                         </Button>
                                     )}
                                     control={control}
                                 />
                             </Group>
-                        ))}
+                        ))
+                        ) : (
+                            <>
+                                {fieldSkeletons(5)}
+                            </>
+                        )}
                     </Group>
                 </Paper>
+
                 <Paper
                     p={6}
                     pb={5}
@@ -224,21 +231,26 @@ const Main = () => {
                     radius="md">
                     <Text className={classes.text}>ПО СТРАНАМ</Text>
                     <Group className={classes.columnsWrapper} position="center" spacing="xs" >
-                        {countries?.map((c) => (
+                        {references ? (countries?.map((c) => (
                             <Link key={uuidv4()} href='/vacancies'>
                                 <Button key={uuidv4()} variant="subtle" type='submit'>
                                     {String(c)}
                                 </Button>
                             </Link>
-                        ))}
+                        ))
+                        ) : (
+                            <>
+                                {fieldSkeletons(11)}
+                            </>
+                        )
+
+                        }
                     </Group>
                 </Paper>
 
-
-
                 <Paper
-                    p={7}
-                    pb={6}
+                    p={25}
+                    pb={15}
                     pt={10}
                     withBorder
                     radius="md">
