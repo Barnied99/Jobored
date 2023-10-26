@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, NumberInput, Paper, Select, Stack } from '@mantine/core';
+import { Button, NumberInput, Paper, MultiSelect, Stack, Select } from '@mantine/core';
 import Image from 'next/image';
 import React, {
 	useCallback,
@@ -35,7 +35,7 @@ const Filters: React.FC<FiltersProps> = ({
 	onChange,
 	className,
 }) => {
-	const { handleSubmit, control, reset } = useForm<any>({
+	const { handleSubmit, control, reset } = useForm<any>({ //any
 		resolver: yupResolver(filterSchema),
 		defaultValues: values,
 	});
@@ -61,7 +61,6 @@ const Filters: React.FC<FiltersProps> = ({
 				: '';
 
 			const to = formValues.payment_to ? Number(formValues.payment_to) : '';
-			console.log(formValues);
 			onChange({
 				catalogues: formValues.catalogues,
 				payment_from: from,

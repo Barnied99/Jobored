@@ -4,6 +4,7 @@ export interface GetVacanciesRequest {
 	/*** Starts with zero **/
 	pageIdx: number;
 	typeWork: string;
+	expirience: string;
 	count: number;
 
 	fields?: string;
