@@ -32,6 +32,7 @@ const PARAM_FIELD = 'field';
 const PARAM_FROM = 'from';
 const PARAM_TO = 'to';
 const PARAM_TYPEWORK = 'type_of_work';
+const PARAM_EXP = 'expirience';
 
 
 export async function getServerSideProps() {
@@ -64,20 +65,23 @@ const Vacancies = ({ fields }) => {
         },
         resolver: yupResolver(searchSchema),
     });
+
     const page = Number(query[PARAM_PAGE]) || 1;
     const catalogue = query[PARAM_FIELD] || '';
     const paymentFrom = Number(query[PARAM_FROM]) || '';
     const paymentTo = Number(query[PARAM_TO]) || '';
     const typework = query[PARAM_TYPEWORK] || '';
+    const expirience = query[PARAM_EXP] || '';
 
     const filtersForm: FiltersForm = {
         catalogues: catalogue as string,
         payment_from: paymentFrom,
         payment_to: paymentTo,
-        type_of_work: typework as string
+        type_of_work: typework as string,
+        expirience: expirience as string
     };
 
-    const { data: vacancies, isLoading: vacanciesLoading } = useQuery(
+    const { data: vacancies, isLoading: vacanciesLoading, isSuccess } = useQuery(
         ['vacancies', page, filtersForm, search],
         {
             queryFn: () =>
@@ -88,8 +92,10 @@ const Vacancies = ({ fields }) => {
                     paymentFrom: filtersForm.payment_from || undefined,
                     paymentTo: filtersForm.payment_to || undefined,
                     keyword: search as string,
-                    typeWork: filtersForm.type_of_work as string
+                    typeWork: filtersForm.type_of_work as string,
+                    expirience: filtersForm.expirience as string
                 }),
+            staleTime: 1000 * 8,
         }
     );
 
@@ -127,7 +133,8 @@ const Vacancies = ({ fields }) => {
                 newParams.set(PARAM_FROM, values.payment_from.toString());
             if (values.payment_to)
                 newParams.set(PARAM_TO, values.payment_to.toString());
-            if (values.type_of_work) newParams.set(PARAM_TYPEWORK, values.type_of_work);//
+            if (values.type_of_work) newParams.set(PARAM_TYPEWORK, values.type_of_work);
+            if (values.expirience) newParams.set(PARAM_EXP, values.expirience);
 
             // scrollToTop();
             router.push(`${pathname}?${newParams.toString()}`);
@@ -151,6 +158,7 @@ const Vacancies = ({ fields }) => {
         if (paymentTo) newParams.append(PARAM_TO, paymentTo.toString());
         if (search) newParams.append(PARAM_SEARCH, search as string);
         if (typework) newParams.append(PARAM_TYPEWORK, typework as string);
+        if (expirience) newParams.append(PARAM_EXP, expirience as string);
         reset({ search: search as string });
 
         router.push(`${pathname}?${newParams.toString()}`, undefined, { shallow: true });
@@ -172,7 +180,6 @@ const Vacancies = ({ fields }) => {
     const title = getPageTitle('Вакансии');
 
     return (
-
         <DefaultContainer>
             <Head>
                 <title>{title}</title>
@@ -197,7 +204,7 @@ const Vacancies = ({ fields }) => {
                             control={control}
                         />
 
-                        {readyToDisplay ? (
+                        {isSuccess ? ( //readyToDisplay
                             vacancies.objects.map((vacancy) => (
                                 <VacancyCard key={vacancy.id} data={vacancy} />
                             ))
