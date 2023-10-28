@@ -17,7 +17,7 @@
 -   Используем Modern Redux with Redux Toolkit: [store](https://github.com/Barnied99/Jobored/blob/main/src/store/store/store.ts).
 -   Используем слайсы: [change-favorites](https://github.com/Barnied99/Jobored/blob/main/src/store/slice/change-favorite.ts) / 
 [user-slice](https://github.com/Barnied99/Jobored/blob/main/src/store/slice/user-slice.ts).
--   Есть хотя бы одна кастомная мидлвара: [getUserData](https://github.com/Barnied99/Jobored/blob/main/src/store/store/getUserData.ts).
+-   Есть хотя бы одна кастомная мидлвара: [saveUserData](https://github.com/Barnied99/Jobored/blob/main/src/store/store/saveUserData.ts).
 -   Используется React Query [Vacancies](https://github.com/Barnied99/Jobored/blob/main/src/pages/vacancies.tsx) /
 [Favorites](https://github.com/Barnied99/Jobored/blob/main/src/pages/favorites.tsx) и т.д.
 
