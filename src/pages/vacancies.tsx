@@ -35,25 +35,25 @@ const PARAM_TYPEWORK = 'type_of_work';
 const PARAM_EXP = 'expirience';
 
 
-export async function getServerSideProps() {
-    try {
-        const fields = await getFields();
-        return {
-            props: {
-                fields,
-            }
-        };
-    } catch (error) {
-        console.error('Error fetching datas:', error);
-        return {
-            props: {
-                fields: [],
-            }
-        };
-    }
-}
+// export async function getServerSideProps() {
+//     try {
+//         const fields = await getFields();
+//         return {
+//             props: {
+//                 fields,
+//             }
+//         };
+//     } catch (error) {
+//         console.error('Error fetching datas:', error);
+//         return {
+//             props: {
+//                 fields: [],
+//             }
+//         };
+//     }
+// }
 
-const Vacancies = ({ fields }) => {
+const Vacancies = () => {
     const router = useRouter();
     const { pathname, query } = router;
     const { classes } = useStyles();
@@ -98,6 +98,10 @@ const Vacancies = ({ fields }) => {
             staleTime: 1000 * 8,
         }
     );
+
+    const { data: fields } = useQuery(['fields'], {
+        queryFn: () => getFields(),
+    });
 
     const { data: references } = useQuery(['typeWork'], {
         queryFn: () => getTime(),
