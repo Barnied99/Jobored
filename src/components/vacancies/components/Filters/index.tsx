@@ -26,14 +26,16 @@ interface FiltersProps {
 	sticky?: boolean;
 	onChange: (values: FiltersForm) => void;
 	className?: string;
+	experienceKey: any;
 }
 
 const Filters: React.FC<FiltersProps> = ({
 	fields,
-	values = { catalogues: '', payment_from: '', payment_to: '' },
+	values = { catalogues: '', payment_from: '', payment_to: '', expirience: '' },
 	sticky,
 	onChange,
 	className,
+	experienceKey
 }) => {
 	const { handleSubmit, control, reset } = useForm<any>({ //any
 		resolver: yupResolver(filterSchema),
@@ -53,6 +55,14 @@ const Filters: React.FC<FiltersProps> = ({
 			})) ?? [],
 		[fields]
 	);
+	const handledReferences = useMemo(
+		() =>
+			experienceKey?.map((field) => ({
+				label: field[1],
+				value: field[0],
+			})) ?? [],
+		[experienceKey]
+	);
 
 	const onSubmit = useCallback(
 		(formValues: FiltersForm) => {
@@ -65,6 +75,7 @@ const Filters: React.FC<FiltersProps> = ({
 				catalogues: formValues.catalogues,
 				payment_from: from,
 				payment_to: to,
+				expirience: formValues.expirience
 			});
 		},
 		[onChange]
@@ -72,7 +83,7 @@ const Filters: React.FC<FiltersProps> = ({
 
 	const onReset = useCallback(() => {
 		reset();
-		onChange({ catalogues: '', payment_from: '', payment_to: '' });
+		onChange({ catalogues: '', payment_from: '', payment_to: '', expirience: '' });
 	}, [onChange]);
 
 	useEffect(() => {
@@ -153,6 +164,31 @@ const Filters: React.FC<FiltersProps> = ({
 						)}
 						control={control}
 					/>
+				</FormGroup>
+
+				<FormGroup title="Опыт">
+					<Controller
+						name="expirience"
+						render={({ field }) => (
+							<Select
+								data={handledReferences}
+								data-elem="expiriences-select"
+								{...field}
+								size="md"
+								placeholder="Выберите опыт"
+								className={classes.filters__select}
+								rightSection={
+									<Image
+										src={IconChevronDown}
+										alt=""
+										className={classes.chevronDownIcon}
+									/>
+								}
+							/>
+						)}
+						control={control}
+					/>
+
 				</FormGroup>
 			</Stack>
 			<Button

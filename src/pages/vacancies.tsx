@@ -106,6 +106,7 @@ const Vacancies = () => {
     const { data: references } = useQuery(['typeWork'], {
         queryFn: () => getTime(),
     });
+    const experienceKeys = Object.entries(references?.experience || {})
 
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -199,6 +200,7 @@ const Vacancies = () => {
                     sticky
                     values={filtersForm}
                     fields={fields}
+                    experienceKey={experienceKeys}
                     onChange={onChangeFilters}
                 />
                 <Box className={classes.flex1}>
