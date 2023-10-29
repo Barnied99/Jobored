@@ -53,6 +53,7 @@ const Main = () => {
     const { data: references } = useQuery(['typeWork'], {
         queryFn: () => getTime(),
     });
+
     const typeWorks = Object.values(references?.type_of_work || {})
     const typeWorksKeys = Object.entries(references?.type_of_work || {})
     const experience = Object.values(references?.experience || {})
@@ -194,7 +195,7 @@ const Main = () => {
                     pt={6}
                     withBorder
                     radius="md">
-                    <Text className={classes.text}>ПО ОБРАЗОВАНИЮ</Text>
+                    <Text className={classes.text}>ПО ОПЫТУ</Text>
                     <Group className={classes.columnsWrapper} position="center" spacing="xs" >
                         {references ? (experienceKeys?.map((e) => (
                             <Group key={uuidv4()} >
