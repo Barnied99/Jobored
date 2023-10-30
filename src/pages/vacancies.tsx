@@ -107,6 +107,7 @@ const Vacancies = () => {
         queryFn: () => getTime(),
     });
     const experienceKeys = Object.entries(references?.experience || {})
+    const typeWorksKeys = Object.entries(references?.type_of_work || {})
 
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -191,6 +192,8 @@ const Vacancies = () => {
             </Head>
             <MobileFilters
                 values={filtersForm}
+                typework={typeWorksKeys}
+                experienceKey={experienceKeys}
                 fields={fields}
                 onChange={onChangeFilters}
             />
@@ -200,6 +203,7 @@ const Vacancies = () => {
                     sticky
                     values={filtersForm}
                     fields={fields}
+                    typework={typeWorksKeys}
                     experienceKey={experienceKeys}
                     onChange={onChangeFilters}
                 />

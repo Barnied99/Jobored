@@ -26,7 +26,6 @@ const PARAM_FROM = 'from';
 const PARAM_TO = 'to';
 
 
-
 const Main = () => {
     // const { email: user } = useAppSelector((state: RootState) => state.user);// не исп.
 

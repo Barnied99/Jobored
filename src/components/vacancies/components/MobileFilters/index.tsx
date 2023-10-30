@@ -11,12 +11,16 @@ interface MobileFiltersProps {
 	fields?: Catalogue[];
 	values?: FiltersForm;
 	onChange: (values: FiltersForm) => void;
+	typework: any;//any
+	experienceKey: any;//any
 }
 
 const MobileFilters: React.FC<MobileFiltersProps> = ({
 	fields,
 	values,
 	onChange,
+	typework,
+	experienceKey
 }) => {
 	const { classes, cx } = useStyles();
 
@@ -31,6 +35,8 @@ const MobileFilters: React.FC<MobileFiltersProps> = ({
 				</Accordion.Control>
 				<Accordion.Panel>
 					<Filters
+						typework={typework}
+						experienceKey={experienceKey}
 						fields={fields}
 						values={values}
 						onChange={onChange}

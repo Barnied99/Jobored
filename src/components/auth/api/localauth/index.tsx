@@ -7,6 +7,7 @@ import useValidation from '@/utills/use-validation';
 import { userActions, LoginFormPayload } from '@/store/slice/user-slice';
 import { useAppDispatch } from '@/utills/hooks';
 
+
 import { styles } from './styles';
 
 export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
@@ -47,7 +48,7 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
                 : dispatch(userActions.signup(payload));
             router.push('/vacancies');
         }
-    };
+    }
 
     return (
         <div className={classes.app}>

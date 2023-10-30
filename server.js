@@ -1,9 +1,10 @@
-import express from 'express';
 import cors from 'cors';
 import proxy from 'express-http-proxy';
 import requestIp from 'request-ip';
 import { LRUCache } from 'lru-cache';
 import dotenv from 'dotenv';
+import express from 'express';
+// import nodemailer from 'nodemailer';
 
 
 dotenv.config();
@@ -16,6 +17,14 @@ const cookiePerIP = new LRUCache({
     updateAgeOnGet: false,
     updateAgeOnHas: false,
 });
+
+// const transporter = nodemailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//         user: 'darkbarnied99@gmail.com', // Ваш адрес электронной почты Gmail
+//         pass: 'DFio3490@' // Ваш пароль для входа в аккаунт Gmail
+//     }
+// })
 
 app.use(
     cors({
@@ -76,3 +85,5 @@ app.use((req, res, next) => {
     console.log('Proxy request:', req.url);
     next();
 })
+
+
