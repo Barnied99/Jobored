@@ -26,7 +26,8 @@ interface FiltersProps {
 	sticky?: boolean;
 	onChange: (values: FiltersForm) => void;
 	className?: string;
-	experienceKey: any;
+	experienceKey: any;//any
+	typework: any;
 }
 
 const Filters: React.FC<FiltersProps> = ({
@@ -35,7 +36,8 @@ const Filters: React.FC<FiltersProps> = ({
 	sticky,
 	onChange,
 	className,
-	experienceKey
+	experienceKey,
+	typework
 }) => {
 	const { handleSubmit, control, reset } = useForm<any>({ //any
 		resolver: yupResolver(filterSchema),
@@ -55,6 +57,7 @@ const Filters: React.FC<FiltersProps> = ({
 			})) ?? [],
 		[fields]
 	);
+
 	const handledReferences = useMemo(
 		() =>
 			experienceKey?.map((field) => ({
@@ -62,6 +65,15 @@ const Filters: React.FC<FiltersProps> = ({
 				value: field[0],
 			})) ?? [],
 		[experienceKey]
+	);
+
+	const handledTypeWork = useMemo(
+		() =>
+			typework?.map((field) => ({
+				label: field[1],
+				value: field[0],
+			})) ?? [],
+		[typework]
 	);
 
 	const onSubmit = useCallback(
@@ -75,7 +87,8 @@ const Filters: React.FC<FiltersProps> = ({
 				catalogues: formValues.catalogues,
 				payment_from: from,
 				payment_to: to,
-				expirience: formValues.expirience
+				expirience: formValues.expirience,
+				type_of_work: formValues.type_of_work
 			});
 		},
 		[onChange]
@@ -83,7 +96,7 @@ const Filters: React.FC<FiltersProps> = ({
 
 	const onReset = useCallback(() => {
 		reset();
-		onChange({ catalogues: '', payment_from: '', payment_to: '', expirience: '' });
+		onChange({ catalogues: '', payment_from: '', payment_to: '', expirience: '', type_of_work: '' });
 	}, [onChange]);
 
 	useEffect(() => {
@@ -188,7 +201,29 @@ const Filters: React.FC<FiltersProps> = ({
 						)}
 						control={control}
 					/>
-
+				</FormGroup>
+				<FormGroup title="График">
+					<Controller
+						name="type_of_work"
+						render={({ field }) => (
+							<Select
+								data={handledTypeWork}
+								data-elem="expiriences-select"
+								{...field}
+								size="md"
+								placeholder="Выберите график"
+								className={classes.filters__select}
+								rightSection={
+									<Image
+										src={IconChevronDown}
+										alt=""
+										className={classes.chevronDownIcon}
+									/>
+								}
+							/>
+						)}
+						control={control}
+					/>
 				</FormGroup>
 			</Stack>
 			<Button

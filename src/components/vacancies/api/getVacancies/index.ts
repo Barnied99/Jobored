@@ -20,7 +20,6 @@ export const getVacancies = async (
 				keyword,
 				published: 1,
 				no_agreement: 1,
-
 				ids,
 			},
 		})
