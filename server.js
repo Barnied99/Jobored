@@ -4,7 +4,8 @@ import requestIp from 'request-ip';
 import { LRUCache } from 'lru-cache';
 import dotenv from 'dotenv';
 import express from 'express';
-// import nodemailer from 'nodemailer';
+import nodemailer from 'nodemailer';
+import directTransport from 'nodemailer-direct-transport';
 
 
 dotenv.config();
@@ -18,13 +19,8 @@ const cookiePerIP = new LRUCache({
     updateAgeOnHas: false,
 });
 
-// const transporter = nodemailer.createTransport({
-//     service: 'gmail',
-//     auth: {
-//         user: 'darkbarnied99@gmail.com', // Ваш адрес электронной почты Gmail
-//         pass: 'DFio3490@' // Ваш пароль для входа в аккаунт Gmail
-//     }
-// })
+
+
 
 app.use(
     cors({
@@ -72,6 +68,40 @@ app.use(
     }),
 );
 
+// app.use(express.urlencoded({ extended: true }));
+// const transporter = nodemailer.createTransport({
+//     host: 'smtp.gmail.com',
+//     port: 587,
+//     secure: false,
+//     auth: {
+//         user: 'darkbarnied99@gmail.com',
+//         pass: '/////'
+//     }
+
+// });
+
+// app.post('/signup', (req, res) => {
+//     const { email } = req.body;
+//     console.log(email);
+//     // Отправка сообщения на Gmail
+//     const mailOptions = {
+//         from: 'darkbarnied99@gmail.com',
+//         to: email,
+//         subject: 'Регистрация завершена',
+//         text: 'Вы успешно зарегистрировались',
+//     };
+
+//     transporter.sendMail(mailOptions, (error, info) => {
+//         if (error) {
+//             console.error('Ошибка при отправке письма:', error);
+//             res.status(500).send('Ошибка при отправке письма');
+//         } else {
+//             console.log('Письмо успешно отправлено:', info.response);
+//             res.status(200).send('Письмо успешно отправлено');
+//         }
+//     });
+// })
+
 app.use((err, _req, res, _next) => {
     console.error(err.stack);
     res.status(500).send('Server error');
@@ -83,6 +113,7 @@ app.listen(port, () => {
 
 app.use((req, res, next) => {
     console.log('Proxy request:', req.url);
+    console.log('Proxy request:', req.body);
     next();
 })
 
