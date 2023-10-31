@@ -28,7 +28,7 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
         submitValueHandler: submitPasswordHandler,
     } = useValidation('password');
 
-    const submitHandler = (event: React.FormEvent) => {
+    const submitHandler = async (event: React.FormEvent) => {
         event.preventDefault();
 
         const enteredEmail = emailInputRef.current!.value;
@@ -42,19 +42,58 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
             const payload: LoginFormPayload = {
                 email: enteredEmail,
             };
-
             props.type === 'signin'
                 ? dispatch(userActions.login(payload))
                 : dispatch(userActions.signup(payload));
             router.push('/vacancies');
+            // try {
+            //     // Отправка данных формы на сервер
+            //     const response = await fetch('http://localhost:3000/signup', {
+            //         method: 'POST',
+            //         headers: {
+            //             'Content-Type': 'application/json',
+            //         },
+            //         body: JSON.stringify(payload),
+            //     });
+
+            //     if (response.ok) {
+            //         // Регистрация прошла успешно
+            //         // Отправка письма на указанный email-адрес
+            //         const mailResponse = await fetch('http://localhost:3000/signup', {
+            //             method: 'POST',
+            //             headers: {
+            //                 'Content-Type': 'application/json',
+            //             },
+            //             body: JSON.stringify({ email: enteredEmail }),
+            //         });
+
+            //         if (mailResponse.ok) {
+            //             console.log('Письмо успешно отправлено');
+            //         } else {
+            //             console.log(mailResponse.statusText);
+            //             console.log(mailResponse.status);
+            //             console.log('Ошибка при отправке письма');
+            //         }
+
+            //         // Перенаправление на главную страницу
+            //         router.push('/');
+            // } else {
+            //     console.log('Ошибка при регистрации');
+            // }
+            // } catch (error) {
+            //     console.log('Ошибка при отправке запроса:', error);
+            // }
         }
+
+        //method="POST" 
+
     }
 
     return (
         <div className={classes.app}>
             <div className={classes.auth}>
                 <Text size="lg" className={classes.authH1}>{props.header}</Text>
-                <form onSubmit={submitHandler} noValidate>
+                <form onSubmit={submitHandler} noValidate >
                     <div className={classes.formControlLabel}>
                         <Input.Wrapper mt="xl" label='Email'>
                             <Input
