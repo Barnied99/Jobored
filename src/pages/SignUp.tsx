@@ -11,7 +11,6 @@ const SignUp = () => {
 
     if (user) {
         router.push('/vacancies')
-        // return null
     }
 
     return <AuthForm header='Регистрация' type='signup' />;
