@@ -45,7 +45,7 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
             props.type === 'signin'
                 ? dispatch(userActions.login(payload))
                 : dispatch(userActions.signup(payload));
-            router.push('/vacancies');
+            router.push('/');
             // try {
             //     // Отправка данных формы на сервер
             //     const response = await fetch('http://localhost:3000/signup', {
@@ -77,9 +77,9 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
 
             //         // Перенаправление на главную страницу
             //         router.push('/');
-            // } else {
-            //     console.log('Ошибка при регистрации');
-            // }
+            //     } else {
+            //         console.log('Ошибка при регистрации');
+            //     }
             // } catch (error) {
             //     console.log('Ошибка при отправке запроса:', error);
             // }

@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, NumberInput, Paper, MultiSelect, Stack, Select } from '@mantine/core';
+import { Button, NumberInput, Paper, Stack, Select } from '@mantine/core';
 import Image from 'next/image';
 import React, {
 	useCallback,

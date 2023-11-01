@@ -23,9 +23,9 @@ const changeSlice = createSlice({
             return [...deletefav]
         },
 
-        setresetFavoriteVacancies: (state) => {
+        setresetFavoriteVacancies: () => {
             resetFavoriteVacancies()
-            state = []
+            // state = []
         },
 
 
