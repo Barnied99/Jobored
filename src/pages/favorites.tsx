@@ -54,7 +54,7 @@ const Favorites = () => {
         queryFn: () =>
             getVacancies({ pageIdx, count: PAGE_ITEMS, ids: vacanciesKeys }),
     });
-
+    console.log(pageVacancies.data?.objects);
     const { classes } = useStyles();
 
     const scrollToTop = () => {
@@ -92,7 +92,7 @@ const Favorites = () => {
             {hasVacancies && userClient ? (
                 <>
                     <Stack align="stretch">
-                        {pageVacancies.data
+                        {pageVacancies.data?.objects
                             ? pageVacancies.data.objects.map((vacancy) => (
                                 <VacancyCard key={vacancy.id} data={vacancy} />
                             ))

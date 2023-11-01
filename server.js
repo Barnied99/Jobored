@@ -70,13 +70,13 @@ app.use(
 
 // app.use(express.urlencoded({ extended: true }));
 // const transporter = nodemailer.createTransport({
-//     host: 'smtp.gmail.com',
+//     host: 'smtp.ethereal.email',
 //     port: 587,
 //     secure: false,
 //     auth: {
-//         user: 'darkbarnied99@gmail.com',
-//         pass: '/////'
-//     }
+//         user: testEmailAccount.user,
+//         pass: testEmailAccount.pass,
+//     },
 
 // });
 
@@ -85,8 +85,8 @@ app.use(
 //     console.log(email);
 //     // Отправка сообщения на Gmail
 //     const mailOptions = {
-//         from: 'darkbarnied99@gmail.com',
-//         to: email,
+//         from: email,
+//         to: 'valerysavitsky99@gmail.com',
 //         subject: 'Регистрация завершена',
 //         text: 'Вы успешно зарегистрировались',
 //     };
