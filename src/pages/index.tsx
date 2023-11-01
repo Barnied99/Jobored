@@ -53,9 +53,9 @@ const Main = () => {
         queryFn: () => getTime(),
     });
 
-    const typeWorks = Object.values(references?.type_of_work || {})
+    // const typeWorks = Object.values(references?.type_of_work || {})
     const typeWorksKeys = Object.entries(references?.type_of_work || {})
-    const experience = Object.values(references?.experience || {})
+    // const experience = Object.values(references?.experience || {})
     const experienceKeys = Object.entries(references?.experience || {})
 
     const countries = Object.values(references?.citizenship || {})

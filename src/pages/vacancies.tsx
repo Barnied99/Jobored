@@ -179,7 +179,7 @@ const Vacancies = () => {
 
     const totalPages = Math.ceil(entities / PAGE_ITEMS);
 
-    const readyToDisplay = !vacanciesLoading && vacancies
+    // const readyToDisplay = !vacanciesLoading && vacancies
 
     const noData = !vacanciesLoading && vacancies?.objects.length === 0;
 
