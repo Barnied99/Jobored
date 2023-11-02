@@ -37,7 +37,7 @@ const Vacancy = () => {
                     <VacancyBody description={vacancy.vacancyRichText} />
                 </Stack>
             ) : (
-                <Stack spacing={20}>
+                <Stack spacing={30}>
                     <VacancyHeaderSkeleton />
                     <VacancyBodySkeleton />
                 </Stack>
