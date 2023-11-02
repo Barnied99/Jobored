@@ -67,6 +67,7 @@ const Main = () => {
     });
 
     const fieldSkeletons = (x: number) => Array.from({ length: x }, (_, index) => (
+
         <FieldSkeleton key={index} />
     ))    //skeletonx31
 
@@ -145,9 +146,9 @@ const Main = () => {
                             </Group>
                         )
                         )) : (
-                            <>
-                                {fieldSkeletons(31)}
-                            </>
+                            <Group >
+                                {fieldSkeletons(37)}
+                            </Group>
                         )}
                     </Group>
                 </Paper>
@@ -180,9 +181,9 @@ const Main = () => {
                             </Group>
                         ))
                         ) : (
-                            <>
-                                {fieldSkeletons(7)}
-                            </>
+                            <Group >
+                                {fieldSkeletons(8)}
+                            </Group>
                         )}
                     </Group>
                 </Paper>
@@ -215,9 +216,9 @@ const Main = () => {
                             </Group>
                         ))
                         ) : (
-                            <>
+                            <Group >
                                 {fieldSkeletons(5)}
-                            </>
+                            </Group>
                         )}
                     </Group>
                 </Paper>
@@ -238,9 +239,9 @@ const Main = () => {
                             </Link>
                         ))
                         ) : (
-                            <>
-                                {fieldSkeletons(11)}
-                            </>
+                            <Group >
+                                {fieldSkeletons(16)}
+                            </Group>
                         )
 
                         }
