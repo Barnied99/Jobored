@@ -68,39 +68,7 @@ app.use(
     }),
 );
 
-// app.use(express.urlencoded({ extended: true }));
-// const transporter = nodemailer.createTransport({
-//     host: 'smtp.ethereal.email',
-//     port: 587,
-//     secure: false,
-//     auth: {
-//         user: testEmailAccount.user,
-//         pass: testEmailAccount.pass,
-//     },
 
-// });
-
-// app.post('/signup', (req, res) => {
-//     const { email } = req.body;
-//     console.log(email);
-//     // Отправка сообщения на Gmail
-//     const mailOptions = {
-//         from: email,
-//         to: 'valerysavitsky99@gmail.com',
-//         subject: 'Регистрация завершена',
-//         text: 'Вы успешно зарегистрировались',
-//     };
-
-//     transporter.sendMail(mailOptions, (error, info) => {
-//         if (error) {
-//             console.error('Ошибка при отправке письма:', error);
-//             res.status(500).send('Ошибка при отправке письма');
-//         } else {
-//             console.log('Письмо успешно отправлено:', info.response);
-//             res.status(200).send('Письмо успешно отправлено');
-//         }
-//     });
-// })
 
 app.use((err, _req, res, _next) => {
     console.error(err.stack);
