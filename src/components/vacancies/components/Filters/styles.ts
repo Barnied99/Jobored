@@ -7,15 +7,15 @@ export const useStyles = createStyles((theme) => ({
 		padding: 20,
 		paddingTop: 14,
 		minWidth: 315,
-		// display: 'flex',
-		// flexDirection: 'column',
-		// maxWidth: 315
 	},
 
 	filters__select: {
 		['.mantine-Select-input']: {
 			paddingLeft: 12,
 			fontSize: rem(14),
+			// display: 'flex',
+			// flexWrap: 'wrap',
+			// maxWidth: 320,
 		},
 
 		['.mantine-Select-rightSection']: {
