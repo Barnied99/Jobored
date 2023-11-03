@@ -4,8 +4,8 @@ import requestIp from 'request-ip';
 import { LRUCache } from 'lru-cache';
 import dotenv from 'dotenv';
 import express from 'express';
-import nodemailer from 'nodemailer';
-import directTransport from 'nodemailer-direct-transport';
+// import nodemailer from 'nodemailer';
+// import directTransport from 'nodemailer-direct-transport';
 
 
 dotenv.config();
@@ -18,9 +18,6 @@ const cookiePerIP = new LRUCache({
     updateAgeOnGet: false,
     updateAgeOnHas: false,
 });
-
-
-
 
 app.use(
     cors({
