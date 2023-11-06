@@ -57,6 +57,7 @@ export const Document = () => {
   return (
     <Html lang="en">
       <Head >
+        <link rel="icon" href="/favicon.svg"></link>
         <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" async></script>
       </Head>
       <body>

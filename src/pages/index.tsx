@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { Controller, useForm } from 'react-hook-form';
+import Head from 'next/head';
 
 // import { useAppSelector } from '@/utills/hooks';
 import { Ballon } from '@/assets/img';
@@ -111,186 +112,191 @@ const Main = () => {
     }, []);
 
     return (
-        <Box className={classes.flex1}
-            ref={paperRef}
-            component="form"
-            onSubmit={handleSubmit(onSubmit)}>
-            <Stack spacing={13}>
-                <Paper
-                    p={13}
-                    pb={11}
-                    pt={10}
-                    withBorder
-                    radius="md"
-                >
-                    <Text className={classes.text}>ПО ОТРАСЛЯМ</Text>
-                    <Group className={classes.columnsWrapper} position="center" spacing="xs" >
-                        {fields ? (fields?.map((f) => (
-                            <Group key={uuidv4()} >
-                                <Controller
-                                    name="catalogues"
-                                    render={({ field }) => (
-                                        <Button key={uuidv4()}
-                                            variant="subtle"
-                                            type='button'
-                                            onClick={() => {
-                                                field.onChange(f.key.toString());
-                                                handleSubmit(onSubmit)();
-                                            }}
-                                        >
-                                            {f.title_rus}
-                                        </Button>
-                                    )}
-                                    control={control}
-                                />
-                            </Group>
-                        )
-                        )) : (
-                            <Group >
-                                {fieldSkeletons(37)}
-                            </Group>
-                        )}
-                    </Group>
-                </Paper>
+        <>
+            <Head>
+                <title>Jobored</title>
+            </Head>
+            <Box className={classes.flex1}
+                ref={paperRef}
+                component="form"
+                onSubmit={handleSubmit(onSubmit)}>
+                <Stack spacing={13}>
+                    <Paper
+                        p={13}
+                        pb={11}
+                        pt={10}
+                        withBorder
+                        radius="md"
+                    >
+                        <Text className={classes.text}>ПО ОТРАСЛЯМ</Text>
+                        <Group className={classes.columnsWrapper} position="center" spacing="xs" >
+                            {fields ? (fields?.map((f) => (
+                                <Group key={uuidv4()} >
+                                    <Controller
+                                        name="catalogues"
+                                        render={({ field }) => (
+                                            <Button key={uuidv4()}
+                                                variant="subtle"
+                                                type='button'
+                                                onClick={() => {
+                                                    field.onChange(f.key.toString());
+                                                    handleSubmit(onSubmit)();
+                                                }}
+                                            >
+                                                {f.title_rus}
+                                            </Button>
+                                        )}
+                                        control={control}
+                                    />
+                                </Group>
+                            )
+                            )) : (
+                                <Group >
+                                    {fieldSkeletons(37)}
+                                </Group>
+                            )}
+                        </Group>
+                    </Paper>
 
-                <Paper
-                    p={13}
-                    pb={11}
-                    pt={10}
-                    withBorder
-                    radius="md">
-                    <Text className={classes.text}>ПО ГРАФИКУ</Text>
-                    <Group className={classes.columnsWrapper} position="center" spacing="xs" >
-                        {references ? (typeWorksKeys?.map((t) => (
-                            <Group key={uuidv4()} >
-                                <Controller
-                                    name="type_of_work"
-                                    render={({ field }) => (
-                                        <Button key={uuidv4()}
-                                            variant="subtle"
-                                            type='button'
-                                            onClick={() => {
-                                                field.onChange(String(t[0]));
-                                                handleSubmit(onSubmit)();
-                                            }}>
-                                            {String(t[1])}
-                                        </Button>
-                                    )}
-                                    control={control}
-                                />
-                            </Group>
-                        ))
-                        ) : (
-                            <Group >
-                                {fieldSkeletons(8)}
-                            </Group>
-                        )}
-                    </Group>
-                </Paper>
+                    <Paper
+                        p={13}
+                        pb={11}
+                        pt={10}
+                        withBorder
+                        radius="md">
+                        <Text className={classes.text}>ПО ГРАФИКУ</Text>
+                        <Group className={classes.columnsWrapper} position="center" spacing="xs" >
+                            {references ? (typeWorksKeys?.map((t) => (
+                                <Group key={uuidv4()} >
+                                    <Controller
+                                        name="type_of_work"
+                                        render={({ field }) => (
+                                            <Button key={uuidv4()}
+                                                variant="subtle"
+                                                type='button'
+                                                onClick={() => {
+                                                    field.onChange(String(t[0]));
+                                                    handleSubmit(onSubmit)();
+                                                }}>
+                                                {String(t[1])}
+                                            </Button>
+                                        )}
+                                        control={control}
+                                    />
+                                </Group>
+                            ))
+                            ) : (
+                                <Group >
+                                    {fieldSkeletons(8)}
+                                </Group>
+                            )}
+                        </Group>
+                    </Paper>
 
-                <Paper
-                    p={6}
-                    pb={5}
-                    pt={6}
-                    withBorder
-                    radius="md">
-                    <Text className={classes.text}>ПО ОПЫТУ</Text>
-                    <Group className={classes.columnsWrapper} position="center" spacing="xs" >
-                        {references ? (experienceKeys?.map((e) => (
-                            <Group key={uuidv4()} >
-                                <Controller
-                                    name="expirience"
-                                    render={({ field }) => (
-                                        <Button key={uuidv4()}
-                                            variant="subtle"
-                                            type='button'
-                                            onClick={() => {
-                                                field.onChange(String(e[0]));
-                                                handleSubmit(onSubmit)();
-                                            }}>
-                                            {String(e[1])}
-                                        </Button>
-                                    )}
-                                    control={control}
-                                />
-                            </Group>
-                        ))
-                        ) : (
-                            <Group >
-                                {fieldSkeletons(5)}
-                            </Group>
-                        )}
-                    </Group>
-                </Paper>
+                    <Paper
+                        p={6}
+                        pb={5}
+                        pt={6}
+                        withBorder
+                        radius="md">
+                        <Text className={classes.text}>ПО ОПЫТУ</Text>
+                        <Group className={classes.columnsWrapper} position="center" spacing="xs" >
+                            {references ? (experienceKeys?.map((e) => (
+                                <Group key={uuidv4()} >
+                                    <Controller
+                                        name="expirience"
+                                        render={({ field }) => (
+                                            <Button key={uuidv4()}
+                                                variant="subtle"
+                                                type='button'
+                                                onClick={() => {
+                                                    field.onChange(String(e[0]));
+                                                    handleSubmit(onSubmit)();
+                                                }}>
+                                                {String(e[1])}
+                                            </Button>
+                                        )}
+                                        control={control}
+                                    />
+                                </Group>
+                            ))
+                            ) : (
+                                <Group >
+                                    {fieldSkeletons(5)}
+                                </Group>
+                            )}
+                        </Group>
+                    </Paper>
 
-                <Paper
-                    p={6}
-                    pb={5}
-                    pt={6}
-                    withBorder
-                    radius="md">
-                    <Text className={classes.text}>ПО СТРАНАМ</Text>
-                    <Group className={classes.columnsWrapper} position="center" spacing="xs" >
-                        {references ? (countries?.map((c) => (
-                            <Link key={uuidv4()} href='/vacancies'>
-                                <Button key={uuidv4()} variant="subtle" type='submit'>
-                                    {String(c)}
-                                </Button>
-                            </Link>
-                        ))
-                        ) : (
-                            <Group >
-                                {fieldSkeletons(16)}
-                            </Group>
-                        )
+                    <Paper
+                        p={6}
+                        pb={5}
+                        pt={6}
+                        withBorder
+                        radius="md">
+                        <Text className={classes.text}>ПО СТРАНАМ</Text>
+                        <Group className={classes.columnsWrapper} position="center" spacing="xs" >
+                            {references ? (countries?.map((c) => (
+                                <Link key={uuidv4()} href='/vacancies'>
+                                    <Button key={uuidv4()} variant="subtle" type='submit'>
+                                        {String(c)}
+                                    </Button>
+                                </Link>
+                            ))
+                            ) : (
+                                <Group >
+                                    {fieldSkeletons(16)}
+                                </Group>
+                            )
 
-                        }
-                    </Group>
-                </Paper>
+                            }
+                        </Group>
+                    </Paper>
 
-                <Paper
-                    p={25}
-                    pb={15}
-                    pt={10}
-                    withBorder
-                    radius="md">
-                    <Image src={Ballon} alt='ballon' priority />
-                    <Text variant="gradient"
-                        gradient={{ from: 'indigo', to: 'pink', deg: 80 }}
-                    > Работа в Москве</Text>
-                    <List withPadding>
-                        <List.Item>Свежие вакансии на Jobored в Москве от прямых работодателей, агентств, центров занятости.
-                        </List.Item>
-                        <List.Item>В нашей базе содержатся предложения для всех специальностей: с опытом и без опыта работы, подработка с ежедневной оплатой, поиск удаленной работы, работа вахтовым методом.
-                        </List.Item>
-                        <List.Item>Все самые популярные вакансии на сегодня, в городе Москва: Грузчик, Водитель, Курьер, Разнорабочий, Продавец-кассир, Продавец-консультант, Повар, Кладовщик, Охранник, Бухгалтер, Продавец, Подсобный рабочий и другие профессии.
-                        </List.Item>
-                        <List.Item>Актуальные объявления о работе в вашем городе! Удобный поиск свежих вакансий на сегодня!
-                        </List.Item>
-                    </List>
-                    <Text variant="gradient"
-                    >Работодателям</Text>
-                    <List withPadding>
-                        <List.Item>У нас вы найдете соискателей с нужными навыками и опытом работы, пригласите их на собеседование и выберете подходящего сотрудника.
-                        </List.Item>
-                        <List.Item>Более 800 000 объявлений о вакансиях и резюме. Сайт Jobored помогает находить работу?
-                        </List.Item>
-                    </List>
-                    <Text variant="gradient"
-                    >Соискателям</Text>
-                    <List withPadding>
-                        <List.Item>Создавайте резюме бесплатно и откликайтесь на свежие вакансии!
-                        </List.Item>
-                        <List.Item>Общайтесь с работодателем через чат, не обязательно звонить!
-                        </List.Item>
-                        <List.Item>Просматривайте статус рассмотрения вашего резюме и получайте приглашения на собеседование из личного кабинета!
-                        </List.Item>
-                    </List>
-                </Paper>
+                    <Paper
+                        p={25}
+                        pb={15}
+                        pt={10}
+                        withBorder
+                        radius="md">
+                        <Image src={Ballon} alt='ballon' priority />
+                        <Text variant="gradient"
+                            gradient={{ from: 'indigo', to: 'pink', deg: 80 }}
+                        > Работа в Москве</Text>
+                        <List withPadding>
+                            <List.Item>Свежие вакансии на Jobored в Москве от прямых работодателей, агентств, центров занятости.
+                            </List.Item>
+                            <List.Item>В нашей базе содержатся предложения для всех специальностей: с опытом и без опыта работы, подработка с ежедневной оплатой, поиск удаленной работы, работа вахтовым методом.
+                            </List.Item>
+                            <List.Item>Все самые популярные вакансии на сегодня, в городе Москва: Грузчик, Водитель, Курьер, Разнорабочий, Продавец-кассир, Продавец-консультант, Повар, Кладовщик, Охранник, Бухгалтер, Продавец, Подсобный рабочий и другие профессии.
+                            </List.Item>
+                            <List.Item>Актуальные объявления о работе в вашем городе! Удобный поиск свежих вакансий на сегодня!
+                            </List.Item>
+                        </List>
+                        <Text variant="gradient"
+                        >Работодателям</Text>
+                        <List withPadding>
+                            <List.Item>У нас вы найдете соискателей с нужными навыками и опытом работы, пригласите их на собеседование и выберете подходящего сотрудника.
+                            </List.Item>
+                            <List.Item>Более 800 000 объявлений о вакансиях и резюме. Сайт Jobored помогает находить работу?
+                            </List.Item>
+                        </List>
+                        <Text variant="gradient"
+                        >Соискателям</Text>
+                        <List withPadding>
+                            <List.Item>Создавайте резюме бесплатно и откликайтесь на свежие вакансии!
+                            </List.Item>
+                            <List.Item>Общайтесь с работодателем через чат, не обязательно звонить!
+                            </List.Item>
+                            <List.Item>Просматривайте статус рассмотрения вашего резюме и получайте приглашения на собеседование из личного кабинета!
+                            </List.Item>
+                        </List>
+                    </Paper>
 
-            </Stack>
+                </Stack>
 
-        </Box >
+            </Box >
+        </>
 
     );
 };
