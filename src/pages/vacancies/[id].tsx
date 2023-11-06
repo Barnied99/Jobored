@@ -1,5 +1,5 @@
 import { Stack } from '@mantine/core';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
@@ -17,6 +17,9 @@ const Vacancy = () => {
 
     const router = useRouter()
     const { id } = router.query
+
+    const queryClient = useQueryClient()
+    queryClient.prefetchQuery(['vacancy', id], () => getVacancy(id as string))
 
     const { data: vacancy, isLoading } = useQuery(['vacancy', id], {
         queryFn: () => getVacancy(id as string),

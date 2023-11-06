@@ -1,10 +1,16 @@
+import Head from "next/head"
+
 import { NotFound } from "@/components/not-found/pages"
+
 
 const Notfound = () => {
     return (
-        <div>
+        <>
+            <Head>
+                <title>Jobored|NotFound</title>
+            </Head>
             <NotFound />
-        </div>
+        </>
     )
 }
 
