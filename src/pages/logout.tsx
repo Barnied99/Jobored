@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 import { AuthForm } from '@/components/auth/api';
 import { RootState } from '@/store/store/store';
@@ -14,7 +15,12 @@ const LogOut = () => {
     }
 
     return (
-        <AuthForm header='Вход' type='signin' />
+        <>
+            <Head>
+                <title>Выход</title>
+            </Head>
+            <AuthForm header='Вход' type='signin' />
+        </>
     );
 };
 

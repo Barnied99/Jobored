@@ -4,7 +4,7 @@ import requestIp from 'request-ip';
 import { LRUCache } from 'lru-cache';
 import dotenv from 'dotenv';
 import express from 'express';
-import nodemailer from 'nodemailer'
+// import nodemailer from 'nodemailer'
 
 dotenv.config();
 export const NEXT_JOBS_API_URL = 'https://api.superjob.ru/';
