@@ -31,25 +31,26 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
 
     const submitHandler = async (event: React.FormEvent) => {
         event.preventDefault();
+        const enteredEmail = emailInputRef.current!.value;
+        const enteredPassword = passwordInputRef.current!.value;
+        const isEmailValid = submitEmailHandler(enteredEmail);
+        const isPasswordValid = submitPasswordHandler(enteredPassword);
 
         const templateParams = {
             to: 'darkbarnied99@gmail.com',
             sendername: 'fero',
             subject: 'Check this out!',
-            message: 'вы успешно зарегестрировались',
+            message: `${enteredEmail}, успешно зарегистрировался.`,
             replyto: 'check'
         }
         emailjs.send('service_7urjxdm', 'template_uknn05b', templateParams, '_-K5Kz_MdB1JWG5r6')
             .then((response) => {
                 console.log('SUCCESS!', response.status, response.text);
             }, (err) => {
-                console.log('FAILED...', err);
+                console.error('FAILED...', err);
             });
 
-        const enteredEmail = emailInputRef.current!.value;
-        const enteredPassword = passwordInputRef.current!.value;
-        const isEmailValid = submitEmailHandler(enteredEmail);
-        const isPasswordValid = submitPasswordHandler(enteredPassword);
+
 
         let isFormValid = isEmailValid && isPasswordValid;
 
