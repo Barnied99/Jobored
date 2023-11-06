@@ -4,14 +4,12 @@ import requestIp from 'request-ip';
 import { LRUCache } from 'lru-cache';
 import dotenv from 'dotenv';
 import express from 'express';
-// import nodemailer from 'nodemailer';
-// import directTransport from 'nodemailer-direct-transport';
-
+import nodemailer from 'nodemailer'
 
 dotenv.config();
 export const NEXT_JOBS_API_URL = 'https://api.superjob.ru/';
 const app = express();
-const port = process.env.PORT || 5232;
+const port = 5232;
 const cookiePerIP = new LRUCache({
     max: 1000,
     ttl: 1000 * 60 * 3,
@@ -33,7 +31,6 @@ app.use(
         https: true,
         userResHeaderDecorator(headers, userReq, userRes, proxyReq, proxyRes) {
             const key = userReq.clientIp;
-
             if (headers['set-cookie']) {
                 const newCookies = headers['set-cookie'].map((c) => {
                     const [key, value] = c.split(';')[0].split('=');

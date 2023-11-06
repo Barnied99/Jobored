@@ -1,4 +1,5 @@
 import axios from 'axios';
+import dotenv from 'dotenv';
 
 import {
     NEXT_CLIENT_ID,
@@ -8,6 +9,8 @@ import {
 } from '../../../common/constants'
 
 import { LoginResponse } from './dat';
+
+dotenv.config()
 
 const login = NEXT_LOGIN;
 const password = NEXT_PASSWORD;

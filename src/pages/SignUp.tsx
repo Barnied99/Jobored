@@ -13,7 +13,9 @@ const SignUp = () => {
         router.push('/vacancies')
     }
 
-    return <AuthForm header='Регистрация' type='signup' />;
+    return (
+        <AuthForm header='Регистрация' type='signup' />
+    );
 };
 
 export default SignUp;

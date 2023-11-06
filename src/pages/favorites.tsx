@@ -54,7 +54,7 @@ const Favorites = () => {
         queryFn: () =>
             getVacancies({ pageIdx, count: PAGE_ITEMS, ids: vacanciesKeys }),
     });
-    console.log(pageVacancies.data?.objects);
+
     const { classes } = useStyles();
 
     const scrollToTop = () => {
