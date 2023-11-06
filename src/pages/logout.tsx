@@ -11,7 +11,6 @@ const LogOut = () => {
 
     if (!user) {
         router.push('/signup')
-        // return null
     }
 
     return (

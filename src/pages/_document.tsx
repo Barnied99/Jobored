@@ -56,7 +56,9 @@ const overrides: MantineThemeOverride = {
 export const Document = () => {
   return (
     <Html lang="en">
-      <Head />
+      <Head >
+        <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" async></script>
+      </Head>
       <body>
         <MantineProvider theme={overrides}>
           <Main />

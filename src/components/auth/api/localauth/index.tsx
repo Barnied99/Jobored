@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useRouter } from 'next/router';
 import { Button, Input, Text } from '@mantine/core';
+import emailjs from '@emailjs/browser';
 
 import useValidation from '@/utills/use-validation';
 import { userActions, LoginFormPayload } from '@/store/slice/user-slice';
@@ -30,6 +31,20 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
 
     const submitHandler = async (event: React.FormEvent) => {
         event.preventDefault();
+
+        const templateParams = {
+            to: 'darkbarnied99@gmail.com',
+            sendername: 'fero',
+            subject: 'Check this out!',
+            message: 'вы успешно зарегестрировались',
+            replyto: 'check'
+        }
+        emailjs.send('service_7urjxdm', 'template_uknn05b', templateParams, '_-K5Kz_MdB1JWG5r6')
+            .then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+            }, (err) => {
+                console.log('FAILED...', err);
+            });
 
         const enteredEmail = emailInputRef.current!.value;
         const enteredPassword = passwordInputRef.current!.value;
@@ -90,6 +105,7 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
     }
 
     return (
+
         <div className={classes.app}>
             <div className={classes.auth}>
                 <Text size="lg" className={classes.authH1}>{props.header}</Text>
@@ -130,6 +146,7 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
                 </form>
             </div>
         </div>
+
     );
 };
 
