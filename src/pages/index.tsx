@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { useQuery } from '@tanstack/react-query';
+// import { useQuery } from '@tanstack/react-query';
 import { Controller, useForm } from 'react-hook-form';
 import Head from 'next/head';
 
@@ -27,7 +27,28 @@ const PARAM_FROM = 'from';
 const PARAM_TO = 'to';
 
 
-const Main = () => {
+export async function getServerSideProps() {
+    try {
+        const fields = await getFields();
+        const references = await getTime();
+        return {
+            props: {
+                fields,
+                references
+            }
+        };
+    } catch (error) {
+        console.error('Error fetching datas:', error);
+        return {
+            props: {
+                fields: [],
+            }
+        };
+    }
+}
+
+
+const Main = ({ fields, references }) => {
     // const { email: user } = useAppSelector((state: RootState) => state.user);// не исп.
 
     const { classes } = useStyles();
@@ -47,12 +68,12 @@ const Main = () => {
         expirience: ''
     }
 
-    const { data: fields } = useQuery(['fields'], {
-        queryFn: () => getFields(),
-    });
-    const { data: references } = useQuery(['typeWork'], {
-        queryFn: () => getTime(),
-    });
+    // const { data: fields } = useQuery(['fields'], {
+    //     queryFn: () => getFields(),
+    // });
+    // const { data: references } = useQuery(['typeWork'], {
+    //     queryFn: () => getTime(),
+    // });
 
     // const typeWorks = Object.values(references?.type_of_work || {})
     const typeWorksKeys = Object.entries(references?.type_of_work || {})
