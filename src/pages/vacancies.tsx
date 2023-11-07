@@ -35,25 +35,27 @@ const PARAM_TYPEWORK = 'type_of_work';
 const PARAM_EXP = 'expirience';
 
 
-// export async function getServerSideProps() {
-//     try {
-//         const fields = await getFields();
-//         return {
-//             props: {
-//                 fields,
-//             }
-//         };
-//     } catch (error) {
-//         console.error('Error fetching datas:', error);
-//         return {
-//             props: {
-//                 fields: [],
-//             }
-//         };
-//     }
-// }
+export async function getServerSideProps() {
+    try {
+        const fields = await getFields();
+        const references = await getTime();
+        return {
+            props: {
+                fields,
+                references
+            }
+        };
+    } catch (error) {
+        console.error('Error fetching datas:', error);
+        return {
+            props: {
+                fields: [],
+            }
+        };
+    }
+}
 
-const Vacancies = () => {
+const Vacancies = ({ fields, references }) => {
     const router = useRouter();
     const { pathname, query } = router;
     const { classes } = useStyles();
@@ -81,6 +83,18 @@ const Vacancies = () => {
         expirience: expirience as string
     };
 
+    // const queryClient = useQueryClient()
+    // queryClient.prefetchQuery(['vacancies', page, filtersForm, search], () => getVacancies({
+    //     pageIdx: page - 1,
+    //     count: PAGE_ITEMS,
+    //     fields: filtersForm.catalogues,
+    //     paymentFrom: filtersForm.payment_from || undefined,
+    //     paymentTo: filtersForm.payment_to || undefined,
+    //     keyword: search as string,
+    //     typeWork: filtersForm.type_of_work as string,
+    //     expirience: filtersForm.expirience as string
+    // }))
+
     const { data: vacancies, isLoading: vacanciesLoading, isSuccess } = useQuery(
         ['vacancies', page, filtersForm, search],
         {
@@ -99,13 +113,13 @@ const Vacancies = () => {
         }
     );
 
-    const { data: fields } = useQuery(['fields'], {
-        queryFn: () => getFields(),
-    });
+    // const { data: fields } = useQuery(['fields'], {
+    //     queryFn: () => getFields(),
+    // });
 
-    const { data: references } = useQuery(['typeWork'], {
-        queryFn: () => getTime(),
-    });
+    // const { data: references } = useQuery(['typeWork'], {
+    //     queryFn: () => getTime(),
+    // });
     const experienceKeys = Object.entries(references?.experience || {})
     const typeWorksKeys = Object.entries(references?.type_of_work || {})
 

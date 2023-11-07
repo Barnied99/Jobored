@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Provider } from 'react-redux';
+import Head from 'next/head';
 
 import store from '@/store/store/store';
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
@@ -12,10 +13,9 @@ import {
 } from '@/components/common/constants';
 import { DefaultLayout, DefaultLoader } from '@/components/common/component';
 import { getToken, setToken } from '@/components/common/services';
-
+import registerSW from '@/utills/registerSW'
 
 import type { AppProps } from 'next/app'
-import Head from 'next/head';
 
 
 const queryClient = new QueryClient({
@@ -29,13 +29,7 @@ const Router = ({ Component, pageProps }: AppProps) => {
 
   useEffect(() => {
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').then(registration => {
-          console.log('Service Worker registered:', registration);
-        }).catch(error => {
-          console.log('Service Worker registration failed:', error);
-        });
-      });
+      registerSW()
     }
   }, [])
 
