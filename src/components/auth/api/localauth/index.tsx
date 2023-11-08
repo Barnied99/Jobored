@@ -43,14 +43,6 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
             message: `${enteredEmail}, успешно зарегистрировался.`,
             replyto: 'check'
         }
-        emailjs.send('service_7urjxdm', 'template_uknn05b', templateParams, '_-K5Kz_MdB1JWG5r6')
-            .then((response) => {
-                console.log('SUCCESS!', response.status, response.text);
-            }, (err) => {
-                console.error('FAILED...', err);
-            });
-
-
 
         let isFormValid = isEmailValid && isPasswordValid;
 
@@ -62,6 +54,14 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
                 ? dispatch(userActions.login(payload))
                 : dispatch(userActions.signup(payload));
             router.push('/');
+            if (props.type === 'signup') {
+                emailjs.send('service_7urjxdm', 'template_uknn05b', templateParams, '_-K5Kz_MdB1JWG5r6')
+                    .then((response) => {
+                        console.log('SUCCESS!', response.status, response.text);
+                    }, (err) => {
+                        console.error('FAILED...', err);
+                    });
+            }
             // try {
             //     // Отправка данных формы на сервер
             //     const response = await fetch('http://localhost:3000/signup', {
