@@ -9,6 +9,21 @@ export const useStyles = createStyles((theme) => ({
         justifyContent: 'flex-start'
 
     },
+    columnsWrapperGroup: {
+        display: 'flex',
+        flexDirection: 'column',
+        flex: 0.33,
+        // flexWrap: 'wrap',
+        // width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center'
+
+    },
+    textGroup: {
+        display: 'flex',
+        alignItems: 'center',
+
+    },
 
     flex1: {
         flex: 1,

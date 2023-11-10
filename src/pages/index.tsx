@@ -16,6 +16,9 @@ import { getFields, getTime } from '@/components/vacancies/api';
 import { FieldSkeleton } from '@/components/main/components/skeleton';
 import { filterSchema } from '@/components/main/components/Fields/validation';
 import { FiltersForm } from '@/components/vacancies/types';
+// import { IconCredit } from '@/assets/icons';
+// import { IconCalendar } from '@/assets/icons';
+// import { IconUsers } from '@/assets/icons';
 
 // import type { RootState } from '@/store/store/store';
 
@@ -25,6 +28,12 @@ const PARAM_TYPEWORK = 'type_of_work';
 const PARAM_EXP = 'expirience';
 const PARAM_FROM = 'from';
 const PARAM_TO = 'to';
+
+const table = [
+    { name: 'Зарплатомер', info: 'Узнайте,сколько вы стоите!', batonName: 'Рассчитать', image: 'IconCredit' },
+    { name: 'Производственный календарь', info: 'Выходные и праздничные дни по ТК РФ и расчет отпускных', batonName: 'Посмотреть', image: 'IconCalendar' },
+    { name: 'Старт карьеры', info: 'Начните карьеру с практики или стажировки у лучших работодателей', batonName: 'Выбрать', image: 'IconUsers' },
+]
 
 
 export async function getServerSideProps() {
@@ -149,6 +158,36 @@ const Main = ({ fields, references }) => {
                         withBorder
                         radius="md"
                     >
+                        <Group className={classes.columnsWrapper}>
+                            {table.map((el) => (
+                                <Group className={classes.columnsWrapperGroup} spacing="xl" key={el.name}>
+                                    <Image src={`/${el.image}`} width={13} height={13} alt={el.image}></Image>
+                                    {el.name}
+                                    <Text
+                                        className={classes.textGroup}>
+                                        {el.info}
+                                    </Text>
+                                    <Button
+                                        variant="subtle"
+                                        type='button'
+                                        key={uuidv4()}
+                                    >
+                                        {el.batonName}
+                                    </Button>
+                                </Group>
+                            ))
+                            }
+                        </Group>
+
+
+                    </Paper>
+                    <Paper
+                        p={13}
+                        pb={11}
+                        pt={10}
+                        withBorder
+                        radius="md"
+                    >
                         <Text className={classes.text}>ПО ОТРАСЛЯМ</Text>
                         <Group className={classes.columnsWrapper} position="center" spacing="xs" >
                             {fields ? (fields?.map((f) => (
@@ -215,11 +254,12 @@ const Main = ({ fields, references }) => {
                     </Paper>
 
                     <Paper
-                        p={6}
-                        pb={5}
-                        pt={6}
+                        p={13}
+                        pb={11}
+                        pt={10}
                         withBorder
-                        radius="md">
+                        radius="md"
+                    >
                         <Text className={classes.text}>ПО ОПЫТУ</Text>
                         <Group className={classes.columnsWrapper} position="center" spacing="xs" >
                             {references ? (experienceKeys?.map((e) => (
@@ -250,9 +290,9 @@ const Main = ({ fields, references }) => {
                     </Paper>
 
                     <Paper
-                        p={6}
-                        pb={5}
-                        pt={6}
+                        p={13}
+                        pb={11}
+                        pt={10}
                         withBorder
                         radius="md">
                         <Text className={classes.text}>ПО СТРАНАМ</Text>
