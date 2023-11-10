@@ -112,6 +112,17 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
                 <Text size="lg" className={classes.authH1}>{props.header}</Text>
                 <form onSubmit={submitHandler} noValidate >
                     <div className={classes.formControlLabel}>
+                        {props.header === 'Регистрация' ?
+                            <Input.Wrapper mt="xl" label='Name'>
+                                <Input
+                                    placeholder="Your name"
+                                    type='name'
+                                    id='name'
+                                    required
+                                />
+                            </Input.Wrapper>
+                            : ''
+                        }
                         <Input.Wrapper mt="xl" label='Email'>
                             <Input
                                 placeholder="Your email"
@@ -135,6 +146,20 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
                             />
                             {isPasswordInvalid && <span>Password is invalid</span>}
                         </Input.Wrapper>
+
+                        {props.header === 'Регстрация' ?
+                            <Input.Wrapper label='Confirm New Password'>
+                                <Input
+                                    placeholder="Your password"
+                                    type='password'
+                                    id='password'
+                                    required
+                                    ref={passwordInputRef}
+                                />
+                                {isPasswordInvalid && <span>Password is invalid</span>}
+                            </Input.Wrapper>
+                            : ''
+                        }
                     </div>
                     <div className={classes.formAction}>
                         <Button
