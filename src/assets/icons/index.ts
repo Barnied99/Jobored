@@ -4,3 +4,6 @@ export { default as IconChevronDown } from './chevron-down.svg';
 export { default as IconStar } from './star.svg';
 export { default as IconStarFilled } from './star-filled.svg';
 export { default as IconGeolocation } from './geolocation.svg';
+export { default as IconCredit } from './credit.svg';
+export { default as IconCalendar } from './calendar.svg';
+export { default as Iconusers } from './users.svg';
