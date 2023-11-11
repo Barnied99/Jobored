@@ -16,9 +16,7 @@ import { getFields, getTime } from '@/components/vacancies/api';
 import { FieldSkeleton } from '@/components/main/components/skeleton';
 import { filterSchema } from '@/components/main/components/Fields/validation';
 import { FiltersForm } from '@/components/vacancies/types';
-// import { IconCredit } from '@/assets/icons';
-// import { IconCalendar } from '@/assets/icons';
-// import { IconUsers } from '@/assets/icons';
+
 
 // import type { RootState } from '@/store/store/store';
 
@@ -29,13 +27,13 @@ const PARAM_EXP = 'expirience';
 const PARAM_FROM = 'from';
 const PARAM_TO = 'to';
 
+
+
 const table = [
-    { name: 'Зарплатомер', info: 'Узнайте,сколько вы стоите!', batonName: 'Рассчитать', image: 'IconCredit' },
-    { name: 'Производственный календарь', info: 'Выходные и праздничные дни по ТК РФ и расчет отпускных', batonName: 'Посмотреть', image: 'IconCalendar' },
-    { name: 'Старт карьеры', info: 'Начните карьеру с практики или стажировки у лучших работодателей', batonName: 'Выбрать', image: 'IconUsers' },
+    { name: 'Зарплатомер', info: 'Узнайте,сколько вы стоите!', batonName: 'Рассчитать', image: 'credit', link: 'https://www.superjob.ru/z/' },
+    { name: 'Производственный календарь', info: 'Выходные и праздничные дни по ТК РФ и расчет отпускных', batonName: 'Посмотреть', image: 'calendar', link: 'https://www.superjob.ru/proizvodstvennyj_kalendar/2023/' },
+    { name: 'Старт карьеры', info: 'Начните карьеру с практики или стажировки у лучших работодателей', batonName: 'Выбрать', image: 'users', link: 'https://students.superjob.ru/' },
 ]
-
-
 export async function getServerSideProps() {
     try {
         const fields = await getFields();
@@ -57,7 +55,10 @@ export async function getServerSideProps() {
 }
 
 
+
 const Main = ({ fields, references }) => {
+
+
     // const { email: user } = useAppSelector((state: RootState) => state.user);// не исп.
 
     const { classes } = useStyles();
@@ -159,21 +160,24 @@ const Main = ({ fields, references }) => {
                         radius="md"
                     >
                         <Group className={classes.columnsWrapper}>
-                            {table.map((el) => (
+                            {table?.map((el) => (
                                 <Group className={classes.columnsWrapperGroup} spacing="xl" key={el.name}>
-                                    <Image src={`/${el.image}`} width={13} height={13} alt={el.image}></Image>
-                                    {el.name}
-                                    <Text
-                                        className={classes.textGroup}>
+                                    <Image src={`/images/${el.image}.svg`} width={20} height={20} alt={el.image}></Image>
+                                    <Text >
+                                        {el.name}
+                                    </Text>
+                                    <Text align='center' >
                                         {el.info}
                                     </Text>
-                                    <Button
-                                        variant="subtle"
-                                        type='button'
-                                        key={uuidv4()}
-                                    >
-                                        {el.batonName}
-                                    </Button>
+                                    <Link key={uuidv4()} href={`${el.link}`}>
+                                        <Button
+                                            variant="subtle"
+                                            type='button'
+                                            key={uuidv4()}
+                                        >
+                                            {el.batonName}
+                                        </Button>
+                                    </Link>
                                 </Group>
                             ))
                             }

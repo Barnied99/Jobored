@@ -14,11 +14,12 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from "next/image";
 
-import { DefaultContainer, NavLink } from '@/components/common/component';
-import { LogoFull } from '@/assets/img';
+import { DefaultContainer, NavLink, Footer } from '@/components/common/component';
 import { useAppSelector, useAppDispatch } from '@/utills/hooks';
+import { LogoFull } from '@/assets/img';
 import { userActions } from '@/store/slice/user-slice'
 import { RootState } from '@/store/store/store';
+
 
 import { useStyles } from './styles';
 
@@ -225,9 +226,13 @@ const defaultStyles: Styles<
 
 const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
 	return (
-		<AppShell fixed header={<HeaderMenu />} styles={defaultStyles}>
-			{children}
-		</AppShell>
+		<>
+			<AppShell fixed header={<HeaderMenu />} styles={defaultStyles}>
+				{children}
+			</AppShell>
+			<Footer />
+		</>
+
 	);
 };
 
