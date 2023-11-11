@@ -1,13 +1,13 @@
 import { Pagination, Stack } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { DefaultContainer } from '@/components/common/component';
 import { getPaginationControlProps } from '@/components/common/helpers';
 import { getPageTitle } from '@/components/common/services';
-import { useAppSelector } from '@/utills/hooks';
+// import { useAppSelector } from '@/utills/hooks';
 import { NothingHere } from '@/components/not-found/components';
 import { getVacancies } from '@/components/vacancies/api';
 import {
@@ -16,7 +16,7 @@ import {
 } from '@/components/vacancies/components';
 import { getFavoriteVacancies } from '@/components/vacancies/services';
 import { useStyles } from '@/components/favorites/pages/Favorites/styles';
-import { RootState } from '@/store/store/store';
+// import { RootState } from '@/store/store/store';
 
 const PAGE_ITEMS = 4;
 const PARAM_PAGE = 'page';
@@ -29,17 +29,17 @@ const Favorites = () => {
     const totalVacancies = vacanciesKeys.length;
     const totalPages = Math.ceil(vacanciesKeys.length / PAGE_ITEMS);
 
-    const [userClient, setUserClient] = useState(false)
-    const { email: user } = useAppSelector((state: RootState) => {
-        return state.user;
-    });
+    // const [userClient, setUserClient] = useState(false)
+    // const { email: user } = useAppSelector((state: RootState) => {
+    //     return state.user;
+    // });
 
-    useEffect(() => {
-        if (user) {
-            setUserClient(!userClient)
-        }
-        navigate.push('/signin')
-    }, [user])
+    // useEffect(() => {
+    //     if (user) {
+    //         setUserClient(!userClient)
+    //     }
+    //     navigate.push('/signin')
+    // }, [user])
 
     const paramsPage = Number(params.get(PARAM_PAGE));
     const page = paramsPage ? Math.min(paramsPage, totalPages) : 1;
@@ -89,7 +89,7 @@ const Favorites = () => {
             <Head>
                 <title>{title}</title>
             </Head>
-            {hasVacancies && userClient ? (
+            {hasVacancies ? (
                 <>
                     <Stack align="stretch">
                         {pageVacancies.data?.objects
