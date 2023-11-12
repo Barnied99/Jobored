@@ -6,17 +6,18 @@ export const useStyles = createStyles((theme) => ({
         flexDirection: 'row',
         flexWrap: 'wrap',
         width: '100%',
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start'
 
     },
     columnsWrapperGroup: {
         display: 'flex',
         flexDirection: 'column',
-        flex: 0.33333,
+        flex: 1,
         // flexWrap: 'wrap',
         // width: '100%',
-        justifyContent: 'center',
-        alignItems: 'center'
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start'
 
     },
     textGroup: {
@@ -38,6 +39,7 @@ export const useStyles = createStyles((theme) => ({
     },
     text: {
         marginBottom: '10px',
+
         marginTop: '10px',
     },
 
