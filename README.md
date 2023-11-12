@@ -27,7 +27,7 @@
 - Использована библиотека yup для валидации данных.
 - Использована библиотека mantine.
 - Написан небольшой proxy-server для обхода cors политики.
-- Написан serviceworker(пока нету).
+- Написан serviceworker(не используется).
 - Использован TypeScript.
 - Есть применение lazy + Suspense/NextDynamic.
 
