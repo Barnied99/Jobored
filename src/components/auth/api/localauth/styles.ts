@@ -64,7 +64,7 @@ export const styles = createStyles(() => ({
     ,
     formControl: {
         marginTop: '0.5rem',
-        marginBottom: '2rem',
+        marginBottom: '1.0rem',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -74,10 +74,11 @@ export const styles = createStyles(() => ({
     ,
     formAction: {
         marginTop: '0.5rem',
-        marginBottom: '3rem',
+        marginBottom: '2rem',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        gap: 5,
 
     },
 

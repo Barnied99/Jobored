@@ -194,7 +194,7 @@ const Main = ({ fields, references }) => {
                     >
                         <Text className={classes.text}>ПО ОТРАСЛЯМ</Text>
                         <Group className={classes.columnsWrapper} position="center" spacing="xs" >
-                            {fields ? (fields?.map((f) => (
+                            {Array.isArray(fields) ? (fields?.map((f) => (
                                 <Group key={uuidv4()} >
                                     <Controller
                                         name="catalogues"
@@ -216,7 +216,7 @@ const Main = ({ fields, references }) => {
                             )
                             )) : (
                                 <Group >
-                                    {fieldSkeletons(37)}
+                                    {fieldSkeletons(36)}
                                 </Group>
                             )}
                         </Group>
