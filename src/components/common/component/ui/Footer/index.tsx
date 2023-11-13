@@ -1,6 +1,7 @@
 import { Container, Text, Group, Paper } from '@mantine/core';
 import React from 'react';
 import Link from 'next/link';
+
 import { useStyles } from './styles';
 
 

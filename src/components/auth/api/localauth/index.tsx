@@ -3,6 +3,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { Button, Input, Text } from '@mantine/core';
 import emailjs from '@emailjs/browser';
+import Link from 'next/link';
 
 import useValidation from '@/utills/use-validation';
 import { userActions, LoginFormPayload } from '@/store/slice/user-slice';
@@ -113,7 +114,7 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
                 <form onSubmit={submitHandler} noValidate >
                     <div className={classes.formControlLabel}>
                         {props.header === 'Регистрация' ?
-                            <Input.Wrapper mt="xl" label='Name'>
+                            <Input.Wrapper mt="xl">
                                 <Input
                                     placeholder="Your name"
                                     type='name'
@@ -123,7 +124,7 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
                             </Input.Wrapper>
                             : ''
                         }
-                        <Input.Wrapper mt="xl" label='Email'>
+                        <Input.Wrapper mt="xl" >
                             <Input
                                 placeholder="Your email"
                                 type='email'
@@ -136,7 +137,7 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
 
                     </div>
                     <div className={classes.formControlLabel}>
-                        <Input.Wrapper label='Password'>
+                        <Input.Wrapper>
                             <Input
                                 placeholder="Your password"
                                 type='password'
@@ -162,16 +163,40 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
                         }
                     </div>
                     <div className={classes.formAction}>
-                        <Button
-                            size={'sm'}
-                            variant="filled"
-                            type='submit'>
-                            {props.header}
-                        </Button>
+                        {props.header === 'Вход' ?
+                            <>
+                                <Button
+                                    fullWidth
+                                    size={'sm'}
+                                    variant="filled"
+                                    type='submit'>
+                                    {props.header}
+                                </Button>
+                                <Button
+                                    fullWidth
+                                    size={'sm'}
+                                    variant="filled"
+                                    component={Link}
+                                    href="/signup"
+                                >
+                                    {'Регистрация'}
+                                </Button>
+                            </>
+
+                            :
+                            <Button
+                                fullWidth
+                                size={'sm'}
+                                variant="filled"
+                                type='submit'>
+                                {props.header}
+                            </Button>
+                        }
+
                     </div>
                 </form>
-            </div>
-        </div>
+            </div >
+        </div >
 
     );
 };
