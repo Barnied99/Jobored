@@ -19,6 +19,7 @@ import { useAppSelector, useAppDispatch } from '@/utills/hooks';
 import { LogoFull } from '@/assets/img';
 import { userActions } from '@/store/slice/user-slice'
 import { RootState } from '@/store/store/store';
+import { AuthForm } from '@/components/auth/api';
 
 
 import { useStyles } from './styles';
@@ -36,6 +37,7 @@ export function HeaderMenu() {
 	const location = useRouter();
 	const { pathname } = location
 	const [userClient, setUserClient] = useState(false)
+	const [opened, { open, close }] = useDisclosure(false);
 
 	const dispatch = useAppDispatch();
 	const { email: user } = useAppSelector((state: RootState) => {
@@ -114,15 +116,19 @@ export function HeaderMenu() {
 								</NavLink>
 							))}
 							<>
-								<Link href="/signin" >
-									<Button
-										size={'sm'}
-										variant="subtle"
-										c="#ACADB9"
-									>
-										Вход
-									</Button>
-								</Link>
+								{/* <Link href="/signin" > */}
+								<Drawer opened={opened} onClose={close} >
+									<AuthForm header='Вход' type='signin' />
+								</Drawer>
+								<Button
+									onClick={open}
+									size={'sm'}
+									variant="subtle"
+									c="#ACADB9"
+								>
+									Вход
+								</Button>
+								{/* </Link> */}
 								{userClient && (
 									<Button
 										size={'sm'}
@@ -132,15 +138,19 @@ export function HeaderMenu() {
 									> Выход
 									</Button>
 								)}
-								<Link href="/signup">
-									<Button
-										size={'sm'}
-										variant="subtle"
-										c="#ACADB9"
-									>
-										Регистрация
-									</Button>
-								</Link>
+								{/* <Link href="/signup"> */}
+								<Drawer opened={opened} onClose={close} >
+									<AuthForm header='Регистрация' type='signup' />
+								</Drawer>
+								<Button
+									onClick={open}
+									size={'sm'}
+									variant="subtle"
+									c="#ACADB9"
+								>
+									Регистрация
+								</Button>
+								{/* </Link> */}
 
 							</>
 
@@ -160,7 +170,7 @@ export function HeaderMenu() {
 				onClose={closeDrawer}
 				closeOnEscape
 				padding="md"
-				size="100%"
+				size="60%"
 				scrollAreaComponent={ScrollArea.Autosize}
 				overlayProps={{ opacity: 0, blur: 4 }}
 				className={cx(classes.hiddenDesktop, classes.drawer)}

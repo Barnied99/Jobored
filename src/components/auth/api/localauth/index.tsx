@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useRouter } from 'next/router';
-import { Button, Input, Text } from '@mantine/core';
+import { Button, Input, Text, Drawer } from '@mantine/core';
+// import { useDisclosure } from '@mantine/hooks';
 import emailjs from '@emailjs/browser';
 import Link from 'next/link';
 
@@ -15,6 +16,7 @@ import { styles } from './styles';
 export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
     const dispatch = useAppDispatch();
     const router = useRouter()
+
 
     const { classes } = styles()
 
