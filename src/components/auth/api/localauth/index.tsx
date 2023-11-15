@@ -1,24 +1,27 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useRouter } from 'next/router';
-import { Button, Input, Text, Drawer } from '@mantine/core';
-// import { useDisclosure } from '@mantine/hooks';
+import { Button, Input, Text, Paper, Group, Divider, Stack } from '@mantine/core';
 import emailjs from '@emailjs/browser';
 import Link from 'next/link';
+// import { useForm } from '@mantine/form'
+// import { useToggle, upperFirst } from '@mantine/hooks';
 
 import useValidation from '@/utills/use-validation';
 import { userActions, LoginFormPayload } from '@/store/slice/user-slice';
 import { useAppDispatch } from '@/utills/hooks';
 
+import { GoogleButton } from './GoogleButton';
+// import { TwitterButton } from './TwitterButton';
 
-import { styles } from './styles';
+// import { styles } from './styles';
 
 export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
     const dispatch = useAppDispatch();
     const router = useRouter()
 
+    // const { classes } = styles()
 
-    const { classes } = styles()
 
     const {
         inputRef: emailInputRef,
@@ -110,82 +113,55 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
 
     return (
 
-        <div className={classes.app}>
-            <div className={classes.auth}>
-                <Text size="lg" className={classes.authH1}>{props.header}</Text>
-                <form onSubmit={submitHandler} noValidate >
-                    <div className={classes.formControlLabel}>
-                        {props.header === 'Регистрация' ?
-                            <Input.Wrapper mt="xl">
-                                <Input
-                                    placeholder="Your name"
-                                    type='name'
-                                    id='name'
-                                    required
-                                />
-                            </Input.Wrapper>
-                            : ''
-                        }
-                        <Input.Wrapper mt="xl" >
+        <Paper radius="md" p="xl" withBorder {...props}>
+            <Text size="lg" fw={500}>
+                Welcome to Mantine,  with
+            </Text>
+
+            <Group grow mb="md" mt="md">
+                <GoogleButton radius="xl">Google</GoogleButton>
+            </Group>
+
+            <Divider label="Or continue with email" labelPosition="center" my="lg" />
+
+            <form onSubmit={submitHandler}>
+                <Stack>
+                    {props.type === 'signup' && (
+                        <Input.Wrapper mt="xl">
                             <Input
-                                placeholder="Your email"
-                                type='email'
-                                id='email'
+                                placeholder="Your name"
+                                type='name'
+                                id='name'
                                 required
-                                ref={emailInputRef}
                             />
-                            {isEmailInvalid && <span>Email is invalid</span>}
                         </Input.Wrapper>
+                    )}
 
-                    </div>
-                    <div className={classes.formControlLabel}>
-                        <Input.Wrapper>
-                            <Input
-                                placeholder="Your password"
-                                type='password'
-                                id='password'
-                                required
-                                ref={passwordInputRef}
-                            />
-                            {isPasswordInvalid && <span>Password is invalid</span>}
-                        </Input.Wrapper>
+                    <Input.Wrapper mt="xl" >
+                        <Input
+                            placeholder="Your email"
+                            type='email'
+                            id='email'
+                            required
+                            ref={emailInputRef}
+                        />
+                        {isEmailInvalid && <span>Email is invalid</span>}
+                    </Input.Wrapper>
+                    <Input.Wrapper>
+                        <Input
+                            placeholder="Your password"
+                            type='password'
+                            id='password'
+                            required
+                            ref={passwordInputRef}
+                        />
+                        {isPasswordInvalid && <span>Password is invalid</span>}
+                    </Input.Wrapper>
+                </Stack>
 
-                        {props.header === 'Регстрация' ?
-                            <Input.Wrapper label='Confirm New Password'>
-                                <Input
-                                    placeholder="Your password"
-                                    type='password'
-                                    id='password'
-                                    required
-                                    ref={passwordInputRef}
-                                />
-                                {isPasswordInvalid && <span>Password is invalid</span>}
-                            </Input.Wrapper>
-                            : ''
-                        }
-                    </div>
-                    <div className={classes.formAction}>
-                        {props.header === 'Вход' ?
-                            <>
-                                <Button
-                                    fullWidth
-                                    size={'sm'}
-                                    variant="filled"
-                                    type='submit'>
-                                    {props.header}
-                                </Button>
-                                <Button
-                                    fullWidth
-                                    size={'sm'}
-                                    variant="filled"
-                                    component={Link}
-                                    href="/signup"
-                                >
-                                    {'Регистрация'}
-                                </Button>
-                            </>
-
-                            :
+                <Group mt="xl">
+                    {props.header === 'Вход' ?
+                        <>
                             <Button
                                 fullWidth
                                 size={'sm'}
@@ -193,13 +169,29 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
                                 type='submit'>
                                 {props.header}
                             </Button>
-                        }
+                            <Button
+                                fullWidth
+                                size={'sm'}
+                                variant="filled"
+                                component={Link}
+                                href="/signup"
+                            >
+                                {'Регистрация'}
+                            </Button>
+                        </>
 
-                    </div>
-                </form>
-            </div >
-        </div >
-
+                        :
+                        <Button
+                            fullWidth
+                            size={'sm'}
+                            variant="filled"
+                            type='submit'>
+                            {props.header}
+                        </Button>
+                    }
+                </Group>
+            </form>
+        </Paper>
     );
 };
 

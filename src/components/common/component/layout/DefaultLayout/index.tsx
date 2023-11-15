@@ -37,7 +37,9 @@ export function HeaderMenu() {
 	const location = useRouter();
 	const { pathname } = location
 	const [userClient, setUserClient] = useState(false)
-	const [opened, { open, close }] = useDisclosure(false);
+	const [openedsu, { open: openreg, close: closereg }] = useDisclosure(false);
+
+	const [openedsi, { open: openin, close: closein }] = useDisclosure(false);
 
 	const dispatch = useAppDispatch();
 	const { email: user } = useAppSelector((state: RootState) => {
@@ -86,6 +88,7 @@ export function HeaderMenu() {
 		closeDrawer();
 	}, [pathname]);
 
+
 	return (
 		<>
 			<Header height={headerHeight} className={classes.header} px="md">
@@ -116,19 +119,28 @@ export function HeaderMenu() {
 								</NavLink>
 							))}
 							<>
-								{/* <Link href="/signin" > */}
-								<Drawer opened={opened} onClose={close} >
+								<Drawer
+									overlayProps={{ opacity: 0, blur: 4 }}
+									padding="md"
+									size="30%"
+									closeOnEscape
+									opened={openedsi}
+									lockScroll={false}
+									closeButtonProps={{
+										size: 'md',
+									}}
+									scrollAreaComponent={ScrollArea.Autosize}
+									onClose={closein} >
 									<AuthForm header='Вход' type='signin' />
 								</Drawer>
 								<Button
-									onClick={open}
+									onClick={openin}
 									size={'sm'}
 									variant="subtle"
 									c="#ACADB9"
 								>
 									Вход
 								</Button>
-								{/* </Link> */}
 								{userClient && (
 									<Button
 										size={'sm'}
@@ -138,19 +150,29 @@ export function HeaderMenu() {
 									> Выход
 									</Button>
 								)}
-								{/* <Link href="/signup"> */}
-								<Drawer opened={opened} onClose={close} >
+								<Drawer
+									overlayProps={{ opacity: 0, blur: 4 }}
+									lockScroll={false}
+									closeButtonProps={{
+										size: 'md',
+									}}
+									scrollAreaComponent={ScrollArea.Autosize}
+									padding="md"
+									size="30%"
+									closeOnEscape
+									opened={openedsu}
+									onClose={closereg}
+								>
 									<AuthForm header='Регистрация' type='signup' />
 								</Drawer>
 								<Button
-									onClick={open}
+									onClick={openreg}
 									size={'sm'}
 									variant="subtle"
 									c="#ACADB9"
 								>
 									Регистрация
 								</Button>
-								{/* </Link> */}
 
 							</>
 
