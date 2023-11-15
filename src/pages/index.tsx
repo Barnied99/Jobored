@@ -48,7 +48,7 @@ export async function getServerSideProps() {
         console.error('Error fetching datas:', error);
         return {
             props: {
-                fields: [],
+                // fields: [],
             }
         };
     }
@@ -57,7 +57,6 @@ export async function getServerSideProps() {
 
 
 const Main = ({ fields, references }) => {
-
 
     // const { email: user } = useAppSelector((state: RootState) => state.user);// не исп.
 
@@ -84,6 +83,7 @@ const Main = ({ fields, references }) => {
     // const { data: references } = useQuery(['typeWork'], {
     //     queryFn: () => getTime(),
     // });
+
 
     // const typeWorks = Object.values(references?.type_of_work || {})
     const typeWorksKeys = Object.entries(references?.type_of_work || {})
@@ -194,7 +194,7 @@ const Main = ({ fields, references }) => {
                     >
                         <Text className={classes.text}>ПО ОТРАСЛЯМ</Text>
                         <Group className={classes.columnsWrapper} position="center" spacing="xs" >
-                            {Array.isArray(fields) ? (fields?.map((f) => (
+                            {fields ? (fields?.map((f) => (
                                 <Group key={uuidv4()} >
                                     <Controller
                                         name="catalogues"
@@ -216,7 +216,7 @@ const Main = ({ fields, references }) => {
                             )
                             )) : (
                                 <Group >
-                                    {fieldSkeletons(36)}
+                                    {fieldSkeletons(35)}
                                 </Group>
                             )}
                         </Group>
