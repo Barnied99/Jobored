@@ -67,6 +67,9 @@ const Router = ({ Component, pageProps }: AppProps) => {
   }, []);
 
   useEffect(() => {
+    const loadingTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000)
     const checkTokenExpiration = () => {
       const nowUtc = new Date().getTime();
       const expirationDate = Number(getToken(EXPIRE_DATE_KEY)) || 0;
@@ -96,9 +99,7 @@ const Router = ({ Component, pageProps }: AppProps) => {
     checkTokenExpiration();
     const timer = setInterval(checkTokenExpiration, 60000);
 
-    const loadingTimer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000)
+
 
     return () => {
       clearInterval(timer);
