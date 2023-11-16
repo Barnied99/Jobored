@@ -114,8 +114,8 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
     return (
 
         <Paper radius="md" p="xl" withBorder {...props}>
-            <Text size="lg" fw={500}>
-                Welcome to Mantine,  with
+            <Text size="lg" fw={500} align={'center'}>
+                Welcome to JOBORED,  with
             </Text>
 
             <Group grow mb="md" mt="md">
@@ -139,6 +139,7 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
 
                     <Input.Wrapper mt="xl" >
                         <Input
+                            data-autofocus
                             placeholder="Your email"
                             type='email'
                             id='email'

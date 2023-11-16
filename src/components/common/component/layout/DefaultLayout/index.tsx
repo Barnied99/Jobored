@@ -113,16 +113,17 @@ export function HeaderMenu() {
 								<NavLink
 									key={link.href}
 									to={link.href}
-									className={classes.header__link}
+									className={`${classes.header__link} ${classes.header__link}`}
 								>
 									{link.title}
 								</NavLink>
 							))}
 							<>
 								<Drawer
+									withCloseButton={false}
 									overlayProps={{ opacity: 0, blur: 4 }}
 									padding="md"
-									size="30%"
+									size="md"
 									closeOnEscape
 									opened={openedsi}
 									lockScroll={false}
@@ -151,6 +152,7 @@ export function HeaderMenu() {
 									</Button>
 								)}
 								<Drawer
+									withCloseButton={false}
 									overlayProps={{ opacity: 0, blur: 4 }}
 									lockScroll={false}
 									closeButtonProps={{
@@ -158,7 +160,7 @@ export function HeaderMenu() {
 									}}
 									scrollAreaComponent={ScrollArea.Autosize}
 									padding="md"
-									size="30%"
+									size="md"
 									closeOnEscape
 									opened={openedsu}
 									onClose={closereg}
@@ -253,7 +255,8 @@ const defaultStyles: Styles<
 	main: {
 		backgroundColor: theme.colors.gray[0],
 		paddingTop: '7.6rem',
-	},
+		minHeight: 'calc(100vh -7.6rem -300px)'
+	}
 });
 
 const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
