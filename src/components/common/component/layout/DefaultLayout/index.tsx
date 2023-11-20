@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import {
 	AppShell,
 	Burger,
@@ -31,9 +32,10 @@ const links = [
 
 interface DefaultLayoutProps {
 	children: React.ReactNode;
+	title?: string;
 }
 
-export function HeaderMenu() {
+export function HeaderMenu({ title }) {
 	const location = useRouter();
 	const { pathname } = location
 	const [userClient, setUserClient] = useState(false)
@@ -91,6 +93,11 @@ export function HeaderMenu() {
 
 	return (
 		<>
+			<Head>
+				<title>{title ? title + ' | Jobored' : 'Jobored'}</title>
+				<meta name="description" content="Ecommerce Website" />
+
+			</Head>
 			<Header height={headerHeight} className={classes.header} px="md">
 				<DefaultContainer className={classes.header}>
 					<Group position="apart" className={classes.header__layout}>
@@ -132,7 +139,7 @@ export function HeaderMenu() {
 									}}
 									scrollAreaComponent={ScrollArea.Autosize}
 									onClose={closein} >
-									<AuthForm header='Вход' type='signin' />
+									<AuthForm header='Вход' type='signin' onClose={closein} />
 								</Drawer>
 								<Button
 									onClick={openin}
@@ -165,7 +172,7 @@ export function HeaderMenu() {
 									opened={openedsu}
 									onClose={closereg}
 								>
-									<AuthForm header='Регистрация' type='signup' />
+									<AuthForm header='Регистрация' type='signup' onClose={closereg} />
 								</Drawer>
 								<Button
 									onClick={openreg}
@@ -249,25 +256,24 @@ export function HeaderMenu() {
 }
 
 const defaultStyles: Styles<
-	'body' | 'main' | 'root',
+	'body' | 'main' | 'root' | 'footer',
 	Record<string, unknown>
 > = (theme) => ({
+
 	main: {
 		backgroundColor: theme.colors.gray[0],
 		paddingTop: '7.6rem',
-		minHeight: 'calc(100vh -7.6rem -300px)'
-	}
+	},
+
 });
 
-const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
+const DefaultLayout: React.FC<DefaultLayoutProps> = ({ title, children }) => {
 	return (
-		<>
-			<AppShell fixed header={<HeaderMenu />} styles={defaultStyles}>
+		<AppShell fixed header={<HeaderMenu title={title} />} styles={defaultStyles} footer={<Footer />}>
+			<main>
 				{children}
-			</AppShell>
-			<Footer />
-		</>
-
+			</main>
+		</AppShell>
 	);
 };
 

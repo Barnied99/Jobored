@@ -1,13 +1,11 @@
 import { Pagination, Stack } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useMemo } from 'react';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { DefaultContainer } from '@/components/common/component';
 import { getPaginationControlProps } from '@/components/common/helpers';
 import { getPageTitle } from '@/components/common/services';
-// import { useAppSelector } from '@/utills/hooks';
 import { NothingHere } from '@/components/not-found/components';
 import { getVacancies } from '@/components/vacancies/api';
 import {
@@ -16,7 +14,8 @@ import {
 } from '@/components/vacancies/components';
 import { getFavoriteVacancies } from '@/components/vacancies/services';
 import { useStyles } from '@/components/favorites/pages/Favorites/styles';
-// import { RootState } from '@/store/store/store';
+import { DefaultLayout } from '@/components/common/component';
+
 
 const PAGE_ITEMS = 4;
 const PARAM_PAGE = 'page';
@@ -85,33 +84,35 @@ const Favorites = () => {
     const title = getPageTitle('Избранное');
 
     return (
-        <DefaultContainer small>
-            <Head>
-                <title>{title}</title>
-            </Head>
-            {hasVacancies ? (
-                <>
-                    <Stack align="stretch">
-                        {pageVacancies.data?.objects
-                            ? pageVacancies.data.objects.map((vacancy) => (
-                                <VacancyCard key={vacancy.id} data={vacancy} />
-                            ))
-                            : Array(pageAmount)
-                                .fill(true)
-                                .map((_, idx) => <VacancyCardSkeleton key={idx} />)}
-                    </Stack>
-                    <Pagination
-                        value={page}
-                        onChange={onChangePage}
-                        total={totalPages}
-                        className={classes.pagination}
-                        getControlProps={getPaginationControlProps}
-                    />
-                </>
-            ) : (
-                <NothingHere className={classes.nothingHere} />
-            )}
-        </DefaultContainer>
+        <DefaultLayout title={title}>
+            <DefaultContainer small>
+
+                {hasVacancies ? (
+                    <>
+                        <Stack align="stretch">
+                            {pageVacancies.data?.objects
+                                ? pageVacancies.data.objects.map((vacancy) => (
+                                    <VacancyCard key={vacancy.id} data={vacancy} />
+                                ))
+                                : Array(pageAmount)
+                                    .fill(true)
+                                    .map((_, idx) => <VacancyCardSkeleton key={idx} />)}
+                        </Stack>
+                        <Pagination
+                            value={page}
+                            onChange={onChangePage}
+                            total={totalPages}
+                            className={classes.pagination}
+                            getControlProps={getPaginationControlProps}
+                        />
+                    </>
+                ) : (
+                    <NothingHere className={classes.nothingHere} />
+                )}
+            </DefaultContainer>
+
+        </DefaultLayout>
+
     );
 };
 
