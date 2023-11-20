@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
-import { AuthForm } from '@/components/auth/api';
+// import { AuthForm } from '@/components/auth/api';
 import { RootState } from '@/store/store/store';
 import { useAppSelector } from '@/utills/hooks';
+// import { DefaultLayout } from '@/components/common/component';
 
 
 const LogOut = () => {
@@ -11,16 +12,13 @@ const LogOut = () => {
     const router = useRouter()
 
     if (!user) {
-        router.push('/signup')
+        router.push('/')
     }
 
     return (
-        <>
-            <Head>
-                <title>Выход</title>
-            </Head>
-            <AuthForm header='Вход' type='signin' />
-        </>
+        <Head>
+            <title>Выход</title>
+        </Head>
     );
 };
 

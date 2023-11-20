@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router';
-import Head from 'next/head';
+// import Head from 'next/head';
 
 import { AuthForm } from '@/components/auth/api';
 import { useAppSelector } from '@/utills/hooks';
 import { RootState } from '@/store/store/store';
+import { DefaultLayout } from '@/components/common/component';
 
 const SignUp = () => {
     const { email: user } = useAppSelector((state: RootState) => state.user);
@@ -14,12 +15,9 @@ const SignUp = () => {
     }
 
     return (
-        <>
-            <Head>
-                <title>Регистрация | Jobored</title>
-            </Head>
-            <AuthForm header='Регистрация' type='signup' />
-        </>
+        <DefaultLayout title="Регистрация | Jobored">
+            <AuthForm header='Регистрация' type='signup' onClose />
+        </DefaultLayout>
 
     );
 };
