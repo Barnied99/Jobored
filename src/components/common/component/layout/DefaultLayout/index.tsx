@@ -94,7 +94,7 @@ export function HeaderMenu({ title }) {
 	return (
 		<>
 			<Head>
-				<title>{title ? title + ' | Jobored' : 'Jobored'}</title>
+				<title>{title ? title : 'Jobored'}</title>
 				<meta name="description" content="Ecommerce Website" />
 
 			</Head>

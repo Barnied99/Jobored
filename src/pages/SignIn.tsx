@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-// import Head from 'next/head';
 
 import { AuthForm } from '@/components/auth/api';
 import { RootState } from '@/store/store/store';
@@ -17,10 +16,11 @@ const SignIn = () => {
 
     return (
         <DefaultLayout title="Вход | Jobored">
-
             <AuthForm header='Вход' type='signin' onClose />
         </DefaultLayout>
+
     );
 };
 
 export default SignIn;
+

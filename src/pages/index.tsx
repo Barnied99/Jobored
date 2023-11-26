@@ -5,18 +5,18 @@ import Image from 'next/image';
 import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-// import { useQuery } from '@tanstack/react-query';
 import { Controller, useForm } from 'react-hook-form';
-// import Head from 'next/head';
 
+// import { useQuery } from '@tanstack/react-query';
+import { getPageTitle } from '@/components/common/services';
 import { useStyles } from '@/components/main/pages/Home/styles';
 import { getFields, getTime } from '@/components/vacancies/api';
 import { FieldSkeleton } from '@/components/main/components/skeleton';
 import { filterSchema } from '@/components/main/components/Fields/validation';
 import { FiltersForm } from '@/components/vacancies/types';
-// import { Footer } from '@/components/common/component';
 import { Info } from '@/components/main/components'
 import { DefaultLayout } from '@/components/common/component';
+
 
 const PARAM_PAGE = 'page';
 const PARAM_FIELD = 'field';
@@ -24,8 +24,6 @@ const PARAM_TYPEWORK = 'type_of_work';
 const PARAM_EXP = 'expirience';
 const PARAM_FROM = 'from';
 const PARAM_TO = 'to';
-
-
 
 const table = [
     { name: 'Зарплатомер', info: 'Узнайте,сколько вы стоите!', batonName: 'Рассчитать', image: 'credit', link: 'https://www.superjob.ru/z/' },
@@ -138,9 +136,11 @@ const Main = ({ fields, references }) => {
         navigate.push(`${pathname}?${newParams.toString()}`, undefined, { shallow: true });
     }, []);
 
-    return (
-        <DefaultLayout title="Jobored">
+    const title = getPageTitle('Главная');
 
+
+    return (
+        <DefaultLayout title={title}>
             <Box className={classes.flex1}
                 ref={paperRef}
                 component="form"
@@ -307,13 +307,10 @@ const Main = ({ fields, references }) => {
                                     {fieldSkeletons(16)}
                                 </Group>
                             )
-
                             }
                         </Group>
                     </Paper>
-
                     <Info />
-
                 </Stack>
 
             </Box >
