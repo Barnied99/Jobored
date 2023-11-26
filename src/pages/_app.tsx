@@ -11,11 +11,13 @@ import {
   EXPIRE_DATE_KEY,
   REFRESH_TOKEN_KEY,
 } from '@/components/common/constants';
-import { DefaultLoader, DefaultLayout } from '@/components/common/component';
+import { DefaultLoader } from '@/components/common/component';
 import { getToken, setToken } from '@/components/common/services';
 import registerSW from '@/utills/registerSW'
 
 import type { AppProps } from 'next/app'
+
+
 
 
 const queryClient = new QueryClient({
@@ -116,8 +118,7 @@ const Router = ({ Component, pageProps }: AppProps) => {
       <QueryClientProvider client={queryClient}>
         <ErrorBoundary>
           <Provider store={store}>
-            {isLoading ? <DefaultLoader />
-              :
+            {isLoading ? <DefaultLoader /> :
               <Component {...pageProps} />
             }
           </Provider>
