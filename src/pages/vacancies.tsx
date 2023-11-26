@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Group, Pagination, Stack } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
-import Head from 'next/head';
+// import Head from 'next/head';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 
@@ -21,6 +21,7 @@ import {
 import { FiltersForm, SearchForm } from '@/components/vacancies/types';
 import { useStyles } from '@/components/vacancies/pages/Vacancies/styles';
 import { searchSchema } from '@/components/vacancies/pages/Vacancies/validation';
+import { DefaultLayout } from '@/components/common/component';
 
 const DEFAULT_PAGES = 5;
 const PAGE_ITEMS = 4;
@@ -200,58 +201,60 @@ const Vacancies = ({ fields, references }) => {
     const title = getPageTitle('Вакансии');
 
     return (
-        <DefaultContainer>
-            <Head>
-                <title>{title}</title>
-            </Head>
-            <MobileFilters
-                values={filtersForm}
-                typework={typeWorksKeys}
-                experienceKey={experienceKeys}
-                fields={fields}
-                onChange={onChangeFilters}
-            />
-            <Group className={classes.columnsWrapper} align="flex-start" spacing={28}>
-                <Filters
-                    className={classes.hiddenTabletsAndBelow}
-                    sticky
+        <DefaultLayout title={title}>
+
+            <DefaultContainer>
+
+                <MobileFilters
                     values={filtersForm}
-                    fields={fields}
                     typework={typeWorksKeys}
                     experienceKey={experienceKeys}
+                    fields={fields}
                     onChange={onChangeFilters}
                 />
-                <Box className={classes.flex1}>
-                    <Stack align="stretch" className={classes.flex1}>
-                        <VacanciesSearch
-                            onChange={handleSubmit(onChangeSearch)}
-                            control={control}
-                        />
-
-                        {isSuccess ? ( //readyToDisplay
-                            vacancies.objects.map((vacancy) => (
-                                <VacancyCard key={vacancy.id} data={vacancy} />
-                            ))
-                        ) : (
-                            <>
-                                <VacancyCardSkeleton />
-                                <VacancyCardSkeleton />
-                                <VacancyCardSkeleton />
-                                <VacancyCardSkeleton />
-                            </>
-                        )}
-                        {noData && <NothingHere withButton={false} />}
-                    </Stack>
-                    <Pagination
-                        value={page}
-                        className={classes.pagination}
-                        onChange={onChangePage}
-                        total={totalPages}
-                        getControlProps={getPaginationControlProps}
+                <Group className={classes.columnsWrapper} align="flex-start" spacing={28}>
+                    <Filters
+                        className={classes.hiddenTabletsAndBelow}
+                        sticky
+                        values={filtersForm}
+                        fields={fields}
+                        typework={typeWorksKeys}
+                        experienceKey={experienceKeys}
+                        onChange={onChangeFilters}
                     />
-                </Box>
-            </Group>
-        </DefaultContainer>
+                    <Box className={classes.flex1}>
+                        <Stack align="stretch" className={classes.flex1}>
+                            <VacanciesSearch
+                                onChange={handleSubmit(onChangeSearch)}
+                                control={control}
+                            />
+
+                            {isSuccess ? ( //readyToDisplay
+                                vacancies.objects.map((vacancy) => (
+                                    <VacancyCard key={vacancy.id} data={vacancy} />
+                                ))
+                            ) : (
+                                <>
+                                    <VacancyCardSkeleton />
+                                    <VacancyCardSkeleton />
+                                    <VacancyCardSkeleton />
+                                    <VacancyCardSkeleton />
+                                </>
+                            )}
+                            {noData && <NothingHere withButton={false} />}
+                        </Stack>
+                        <Pagination
+                            value={page}
+                            className={classes.pagination}
+                            onChange={onChangePage}
+                            total={totalPages}
+                            getControlProps={getPaginationControlProps}
+                        />
+                    </Box>
+                </Group>
+            </DefaultContainer>
+        </DefaultLayout>
+
     );
 };
 

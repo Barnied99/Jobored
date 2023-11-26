@@ -12,11 +12,10 @@ import { userActions, LoginFormPayload } from '@/store/slice/user-slice';
 import { useAppDispatch } from '@/utills/hooks';
 
 import { GoogleButton } from './GoogleButton';
-// import { TwitterButton } from './TwitterButton';
 
 // import { styles } from './styles';
 
-export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
+export const AuthForm: React.FC<{ header: any; type: any; onClose }> = (props) => {
     const dispatch = useAppDispatch();
     const router = useRouter()
 
@@ -41,6 +40,7 @@ export const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
         const enteredPassword = passwordInputRef.current!.value;
         const isEmailValid = submitEmailHandler(enteredEmail);
         const isPasswordValid = submitPasswordHandler(enteredPassword);
+        props.onClose()
 
         const templateParams = {
             to: 'darkbarnied99@gmail.com',

@@ -11,11 +11,13 @@ import {
   EXPIRE_DATE_KEY,
   REFRESH_TOKEN_KEY,
 } from '@/components/common/constants';
-import { DefaultLayout, DefaultLoader } from '@/components/common/component';
+import { DefaultLoader } from '@/components/common/component';
 import { getToken, setToken } from '@/components/common/services';
 import registerSW from '@/utills/registerSW'
 
 import type { AppProps } from 'next/app'
+
+
 
 
 const queryClient = new QueryClient({
@@ -38,7 +40,6 @@ const Router = ({ Component, pageProps }: AppProps) => {
 
   const onRefreshTokens = useCallback(async () => {
     const refreshToken = getToken(REFRESH_TOKEN_KEY);
-
     try {
       const data = await refreshTokens(refreshToken);
 
@@ -54,6 +55,7 @@ const Router = ({ Component, pageProps }: AppProps) => {
   }, []);
 
   const onLoginUser = useCallback(async () => {
+
     try {
       const data = await loginUser();
       const expirationDate = data.ttl * 1000;
@@ -69,7 +71,7 @@ const Router = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
     const loadingTimer = setTimeout(() => {
       setIsLoading(false);
-    }, 1000)
+    }, 800)
     const checkTokenExpiration = () => {
       const nowUtc = new Date().getTime();
       const expirationDate = Number(getToken(EXPIRE_DATE_KEY)) || 0;
@@ -116,9 +118,9 @@ const Router = ({ Component, pageProps }: AppProps) => {
       <QueryClientProvider client={queryClient}>
         <ErrorBoundary>
           <Provider store={store}>
-            <DefaultLayout>
-              {isLoading ? <DefaultLoader /> : <Component {...pageProps} />}
-            </DefaultLayout>
+            {isLoading ? <DefaultLoader /> :
+              <Component {...pageProps} />
+            }
           </Provider>
         </ErrorBoundary>
       </QueryClientProvider>
