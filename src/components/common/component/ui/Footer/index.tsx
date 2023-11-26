@@ -5,6 +5,7 @@ import { LogoFull } from '@/assets/img';
 
 import classes from './FooterLinks.module.css';
 
+
 const data = [
     {
         title: 'Партнерам',
@@ -36,6 +37,7 @@ const data = [
 ];
 
 export function Footer() {
+
     const groups = data.map((group) => {
         const links = group.links.map((link, index) => (
             <Text<'a'>
