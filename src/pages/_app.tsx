@@ -13,7 +13,7 @@ import {
 } from '@/components/common/constants';
 import { DefaultLoader } from '@/components/common/component';
 import { getToken, setToken } from '@/components/common/services';
-import registerSW from '@/utills/registerSW'
+// import registerSW from '@/utills/registerSW'
 
 import type { AppProps } from 'next/app'
 
