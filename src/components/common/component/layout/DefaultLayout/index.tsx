@@ -182,6 +182,12 @@ export function HeaderMenu({ title }) {
 								>
 									Регистрация
 								</Button>
+								<NavLink
+									to='/settings'
+									variant="subtle"
+								>
+									Настройки
+								</NavLink>
 
 							</>
 
@@ -222,6 +228,7 @@ export function HeaderMenu({ title }) {
 				<>
 					<Link href="/signin" >
 						<Button
+							pl={30}
 							size={'sm'}
 							variant="subtle"
 							c="#ACADB9"
@@ -232,6 +239,7 @@ export function HeaderMenu({ title }) {
 					{userClient && (
 						<Link href='/logout'>
 							<Button
+								pl={30}
 								size={'sm'}
 								variant="subtle"
 								c="#ACADB9"
@@ -241,11 +249,22 @@ export function HeaderMenu({ title }) {
 					)}
 					<Link href="/signup">
 						<Button
+							pl={30}
 							size={'sm'}
 							variant="subtle"
 							c="#ACADB9"
 						>
 							Регистрация
+						</Button>
+					</Link>
+					<Link href="/settings">
+						<Button
+							pl={30}
+							size={'sm'}
+							variant="subtle"
+							c="#ACADB9"
+						>
+							Настройки
 						</Button>
 					</Link>
 
@@ -263,7 +282,12 @@ const defaultStyles: Styles<
 	main: {
 		backgroundColor: theme.colors.gray[0],
 		paddingTop: '7.6rem',
+		width: 'auto'
 	},
+	footer: {
+		width: 'auto',
+		flexWrap: 'wrap'
+	}
 
 });
 

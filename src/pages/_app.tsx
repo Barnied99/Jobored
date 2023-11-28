@@ -29,11 +29,11 @@ const FIVE_MINUTES = 1000 * 60 * 5;
 
 const Router = ({ Component, pageProps }: AppProps) => {
 
-  useEffect(() => {
-    if ('serviceWorker' in navigator) {
-      registerSW()
-    }
-  }, [])
+  // useEffect(() => {
+  //   if ('serviceWorker' in navigator) {
+  //     registerSW()
+  //   }
+  // }, [])
 
   const [isLoading, setIsLoading] = useState(true)
   const refOnce = useRef(false);
