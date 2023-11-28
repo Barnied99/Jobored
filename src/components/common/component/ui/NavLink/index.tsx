@@ -3,7 +3,6 @@ import React from 'react';
 import Link from 'next/link';
 
 import { useStyles } from './styles';
-const defaultsize = 'sm'
 
 interface NavLinkProps {
 	to: string;
