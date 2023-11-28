@@ -38,7 +38,7 @@ const data = [
 ];
 
 export function Footer() {
-    const { classes, cx } = useStyles();
+    const { classes } = useStyles();
 
     const groups = data.map((group) => {
         const links = group.links.map((link, index) => (
