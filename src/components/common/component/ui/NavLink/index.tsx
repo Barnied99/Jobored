@@ -8,9 +8,11 @@ interface NavLinkProps {
 	to: string;
 	className?: string;
 	children: React.ReactNode;
+	variant?: string;
+	size?: string | undefined;
 }
 
-const NavLink: React.FC<NavLinkProps> = ({ to, className, children }) => {
+const NavLink: React.FC<NavLinkProps> = ({ to, className, children, variant, size }) => {
 
 	const { classes, cx } = useStyles();
 	return (
@@ -18,6 +20,7 @@ const NavLink: React.FC<NavLinkProps> = ({ to, className, children }) => {
 			component={Link}
 			label={children}
 			href={to}
+			variant={variant}
 		/>
 
 	);

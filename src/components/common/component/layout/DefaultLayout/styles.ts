@@ -39,12 +39,19 @@ export const useStyles = createStyles(
 			['& .mantine-Drawer-header']: {
 				display: 'flex',
 				alignItems: 'center',
+				flexDirection: 'column',
 				height: headerHeight,
 				padding: '0 12px',
 			},
 
 			['.mantine-Drawer-close']: {
 				color: theme.black,
+			},
+			['.mantine-Drawer-body']: {
+				display: 'flex',
+				flexDirection: 'column',
+				paddingLeft: 0
+
 			},
 		},
 

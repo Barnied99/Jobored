@@ -15,7 +15,7 @@ import { GoogleButton } from './GoogleButton';
 
 // import { styles } from './styles';
 
-export const AuthForm: React.FC<{ header: any; type: any; onClose }> = (props) => {
+export const AuthForm: React.FC<{ header: any; type: any; onClose: any }> = (props) => {
     const dispatch = useAppDispatch();
     const router = useRouter()
 
@@ -141,6 +141,7 @@ export const AuthForm: React.FC<{ header: any; type: any; onClose }> = (props) =
                         <Input
                             data-autofocus
                             placeholder="Your email"
+                            autoComplete="username"
                             type='email'
                             id='email'
                             required
@@ -151,6 +152,7 @@ export const AuthForm: React.FC<{ header: any; type: any; onClose }> = (props) =
                     <Input.Wrapper>
                         <Input
                             placeholder="Your password"
+                            autoComplete="current-password"
                             type='password'
                             id='password'
                             required
