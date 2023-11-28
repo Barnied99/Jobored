@@ -6,6 +6,8 @@ export const useStyles = createStyles((theme) => ({
 		flexDirection: 'row',
 		flexWrap: 'nowrap',
 		width: '100%',
+		minWidth: '440px',
+		maxWidth: '1160px'
 	},
 
 	flex1: {

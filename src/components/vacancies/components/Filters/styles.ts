@@ -6,7 +6,7 @@ export const useStyles = createStyles((theme) => ({
 	filterDesktop__wrapper: {
 		padding: 20,
 		paddingTop: 14,
-		minWidth: 315,
+		minWidth: 415,
 	},
 
 	filters__select: {

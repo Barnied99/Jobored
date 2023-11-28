@@ -1,5 +1,5 @@
 # JOBORED[]
-
+demo :[Jobored] (https://jobored-three.vercel.app/?page=1)
 Сделано небольшое приложение для поиска работы.
 
 ### React(v.18.2)&Next(v.13.4)
@@ -22,6 +22,7 @@
 [Favorites](https://github.com/Barnied99/Jobored/blob/main/src/pages/favorites.tsx) и т.д.
 
 ## Дополнительно
+- Использован API Superjob.
 - Использован NextJs.
 - Использована библиотека react-hook-form для форм регистрации и входа.
 - Использована библиотека yup для валидации данных.

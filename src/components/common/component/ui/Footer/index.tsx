@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import { Text, Container, ActionIcon, Group, rem } from '@mantine/core';
 import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons-react';
+
 import { LogoFull } from '@/assets/img';
 
-import classes from './FooterLinks.module.css';
+import { useStyles } from './styles';
 
 
 const data = [
@@ -24,19 +25,20 @@ const data = [
             { label: 'Работа в SuperJob', link: 'https://www.superjob.ru/clients/superjob-14449.html' },
         ],
     },
-    {
-        title: 'Документы',
-        links: [
-            { label: 'База данных SuperJob', link: 'https://www.superjob.ru/info/hr_service.html' },
-            { label: 'Рекламный кабинет', link: 'https://www.superjob.ru/info/rtb_service.html' },
-            { label: 'Агрегатор образовательных курсов', link: 'https://www.superjob.ru/info/course-license-agreement/' },
-            { label: 'Иные документы', link: 'https://www.superjob.ru/hr/billing/documents.html' },
-        ],
-    },
+    // {
+    //     title: 'Документы',
+    //     links: [
+    //         { label: 'База данных SuperJob', link: 'https://www.superjob.ru/info/hr_service.html' },
+    //         { label: 'Рекламный кабинет', link: 'https://www.superjob.ru/info/rtb_service.html' },
+    //         { label: 'Агрегатор образовательных курсов', link: 'https://www.superjob.ru/info/course-license-agreement/' },
+    //         { label: 'Иные документы', link: 'https://www.superjob.ru/hr/billing/documents.html' },
+    //     ],
+    // },
 
 ];
 
 export function Footer() {
+    const { classes } = useStyles();
 
     const groups = data.map((group) => {
         const links = group.links.map((link, index) => (
@@ -53,7 +55,7 @@ export function Footer() {
 
         return (
             <div className={classes.wrapper} key={group.title}>
-                <Text className={classes.title}>{group.title}</Text>
+                <Text >{group.title}</Text>
                 {links}
             </div>
         );
@@ -66,21 +68,18 @@ export function Footer() {
                     <Image
                         src={LogoFull}
                         alt="Jobored Logo"
-                        className={classes.header__logo}
+                        // className={classes.header__logo}
                         priority
                     />
-                    <Text size="xs" c="dimmed" className={classes.description}>
-                        Build fully functional accessible web applications faster than ever
-                    </Text>
                 </div>
                 <div className={classes.groups}>{groups}</div>
             </Container>
-            <Container className={classes.afterFooter}>
+            <Container >
                 <Text c="dimmed" size="sm">
                     © 2023 Savitskiy.mantine.dev All rights reserved.
                 </Text>
 
-                <Group className={classes.social} align="flex-end" noWrap>
+                <Group align="flex-end" noWrap>
                     <ActionIcon size="lg" color="gray" variant="subtle">
                         <IconBrandTwitter style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
                     </ActionIcon>
