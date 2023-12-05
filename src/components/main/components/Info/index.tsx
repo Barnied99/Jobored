@@ -3,8 +3,14 @@ import Image from "next/image"
 
 import { Ballon } from '@/assets/img';
 
+import { useStyles } from './styles';
+
+
 
 const Info = () => {
+
+    const { classes } = useStyles();
+
     return (
         <Paper
             p={25}
@@ -12,7 +18,7 @@ const Info = () => {
             pt={10}
             withBorder
             radius="md">
-            <Image src={Ballon} alt='ballon' priority />
+            <Image className={classes.img} src={Ballon} alt='ballon' priority />
             <Text variant="gradient"
                 gradient={{ from: 'indigo', to: 'pink', deg: 80 }}
             > Работа в Москве</Text>

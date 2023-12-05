@@ -16,7 +16,7 @@ const SignIn = () => {
 
     return (
         <DefaultLayout title="Вход | Jobored">
-            <AuthForm header='Вход' type='signin' onClose />
+            <AuthForm header='Вход' type='signin' />
         </DefaultLayout>
 
     );

@@ -33,6 +33,7 @@ export const useStyles = createStyles(
 		header__logo: {
 			height: '40%',
 			aspectRatio: '141 / 36',
+
 		},
 
 		drawer: {
