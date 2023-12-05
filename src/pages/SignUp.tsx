@@ -16,7 +16,7 @@ const SignUp = () => {
 
     return (
         <DefaultLayout title="Регистрация | Jobored">
-            <AuthForm header='Регистрация' type='signup' onClose />
+            <AuthForm header='Регистрация' type='signup' />
         </DefaultLayout>
 
     );

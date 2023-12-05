@@ -1,21 +1,23 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useRouter } from 'next/router';
-import { Button, Input, Text, Paper, Group, Divider, Stack } from '@mantine/core';
+import {
+    Button, Text, Paper, Group,
+    Container, Title, Checkbox, PasswordInput, TextInput, Anchor
+} from '@mantine/core';
 import emailjs from '@emailjs/browser';
 import Link from 'next/link';
-// import { useForm } from '@mantine/form'
-// import { useToggle, upperFirst } from '@mantine/hooks';
+import { notifications } from '@mantine/notifications';
+
 
 import useValidation from '@/utills/use-validation';
 import { userActions, LoginFormPayload } from '@/store/slice/user-slice';
 import { useAppDispatch } from '@/utills/hooks';
 
-import { GoogleButton } from './GoogleButton';
 
 // import { styles } from './styles';
 
-export const AuthForm: React.FC<{ header: any; type: any; onClose: any }> = (props) => {
+export const AuthForm: React.FC<{ header: any; type: any; onClose?: any }> = (props) => {
     const dispatch = useAppDispatch();
     const router = useRouter()
 
@@ -40,12 +42,17 @@ export const AuthForm: React.FC<{ header: any; type: any; onClose: any }> = (pro
         const enteredPassword = passwordInputRef.current!.value;
         const isEmailValid = submitEmailHandler(enteredEmail);
         const isPasswordValid = submitPasswordHandler(enteredPassword);
-        props.onClose()
+
+        if (window.innerWidth >= 724) {
+            props.onClose();
+        }
+
+
 
         const templateParams = {
             to: 'darkbarnied99@gmail.com',
-            sendername: 'fero',
-            subject: 'Check this out!',
+            sendername: `${enteredEmail}`,
+            subject: 'Auth to Jobored!',
             message: `${enteredEmail}, успешно зарегистрировался.`,
             replyto: 'check'
         }
@@ -67,134 +74,86 @@ export const AuthForm: React.FC<{ header: any; type: any; onClose: any }> = (pro
                     }, (err) => {
                         console.error('FAILED...', err);
                     });
+                notifications.show({
+                    title: 'SUCCESS✅',
+                    message: 'Hey there, your email has been successfully registered',
+                })
             }
-            // try {
-            //     // Отправка данных формы на сервер
-            //     const response = await fetch('http://localhost:3000/signup', {
-            //         method: 'POST',
-            //         headers: {
-            //             'Content-Type': 'application/json',
-            //         },
-            //         body: JSON.stringify(payload),
-            //     });
 
-            //     if (response.ok) {
-            //         // Регистрация прошла успешно
-            //         // Отправка письма на указанный email-адрес
-            //         const mailResponse = await fetch('http://localhost:3000/signup', {
-            //             method: 'POST',
-            //             headers: {
-            //                 'Content-Type': 'application/json',
-            //             },
-            //             body: JSON.stringify({ email: enteredEmail }),
-            //         });
-
-            //         if (mailResponse.ok) {
-            //             console.log('Письмо успешно отправлено');
-            //         } else {
-            //             console.log(mailResponse.statusText);
-            //             console.log(mailResponse.status);
-            //             console.log('Ошибка при отправке письма');
-            //         }
-
-            //         // Перенаправление на главную страницу
-            //         router.push('/');
-            //     } else {
-            //         console.log('Ошибка при регистрации');
-            //     }
-            // } catch (error) {
-            //     console.log('Ошибка при отправке запроса:', error);
-            // }
         }
 
-        //method="POST" 
 
     }
 
     return (
 
-        <Paper radius="md" p="xl" withBorder {...props}>
-            <Text size="lg" fw={500} align={'center'}>
-                Welcome to JOBORED,  with
-            </Text>
-
-            <Group grow mb="md" mt="md">
-                <GoogleButton radius="xl">Google</GoogleButton>
-            </Group>
-
-            <Divider label="Or continue with email" labelPosition="center" my="lg" />
-
+        <Container size={420} my={40}>
+            <Title ta="center" >
+                Welcome back!
+            </Title>
+            {props.type === 'signin' && (
+                <Text c="dimmed" size="sm" ta="center" mt={5}>
+                    Do not have an account yet?{' '}
+                    <Anchor size="sm" component="button">
+                        <Link href='/signup'>
+                            Create account
+                        </Link>
+                    </Anchor>
+                </Text>
+            )}
             <form onSubmit={submitHandler}>
-                <Stack>
+                <Paper withBorder shadow="md" p={30} mt={30} radius="md" >
                     {props.type === 'signup' && (
-                        <Input.Wrapper mt="xl">
-                            <Input
-                                placeholder="Your name"
-                                type='name'
-                                id='name'
-                                required
-                            />
-                        </Input.Wrapper>
+                        <Group grow >
+                            <TextInput label="First name" placeholder="Your first name " required />
+                            <TextInput label="Last name" placeholder="Your last name " required />
+                        </Group>
                     )}
-
-                    <Input.Wrapper mt="xl" >
-                        <Input
-                            data-autofocus
-                            placeholder="Your email"
-                            autoComplete="username"
-                            type='email'
-                            id='email'
+                    <TextInput
+                        autoComplete="username"
+                        label="Email"
+                        id='email'
+                        type='email'
+                        placeholder="you@email.com"
+                        required
+                        ref={emailInputRef}
+                    />
+                    {isEmailInvalid && <span>Email is invalid</span>}
+                    <PasswordInput
+                        label="Password"
+                        autoComplete="current-password"
+                        placeholder="Your password"
+                        required
+                        type='password'
+                        mt="md"
+                        id='password'
+                        ref={passwordInputRef}
+                    />
+                    {isPasswordInvalid && <span>Password is invalid</span>}
+                    {props.type === 'signup' && (
+                        <PasswordInput
+                            label="Confirm Password"
+                            placeholder="Confirm password"
                             required
-                            ref={emailInputRef}
-                        />
-                        {isEmailInvalid && <span>Email is invalid</span>}
-                    </Input.Wrapper>
-                    <Input.Wrapper>
-                        <Input
-                            placeholder="Your password"
-                            autoComplete="current-password"
-                            type='password'
-                            id='password'
-                            required
-                            ref={passwordInputRef}
-                        />
-                        {isPasswordInvalid && <span>Password is invalid</span>}
-                    </Input.Wrapper>
-                </Stack>
-
-                <Group mt="xl">
-                    {props.header === 'Вход' ?
-                        <>
-                            <Button
-                                fullWidth
-                                size={'sm'}
-                                variant="filled"
-                                type='submit'>
-                                {props.header}
-                            </Button>
-                            <Button
-                                fullWidth
-                                size={'sm'}
-                                variant="filled"
-                                component={Link}
-                                href="/signup"
-                            >
-                                {'Регистрация'}
-                            </Button>
-                        </>
-
-                        :
-                        <Button
-                            fullWidth
-                            size={'sm'}
-                            variant="filled"
-                            type='submit'>
-                            {props.header}
-                        </Button>
-                    }
-                </Group>
+                            mt="md" />
+                    )}
+                    <Group align="space-between" mt="lg">
+                        <Checkbox label="Remember me" />
+                        <Anchor component="button" size="sm">
+                            Forgot password?
+                        </Anchor>
+                    </Group>
+                    <Button fullWidth
+                        type='submit'
+                        mt="xl"
+                    >
+                        Вход
+                    </Button>
+                </Paper>
             </form>
-        </Paper>
+
+        </Container>
+
     );
 };
 
@@ -202,4 +161,7 @@ AuthForm.propTypes = {
     type: PropTypes.oneOf(['signin', 'signup']),
     header: PropTypes.string,
 };
+
+
+
 

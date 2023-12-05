@@ -8,6 +8,8 @@ import {
 	Header,
 	ScrollArea,
 	Styles,
+	Menu,
+	useMantineColorScheme
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -22,8 +24,10 @@ import { userActions } from '@/store/slice/user-slice'
 import { RootState } from '@/store/store/store';
 import { AuthForm } from '@/components/auth/api';
 
+import { IconSun, IconMoon, IconSettings } from '@tabler/icons-react';
 
 import { useStyles } from './styles';
+import { inherits } from 'util';
 
 const links = [
 	{ href: '/vacancies', title: 'Поиск Вакансий' },
@@ -42,6 +46,9 @@ export function HeaderMenu({ title }) {
 	const [openedsu, { open: openreg, close: closereg }] = useDisclosure(false);
 
 	const [openedsi, { open: openin, close: closein }] = useDisclosure(false);
+
+	const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+	const dark = colorScheme === 'dark';
 
 	const dispatch = useAppDispatch();
 	const { email: user } = useAppSelector((state: RootState) => {
@@ -182,12 +189,30 @@ export function HeaderMenu({ title }) {
 								>
 									Регистрация
 								</Button>
-								<NavLink
-									to='/settings'
-									variant="subtle"
-								>
-									Настройки
-								</NavLink>
+								<Menu
+									shadow="md" width={200}>
+									<Menu.Target>
+										<Button
+											variant="subtle"
+											c="#ACADB9"
+
+										>Настройки <IconSettings size={14} /></Button>
+									</Menu.Target>
+
+									<Menu.Dropdown>
+										<Menu.Label>Jobored</Menu.Label>
+										<Menu.Item >
+											<Group
+												variant="subtle"
+												onClick={() => toggleColorScheme()}
+												title="Toggle color scheme">
+												Тема {dark ? <IconSun size="0.9rem" /> : <IconMoon size="0.9rem" />}
+											</Group>
+										</Menu.Item>
+										<Menu.Item >Язык ru/en  </Menu.Item>
+
+									</Menu.Dropdown>
+								</Menu>
 
 							</>
 
@@ -257,17 +282,18 @@ export function HeaderMenu({ title }) {
 							Регистрация
 						</Button>
 					</Link>
-					<Link href="/settings">
-						<Button
-							pl={30}
-							size={'sm'}
-							variant="subtle"
-							c="#ACADB9"
-						>
-							Настройки
-						</Button>
-					</Link>
-
+					<Menu
+						shadow="md" width={200}>
+						<Menu.Target>
+							<Button
+								variant="subtle" c="#ACADB9" size={'sm'}>Настройки <IconSettings size={14} /></Button>
+						</Menu.Target>
+						<Menu.Dropdown>
+							<Menu.Label>Jobored</Menu.Label>
+							<Menu.Item >Тема <IconSun size={12} />/<IconMoon size={12} /> </Menu.Item>
+							<Menu.Item >Язык ru/en  </Menu.Item>
+						</Menu.Dropdown>
+					</Menu>
 				</>
 			</Drawer>
 		</>
@@ -280,7 +306,8 @@ const defaultStyles: Styles<
 > = (theme) => ({
 
 	main: {
-		backgroundColor: theme.colors.gray[0],
+		// backgroundColor: theme.colors.gray[0],
+		backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark : theme.colors.gray[0],
 		paddingTop: '7.6rem',
 		width: 'auto'
 	},
