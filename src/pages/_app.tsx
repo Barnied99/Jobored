@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Provider } from 'react-redux';
 import Head from 'next/head';
-import { MantineProvider, MantineThemeOverride, ColorSchemeProvider, ColorScheme } from '@mantine/core';
+import { MantineProvider, ColorSchemeProvider, ColorScheme } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 
@@ -21,72 +21,72 @@ import { getToken, setToken } from '@/components/common/services';
 import type { AppProps } from 'next/app'
 
 
-const overrides: MantineThemeOverride = {
+// const overrides: MantineThemeOverride = {
 
-  globalStyles: () => ({
+//   globalStyles: () => ({
 
-    body: {
-      overflowY: 'scroll',
-      scrollbarGutter: 'stable',
-    },
-  }),
-  colorScheme: 'light',
-  colors: {
-    dark: [
-      '#d5d7e0',
-      '#acaebf',
-      '#8c8fa3',
-      '#666980',
-      '#4d4f66',
-      '#34354a',
-      '#2b2c3d',
-      '#1d1e30',
-      '#0c0d21',
-      '#01010a',
-    ],
-  },
-  components: {
-    Paper: {
-      styles: () => ({
-        root: {
-          borderRadius: 10,
-        },
-      }),
-    },
+//     body: {
+//       overflowY: 'scroll',
+//       scrollbarGutter: 'stable',
+//     },
+//   }),
+//   colorScheme: 'light',
+//   colors: {
+//     dark: [
+//       '#d5d7e0',
+//       '#acaebf',
+//       '#8c8fa3',
+//       '#666980',
+//       '#4d4f66',
+//       '#34354a',
+//       '#2b2c3d',
+//       '#1d1e30',
+//       '#0c0d21',
+//       '#01010a',
+//     ],
+//   },
+//   components: {
+//     Paper: {
+//       styles: () => ({
+//         root: {
+//           borderRadius: 10,
+//         },
+//       }),
+//     },
 
-    Button: {
-      styles: () => ({
-        root: {
-          borderRadius: 10,
-        },
-      }),
-    },
+//     Button: {
+//       styles: () => ({
+//         root: {
+//           borderRadius: 10,
+//         },
+//       }),
+//     },
 
-    Input: {
-      styles: () => ({
-        input: {
-          borderRadius: '10px',
-        },
-      }),
-    },
+//     Input: {
+//       styles: () => ({
+//         input: {
+//           borderRadius: '10px',
+//         },
+//       }),
+//     },
 
-    NumberInput: {
-      styles: () => ({
-        input: {
-          borderRadius: '10px',
-        },
-      }),
-    },
+//     NumberInput: {
+//       styles: () => ({
+//         input: {
+//           borderRadius: '10px',
+//         },
+//       }),
+//     },
 
-    Select: {
-      styles: () => ({
-        input: {
-          borderRadius: '10px',
-        },
-      }),
-    },
-  },
-};
+//     Select: {
+//       styles: () => ({
+//         input: {
+//           borderRadius: '10px',
+//         },
+//       }),
+//     },
+//   },
+// };
 
 const queryClient = new QueryClient({
   defaultOptions: {
