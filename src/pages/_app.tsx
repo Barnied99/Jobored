@@ -21,72 +21,72 @@ import { getToken, setToken } from '@/components/common/services';
 import type { AppProps } from 'next/app'
 
 
-const overrides: MantineThemeOverride = {
+// const overrides: MantineThemeOverride = {
 
-  globalStyles: () => ({
+//   globalStyles: () => ({
 
-    body: {
-      overflowY: 'scroll',
-      scrollbarGutter: 'stable',
-    },
-  }),
-  colorScheme: 'light',
-  colors: {
-    dark: [
-      '#d5d7e0',
-      '#acaebf',
-      '#8c8fa3',
-      '#666980',
-      '#4d4f66',
-      '#34354a',
-      '#2b2c3d',
-      '#1d1e30',
-      '#0c0d21',
-      '#01010a',
-    ],
-  },
-  components: {
-    Paper: {
-      styles: () => ({
-        root: {
-          borderRadius: 10,
-        },
-      }),
-    },
+//     body: {
+//       overflowY: 'scroll',
+//       scrollbarGutter: 'stable',
+//     },
+//   }),
+//   colorScheme: 'light',
+//   colors: {
+//     dark: [
+//       '#d5d7e0',
+//       '#acaebf',
+//       '#8c8fa3',
+//       '#666980',
+//       '#4d4f66',
+//       '#34354a',
+//       '#2b2c3d',
+//       '#1d1e30',
+//       '#0c0d21',
+//       '#01010a',
+//     ],
+//   },
+//   components: {
+//     Paper: {
+//       styles: () => ({
+//         root: {
+//           borderRadius: 10,
+//         },
+//       }),
+//     },
 
-    Button: {
-      styles: () => ({
-        root: {
-          borderRadius: 10,
-        },
-      }),
-    },
+//     Button: {
+//       styles: () => ({
+//         root: {
+//           borderRadius: 10,
+//         },
+//       }),
+//     },
 
-    Input: {
-      styles: () => ({
-        input: {
-          borderRadius: '10px',
-        },
-      }),
-    },
+//     Input: {
+//       styles: () => ({
+//         input: {
+//           borderRadius: '10px',
+//         },
+//       }),
+//     },
 
-    NumberInput: {
-      styles: () => ({
-        input: {
-          borderRadius: '10px',
-        },
-      }),
-    },
+//     NumberInput: {
+//       styles: () => ({
+//         input: {
+//           borderRadius: '10px',
+//         },
+//       }),
+//     },
 
-    Select: {
-      styles: () => ({
-        input: {
-          borderRadius: '10px',
-        },
-      }),
-    },
-  },
-};
+//     Select: {
+//       styles: () => ({
+//         input: {
+//           borderRadius: '10px',
+//         },
+//       }),
+//     },
+//   },
+// };
 
 const queryClient = new QueryClient({
   defaultOptions: {
