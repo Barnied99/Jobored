@@ -13,9 +13,6 @@ export const useStyles = createStyles((theme) => ({
 		['.mantine-Select-input']: {
 			paddingLeft: 12,
 			fontSize: rem(14),
-			// display: 'flex',
-			// flexWrap: 'wrap',
-			// maxWidth: 320,
 		},
 
 		['.mantine-Select-rightSection']: {

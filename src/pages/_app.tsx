@@ -2,6 +2,9 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Provider } from 'react-redux';
 import Head from 'next/head';
+import { MantineProvider, MantineThemeOverride, ColorSchemeProvider, ColorScheme } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
+import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 
 import store from '@/store/store/store';
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
@@ -18,7 +21,72 @@ import { getToken, setToken } from '@/components/common/services';
 import type { AppProps } from 'next/app'
 
 
+const overrides: MantineThemeOverride = {
 
+  globalStyles: () => ({
+
+    body: {
+      overflowY: 'scroll',
+      scrollbarGutter: 'stable',
+    },
+  }),
+  colorScheme: 'light',
+  colors: {
+    dark: [
+      '#d5d7e0',
+      '#acaebf',
+      '#8c8fa3',
+      '#666980',
+      '#4d4f66',
+      '#34354a',
+      '#2b2c3d',
+      '#1d1e30',
+      '#0c0d21',
+      '#01010a',
+    ],
+  },
+  components: {
+    Paper: {
+      styles: () => ({
+        root: {
+          borderRadius: 10,
+        },
+      }),
+    },
+
+    Button: {
+      styles: () => ({
+        root: {
+          borderRadius: 10,
+        },
+      }),
+    },
+
+    Input: {
+      styles: () => ({
+        input: {
+          borderRadius: '10px',
+        },
+      }),
+    },
+
+    NumberInput: {
+      styles: () => ({
+        input: {
+          borderRadius: '10px',
+        },
+      }),
+    },
+
+    Select: {
+      styles: () => ({
+        input: {
+          borderRadius: '10px',
+        },
+      }),
+    },
+  },
+};
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,6 +96,25 @@ const queryClient = new QueryClient({
 const FIVE_MINUTES = 1000 * 60 * 5;
 
 const Router = ({ Component, pageProps }: AppProps) => {
+
+  // const [colorScheme, setColorScheme] = useState<ColorScheme>('light');
+  // const toggleColorScheme = (value) =>
+  //   setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+
+
+  const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
+    key: 'mantine-color-scheme',
+    defaultValue: 'light',
+    getInitialValueInEffect: true,
+  });
+
+  const toggleColorScheme = (value?: ColorScheme) =>
+    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+
+  useHotkeys([['mod+J', () => toggleColorScheme()]]);
+
+
+
 
   // useEffect(() => {
   //   if ('serviceWorker' in navigator) {
@@ -115,15 +202,22 @@ const Router = ({ Component, pageProps }: AppProps) => {
       <Head>
         <link rel="manifest" href="/manifest.json" />
       </Head>
-      <QueryClientProvider client={queryClient}>
-        <ErrorBoundary>
-          <Provider store={store}>
-            {isLoading ? <DefaultLoader /> :
-              <Component {...pageProps} />
-            }
-          </Provider>
-        </ErrorBoundary>
-      </QueryClientProvider>
+      <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+        <MantineProvider withGlobalStyles withNormalizeCSS theme={{ colorScheme }}>
+          <Notifications />
+          <QueryClientProvider client={queryClient}>
+            <ErrorBoundary>
+              <Provider store={store}>
+                <main>
+                  {isLoading ? <DefaultLoader /> :
+                    <Component {...pageProps} />
+                  }
+                </main>
+              </Provider>
+            </ErrorBoundary>
+          </QueryClientProvider>
+        </MantineProvider>
+      </ColorSchemeProvider>
     </>
 
 
