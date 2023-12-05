@@ -27,7 +27,6 @@ import { AuthForm } from '@/components/auth/api';
 import { IconSun, IconMoon, IconSettings } from '@tabler/icons-react';
 
 import { useStyles } from './styles';
-import { inherits } from 'util';
 
 const links = [
 	{ href: '/vacancies', title: 'Поиск Вакансий' },
