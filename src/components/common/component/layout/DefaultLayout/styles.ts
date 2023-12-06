@@ -1,8 +1,15 @@
-import { createStyles } from '@mantine/core';
+import { createStyles, keyframes } from '@mantine/core';
 
 interface LayoutProps {
 	headerHeight: number;
 }
+
+export const bounce = keyframes({
+	'from, 20%, 53%, 80%, to': { transform: 'translate3d(0, 0, 0)' },
+	'40%, 43%': { transform: 'translate3d(0, -1.475rem, 0)' },
+	'70%': { transform: 'translate3d(0, -0.9375rem, 0)' },
+	'90%': { transform: 'translate3d(0, -0.25rem, 0)' },
+});
 
 export const useStyles = createStyles(
 	(theme, { headerHeight }: LayoutProps) => ({
@@ -33,7 +40,7 @@ export const useStyles = createStyles(
 		header__logo: {
 			height: '40%',
 			aspectRatio: '141 / 36',
-
+			animation: `${bounce} 3s ease-in-out infinite`,
 		},
 
 		drawer: {
