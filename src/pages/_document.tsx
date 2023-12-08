@@ -13,6 +13,7 @@ export const Document = () => {
         <meta name="theme-color" content="#333333" />
         <meta name="referrer" content={'strict-origin'} />
         <link rel="icon" href="/favicon.svg"></link>
+        <link rel="manifest" href="/site.webmanifest" />
         <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" async></script>
       </Head>
       <body>
