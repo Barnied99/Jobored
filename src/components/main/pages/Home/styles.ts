@@ -4,25 +4,23 @@ export const useStyles = createStyles((theme) => ({
     columnsWrapper: {
         display: 'flex',
         flexDirection: 'row',
-        flexWrap: 'wrap',
         width: '100%',
-        justifyContent: 'flex-start'
+        justifyContent: 'center',
+        alignItems: 'flex-start'
 
     },
     columnsWrapperGroup: {
         display: 'flex',
         flexDirection: 'column',
-        flex: 0.33333,
-        // flexWrap: 'wrap',
-        // width: '100%',
+        flex: 0.33,
         justifyContent: 'center',
-        alignItems: 'center'
-
+        alignItems: 'center',
+        fontSize: '0.8rem',
+        flexWrap: 'wrap',
+        gap: '0.7rem'
     },
     textGroup: {
         display: 'flex',
-
-
     },
 
     flex1: {

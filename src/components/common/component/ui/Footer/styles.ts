@@ -7,10 +7,12 @@ import {
 export const useStyles = createStyles((theme) => ({
   footer: {
     marginTop: 'rem(120px)',
+    marginBottom: 'rem(120px)',
     paddingTop: 'calc(var(--mantine - spacing - xl) * 2)',
     paddingBottom: 'calc(var(--mantine - spacing - xl) * 2)',
     backgroundColor: 'light - dark(var(--mantine - color - gray - 0), var(--mantine - color - dark - 6))',
     borderTop: 'rem(1px) solid light - dark(var(--mantine - color - gray - 2), var(--mantine - color - dark - 5))',
+    height: '32px'
   },
 
   logo: {
@@ -23,9 +25,11 @@ export const useStyles = createStyles((theme) => ({
 
   inner: {
     display: 'flex',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     gap: '10px',
     paddingTop: '15px',
+    paddingBottom: '15px',
 
   },
 
@@ -47,6 +51,7 @@ export const useStyles = createStyles((theme) => ({
     paddingTop: 'rem(5px)',
     paddingBottom: 'rem(5px)',
   },
+
 
 
 }));

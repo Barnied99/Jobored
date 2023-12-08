@@ -10,7 +10,7 @@ demo :[Jobored] (https://jobored-three.vercel.app/?page=1)
 -   Реализована хотя бы одна форма: [AuthForm](https://github.com/Barnied99/Jobored/blob/main/src/components/auth/api/localauth/index.tsx).
 -   Есть применение предохранителя: [ErrorBoundary](https://github.com/Barnied99/Jobored/blob/main/src/components/ErrorBoundary/ErrorBoundary.tsx).
 -   Есть хотя бы один кастомный хук: [use-validation](https://github.com/Barnied99/Jobored/blob/main/src/utills/use-validation.ts).
--   Компонент с SSR: [Vacancies](https://github.com/Barnied99/Jobored/blob/main/src/pages/vacancies.tsx).
+-   Компонент с SSR: [Index](https://github.com/Barnied99/Jobored/blob/main/src/pages/index.tsx).
 
 ### Redux
 
@@ -22,13 +22,13 @@ demo :[Jobored] (https://jobored-three.vercel.app/?page=1)
 [Favorites](https://github.com/Barnied99/Jobored/blob/main/src/pages/favorites.tsx) и т.д.
 
 ## Дополнительно
-- Использован API Superjob.
+- Использован API SUPERJOB.
 - Использован NextJs.
 - Использована библиотека react-hook-form для форм регистрации и входа.
 - Использована библиотека yup для валидации данных.
-- Использована библиотека mantine.
-- Написан небольшой proxy-server для обхода cors политики.
-- Написан serviceworker(не используется).
+- Использована библиотека Mantine.
+- Написан proxy-server для обхода cors политики.
+- Написан serviceworker.
 - Использован TypeScript.
 - Есть применение lazy + Suspense/NextDynamic.
 
