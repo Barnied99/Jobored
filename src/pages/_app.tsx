@@ -16,7 +16,7 @@ import {
 } from '@/components/common/constants';
 import { DefaultLoader } from '@/components/common/component';
 import { getToken, setToken } from '@/components/common/services';
-// import registerSW from '@/utills/registerSW'
+import registerSW from '@/utills/registerSW'
 
 import type { AppProps } from 'next/app'
 
@@ -116,11 +116,11 @@ const Router = ({ Component, pageProps }: AppProps) => {
 
 
 
-  // useEffect(() => {
-  //   if ('serviceWorker' in navigator) {
-  //     registerSW()
-  //   }
-  // }, [])
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      registerSW()
+    }
+  }, [])
 
   const [isLoading, setIsLoading] = useState(true)
   const refOnce = useRef(false);
@@ -200,7 +200,7 @@ const Router = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
         <MantineProvider withGlobalStyles withNormalizeCSS theme={{ colorScheme }}>

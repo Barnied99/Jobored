@@ -1,98 +1,38 @@
 import Image from 'next/image';
-import { Text, Container, ActionIcon, Group, rem } from '@mantine/core';
-import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons-react';
+import Link from 'next/link';
+import { Container, Group, ActionIcon, rem } from '@mantine/core';
+import { IconCloudFilled, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons-react';
 
 import { LogoFull } from '@/assets/img';
 
 import { useStyles } from './styles';
 
 
-const data = [
-    {
-        title: 'Партнерам',
-        links: [
-            { label: 'Реклама на сайте', link: 'https://www.superjob.ru/targetirovannaya_reklama/?utm_source=superjob&utm_campaign=desktop_footer' },
-            { label: 'Интеграционные сервисы', link: 'https://www.superjob.ru/integration/' },
-            { label: 'Продвижение вакансий', link: 'https://www.superjob.ru/reklama_vakansii/?utm_source=superjob&utm_campaign=desktop_footer' },
-        ],
-    },
-    {
-        title: 'SuperJob',
-        links: [
-            { label: 'О компании', link: 'https://www.superjob.ru/clients/superjob-14449.html' },
-            { label: 'SuperJob.tech', link: 'https://superjob.tech/' },
-            { label: 'Новости сервиса', link: 'https://www.superjob.ru/news/' },
-            { label: 'Работа в SuperJob', link: 'https://www.superjob.ru/clients/superjob-14449.html' },
-        ],
-    },
-    // {
-    //     title: 'Документы',
-    //     links: [
-    //         { label: 'База данных SuperJob', link: 'https://www.superjob.ru/info/hr_service.html' },
-    //         { label: 'Рекламный кабинет', link: 'https://www.superjob.ru/info/rtb_service.html' },
-    //         { label: 'Агрегатор образовательных курсов', link: 'https://www.superjob.ru/info/course-license-agreement/' },
-    //         { label: 'Иные документы', link: 'https://www.superjob.ru/hr/billing/documents.html' },
-    //     ],
-    // },
-
-];
-
 export function Footer() {
     const { classes } = useStyles();
 
-    const groups = data.map((group) => {
-        const links = group.links.map((link, index) => (
-            <Text<'a'>
-                key={index}
-                className={classes.link}
-                component="a"
-                href={link.link}
-            // onClick={(event) => event.preventDefault()}
-            >
-                {link.label}
-            </Text>
-        ));
-
-        return (
-            <div className={classes.wrapper} key={group.title}>
-                <Text >{group.title}</Text>
-                {links}
-            </div>
-        );
-    });
-
     return (
-        <footer className={classes.footer}>
+        <div className={classes.footer}>
             <Container className={classes.inner}>
-                <div className={classes.logo}>
-                    <Image
-                        src={LogoFull}
-                        alt="Jobored Logo"
-                        // className={classes.header__logo}
-                        priority
-                    />
-                </div>
-                <div className={classes.groups}>{groups}</div>
-            </Container>
-            <Container >
-                <Text c="dimmed" size="sm">
-                    © 2023 Savitskiy.mantine.dev All rights reserved.
-                </Text>
-
-                <Group align="flex-end" noWrap>
-                    <ActionIcon size="lg" color="gray" variant="subtle">
-                        <IconBrandTwitter style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
+                <Image src={LogoFull}
+                    alt="Jobored Logo"
+                    priority
+                />
+                <Group spacing={0} className={classes.groups} position="right" noWrap>
+                    <ActionIcon component={Link} href='https://bsky.app'
+                        size="lg" color="gray" variant="subtle">
+                        <IconCloudFilled style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
                     </ActionIcon>
-                    <ActionIcon size="lg" color="gray" variant="subtle">
+                    <ActionIcon component={Link} href='https://www.youtube.com/' size="lg" color="gray" variant="subtle">
                         <IconBrandYoutube style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
                     </ActionIcon>
-                    <ActionIcon size="lg" color="gray" variant="subtle">
+                    <ActionIcon component={Link} href='https://www.instagram.com/'
+                        size="lg" color="gray" variant="subtle">
                         <IconBrandInstagram style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
                     </ActionIcon>
                 </Group>
             </Container>
-        </footer>
+        </div>
     );
 }
-
 export default Footer;

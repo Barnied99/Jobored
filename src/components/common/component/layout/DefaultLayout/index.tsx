@@ -282,15 +282,27 @@ export function HeaderMenu({ title }) {
 						</Button>
 					</Link>
 					<Menu
-						shadow="md" width={200}>
+						shadow="md" width={200}
+					>
 						<Menu.Target>
 							<Button
-								variant="subtle" c="#ACADB9" size={'sm'}>Настройки <IconSettings size={14} /></Button>
+								variant="subtle"
+								c="#ACADB9"
+							>Настройки <IconSettings size={14} /></Button>
 						</Menu.Target>
+
 						<Menu.Dropdown>
 							<Menu.Label>Jobored</Menu.Label>
-							<Menu.Item >Тема <IconSun size={12} />/<IconMoon size={12} /> </Menu.Item>
+							<Menu.Item >
+								<Group
+									variant="subtle"
+									onClick={() => toggleColorScheme()}
+									title="Toggle color scheme">
+									Тема {dark ? <IconSun size="0.9rem" /> : <IconMoon size="0.9rem" />}
+								</Group>
+							</Menu.Item>
 							<Menu.Item >Язык ru/en  </Menu.Item>
+
 						</Menu.Dropdown>
 					</Menu>
 				</>
