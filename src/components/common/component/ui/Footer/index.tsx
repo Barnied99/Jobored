@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Container, Group, ActionIcon, rem } from '@mantine/core';
+import { Container, Group, ActionIcon, rem, Text } from '@mantine/core';
 import { IconCloudFilled, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons-react';
 
 import { LogoFull } from '@/assets/img';
@@ -14,10 +14,8 @@ export function Footer() {
     return (
         <div className={classes.footer}>
             <Container className={classes.inner}>
-                <Image src={LogoFull}
-                    alt="Jobored Logo"
-                    priority
-                />
+                <Text size="xl"> Jobored</Text>
+                <Text >©2023 Jobored. All Rights are reserved</Text>
                 <Group spacing={0} className={classes.groups} position="right" noWrap>
                     <ActionIcon component={Link} href='https://bsky.app'
                         size="lg" color="gray" variant="subtle">

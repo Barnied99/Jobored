@@ -4,18 +4,34 @@ import requestIp from 'request-ip';
 import { LRUCache } from 'lru-cache';
 import dotenv from 'dotenv';
 import express from 'express';
-// import nodemailer from 'nodemailer'
+// import mongoose from 'mongoose';
 
 dotenv.config();
 export const NEXT_JOBS_API_URL = 'https://api.superjob.ru/';
 const app = express();
 const port = 5232;
+// const URL = 'mongodb://Localhost:27017/Userstate';
 const cookiePerIP = new LRUCache({
     max: 1000,
     ttl: 1000 * 60 * 3,
     updateAgeOnGet: false,
     updateAgeOnHas: false,
 });
+
+// mongoose
+//     .connect(URL)
+//     .then(() => {
+//         console.log('connected to db');
+//     })
+//     .catch((err) => {
+//         console.log(`Db connection error:${err}`);
+//     })
+
+// app.listen('3000', () => {
+//     console.log(`DB started on 3000`);
+// });
+
+
 
 app.use(
     cors({
@@ -78,5 +94,8 @@ app.use((req, res, next) => {
     console.log('Proxy request:', req.body);
     next();
 })
+
+
+
 
 
