@@ -32,15 +32,15 @@ interface FiltersProps {
 
 const Filters: React.FC<FiltersProps> = ({
 	fields,
-	values = { catalogues: '', payment_from: '', payment_to: '', expirience: '' },
+	values = { catalogues: '', payment_from: 0, payment_to: 0, expirience: '' },
 	sticky,
 	onChange,
 	className,
 	experienceKey,
 	typework
 }) => {
-	const { handleSubmit, control, reset } = useForm<any>({ //any
-		resolver: yupResolver(filterSchema),
+	const { handleSubmit, control, reset } = useForm<{ type_of_work: string; catalogues: string; expirience: string; payment_from: number; payment_to: number; typework: string }>({ //any
+		resolver: yupResolver(filterSchema),//
 		defaultValues: values,
 	});
 
@@ -80,9 +80,9 @@ const Filters: React.FC<FiltersProps> = ({
 		(formValues: FiltersForm) => {
 			const from = formValues.payment_from
 				? Number(formValues.payment_from)
-				: '';
+				: 0;
 
-			const to = formValues.payment_to ? Number(formValues.payment_to) : '';
+			const to = formValues.payment_to ? Number(formValues.payment_to) : 0;
 			onChange({
 				catalogues: formValues.catalogues,
 				payment_from: from,
@@ -96,7 +96,7 @@ const Filters: React.FC<FiltersProps> = ({
 
 	const onReset = useCallback(() => {
 		reset();
-		onChange({ catalogues: '', payment_from: '', payment_to: '', expirience: '', type_of_work: '' });
+		onChange({ catalogues: '', payment_from: 0, payment_to: 0, expirience: '', type_of_work: '' });
 	}, [onChange]);
 
 	useEffect(() => {
@@ -141,7 +141,7 @@ const Filters: React.FC<FiltersProps> = ({
 								}
 							/>
 						)}
-						control={control}
+						control={control}//
 					/>
 				</FormGroup>
 
@@ -151,6 +151,7 @@ const Filters: React.FC<FiltersProps> = ({
 						render={({ field, fieldState }) => (
 							<NumberInput
 								data-elem="salary-from-input"
+								defaultValue={0}
 								size="md"
 								placeholder="От"
 								error={fieldState.error ? fieldState.error.message : undefined}
@@ -159,7 +160,7 @@ const Filters: React.FC<FiltersProps> = ({
 								step={PAYMENT_STEP}
 							/>
 						)}
-						control={control}
+						control={control}//
 					/>
 
 					<Controller
@@ -167,6 +168,7 @@ const Filters: React.FC<FiltersProps> = ({
 						render={({ field, fieldState }) => (
 							<NumberInput
 								data-elem="salary-to-input"
+								defaultValue={0}
 								size="md"
 								placeholder="До"
 								error={fieldState.error ? fieldState.error.message : undefined}
@@ -175,7 +177,7 @@ const Filters: React.FC<FiltersProps> = ({
 								step={PAYMENT_STEP}
 							/>
 						)}
-						control={control}
+						control={control}//
 					/>
 				</FormGroup>
 
@@ -199,7 +201,7 @@ const Filters: React.FC<FiltersProps> = ({
 								}
 							/>
 						)}
-						control={control}
+						control={control}//
 					/>
 				</FormGroup>
 				<FormGroup title="График">
@@ -222,7 +224,7 @@ const Filters: React.FC<FiltersProps> = ({
 								}
 							/>
 						)}
-						control={control}
+						control={control}//
 					/>
 				</FormGroup>
 			</Stack>

@@ -87,7 +87,7 @@ const Main = ({ fields, references }) => {
     const countries = Object.values(references?.citizenship || {})
 
 
-    const { handleSubmit, control } = useForm<any>({ //any
+    const { handleSubmit, control } = useForm<{ type_of_work: string; catalogues: string; expirience: string; }>({ //any
         resolver: yupResolver(filterSchema),
         defaultValues: values,
     });

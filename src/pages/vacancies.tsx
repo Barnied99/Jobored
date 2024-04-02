@@ -2,7 +2,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Group, Pagination, Stack } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
-// import Head from 'next/head';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 
@@ -71,8 +70,8 @@ const Vacancies = ({ fields, references }) => {
 
     const page = Number(query[PARAM_PAGE]) || 1;
     const catalogue = query[PARAM_FIELD] || '';
-    const paymentFrom = Number(query[PARAM_FROM]) || '';
-    const paymentTo = Number(query[PARAM_TO]) || '';
+    const paymentFrom = Number(query[PARAM_FROM]) || 0;
+    const paymentTo = Number(query[PARAM_TO]) || 0;
     const typework = query[PARAM_TYPEWORK] || '';
     const expirience = query[PARAM_EXP] || '';
 

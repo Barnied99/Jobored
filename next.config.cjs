@@ -15,6 +15,7 @@ const nextConfig = withPWA({
     runtimeCaching,
     buildExcludes: [/middleware-manifest.json$/],
   },
+
 })
 
 const withBundleAnalyzer = require('next-bundle-analyzer')({

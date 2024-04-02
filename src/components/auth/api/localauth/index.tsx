@@ -1,3 +1,4 @@
+'use-client'
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useRouter } from 'next/router';
@@ -7,8 +8,13 @@ import {
 } from '@mantine/core';
 import emailjs from '@emailjs/browser';
 import Link from 'next/link';
+// import { signIn, useSession } from 'next-auth/react'
 import { notifications } from '@mantine/notifications';
 
+type Inputs = {
+    email: string
+    password: string
+}
 
 import useValidation from '@/utills/use-validation';
 import { userActions, LoginFormPayload } from '@/store/slice/user-slice';
@@ -46,7 +52,6 @@ export const AuthForm: React.FC<{ header: any; type: any; onClose?: any }> = (pr
         if (window.innerWidth >= 724) {
             props.onClose();
         }
-
 
 
         const templateParams = {

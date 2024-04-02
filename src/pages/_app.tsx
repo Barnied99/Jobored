@@ -6,6 +6,7 @@ import { MantineProvider, ColorSchemeProvider, ColorScheme } from '@mantine/core
 import { Notifications } from '@mantine/notifications';
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 
+// import Providers from '@/components/Providers'
 import store from '@/store/store/store';
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 import { loginUser, refreshTokens } from '@/components/auth/api';
@@ -202,6 +203,7 @@ const Router = ({ Component, pageProps }: AppProps) => {
       <Head>
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
+      {/* <Providers> */}
       <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
         <MantineProvider withGlobalStyles withNormalizeCSS theme={{ colorScheme }}>
           <Notifications />
@@ -218,6 +220,7 @@ const Router = ({ Component, pageProps }: AppProps) => {
           </QueryClientProvider>
         </MantineProvider>
       </ColorSchemeProvider>
+      {/* </Providers> */}
     </>
 
 
@@ -225,3 +228,6 @@ const Router = ({ Component, pageProps }: AppProps) => {
 }
 
 export default Router
+
+
+
