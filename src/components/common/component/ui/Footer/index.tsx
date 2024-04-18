@@ -1,4 +1,4 @@
-import Image from 'next/image';
+
 import Link from 'next/link';
 import { Container, Group, ActionIcon, rem, Text } from '@mantine/core';
 import { IconCloudFilled, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons-react';
