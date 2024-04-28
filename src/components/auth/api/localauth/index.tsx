@@ -11,10 +11,7 @@ import Link from 'next/link';
 // import { signIn, useSession } from 'next-auth/react'
 import { notifications } from '@mantine/notifications';
 
-type Inputs = {
-    email: string
-    password: string
-}
+
 
 import useValidation from '@/utills/use-validation';
 import { userActions, LoginFormPayload } from '@/store/slice/user-slice';
