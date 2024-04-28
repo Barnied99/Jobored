@@ -26,7 +26,7 @@ interface FiltersProps {
 	sticky?: boolean;
 	onChange: (values: FiltersForm) => void;
 	className?: string;
-	experienceKey: any;//any
+	experienceKey: any;
 	typework: any;
 }
 
@@ -40,7 +40,7 @@ const Filters: React.FC<FiltersProps> = ({
 	typework
 }) => {
 	const { handleSubmit, control, reset } = useForm<{ type_of_work: string; catalogues: string; expirience: string; payment_from: number; payment_to: number; typework: string }>({ //any
-		resolver: yupResolver(filterSchema),//
+		resolver: yupResolver(filterSchema),
 		defaultValues: values,
 	});
 

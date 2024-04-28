@@ -6,4 +6,5 @@ export const filterSchema = yup.object({
 	payment_to: yup.number().optional().default(0),
 	expirience: yup.string().optional().default(''),
 	typework: yup.string().optional().default(''),
+	type_of_work: yup.string().optional().default(''),
 });
