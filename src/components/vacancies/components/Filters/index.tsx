@@ -32,7 +32,7 @@ interface FiltersProps {
 
 const Filters: React.FC<FiltersProps> = ({
 	fields,
-	values = { catalogues: '', payment_from: 0, payment_to: 0, expirience: '' },
+	values = { catalogues: '', payment_from: 0, payment_to: 0, expirience: '', typework: '' },
 	sticky,
 	onChange,
 	className,

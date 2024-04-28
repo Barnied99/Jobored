@@ -16,6 +16,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from "next/image";
+import { IconSun, IconMoon, IconSettings } from '@tabler/icons-react';
 
 import { DefaultContainer, NavLink, Footer } from '@/components/common/component';
 import { useAppSelector, useAppDispatch } from '@/utills/hooks';
@@ -23,8 +24,6 @@ import { LogoFull } from '@/assets/img';
 import { userActions } from '@/store/slice/user-slice'
 import { RootState } from '@/store/store/store';
 import { AuthForm } from '@/components/auth/api';
-
-import { IconSun, IconMoon, IconSettings } from '@tabler/icons-react';
 
 import { useStyles } from './styles';
 

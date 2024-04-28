@@ -4,7 +4,7 @@ import {
 
   from '@mantine/core';
 
-export const useStyles = createStyles((theme) => ({
+export const useStyles = createStyles(() => ({
   footer: {
     marginTop: 'rem(120px)',
     marginBottom: 'rem(120px)',

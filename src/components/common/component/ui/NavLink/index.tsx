@@ -12,7 +12,7 @@ interface NavLinkProps {
 	size?: string | undefined;
 }
 
-const NavLink: React.FC<NavLinkProps> = ({ to, className, children, variant, size }) => {
+const NavLink: React.FC<NavLinkProps> = ({ to, className, children, variant }) => {
 
 	const { classes, cx } = useStyles();
 	return (
