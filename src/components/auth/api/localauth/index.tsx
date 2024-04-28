@@ -8,7 +8,6 @@ import {
 } from '@mantine/core';
 import emailjs from '@emailjs/browser';
 import Link from 'next/link';
-// import { signIn, useSession } from 'next-auth/react'
 import { notifications } from '@mantine/notifications';
 
 
@@ -18,7 +17,6 @@ import { userActions, LoginFormPayload } from '@/store/slice/user-slice';
 import { useAppDispatch } from '@/utills/hooks';
 
 
-// import { styles } from './styles';
 
 export const AuthForm: React.FC<{ header: any; type: any; onClose?: any }> = (props) => {
     const dispatch = useAppDispatch();
